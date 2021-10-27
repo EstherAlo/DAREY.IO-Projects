@@ -155,7 +155,7 @@ sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/met
 ```
 
 
-## Enable PHP on the website
+## ENABLE PHP ON THE WEBSITE
 
 With the default DirectoryIndex settings on Apache, a file named index.html will always take precedence over an index.php file. To change this behavior, I eddited the /etc/apache2/mods-enabled/dir.conf file and changed the order in which the index.php file was listed within the DirectoryIndex directive.
 
