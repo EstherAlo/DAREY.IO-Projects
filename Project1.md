@@ -54,7 +54,7 @@ I then exited MySQL: ```
                     
                     
  
-## INSTALLED MYSQL
+## INSTALLING PHP
 
 PHP is the component of our setup that will process code to display dynamic content to the end user.
 
