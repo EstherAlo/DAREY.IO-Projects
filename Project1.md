@@ -128,6 +128,7 @@ Screenshot below shows the new file in the site-available directory. With this V
 I used the a2ensite command to enable the new virtual host:```
                                                            sudo a2ensite projectlamp
                                                            ```
+                                                           
 ![Project1 - G (4)](https://user-images.githubusercontent.com/93116204/139143110-b8438846-7b52-45e0-a8f4-25716ad20dc7.png)
 
 I disabled the default website that comes installed with Apache. This is required if you’re not using a custom domain name, because in this case Apache’s default configuration would overwrite my virtual host. 
