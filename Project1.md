@@ -7,7 +7,7 @@ Completed the following:
 * Saved the private key
 * Connected to the private key via GitBash terminal
 
-INSTALLED APACHE AND UPDATED THE FIREWALL
+###INSTALLED APACHE AND UPDATED THE FIREWALL
 
 Installed Apache using Ubuntu's package manager by running command: ```
                                                                    sudo apt update 
@@ -30,7 +30,7 @@ Verified if my Apache HTTP server can respond to requests from the Internet.
 
 
 
-## INSTALLED MYSQL
+###INSTALLED MYSQL
 
 MYSQL is a popular relational database management system used within PHP enviroments
 
@@ -54,7 +54,7 @@ I then exited MySQL: ```
                     
                     
  
-## INSTALLING PHP
+### INSTALLED PHP
 
 PHP is the component of our setup that will process code to display dynamic content to the end user.
 
@@ -156,7 +156,7 @@ sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/met
 ```
 
 
-## ENABLE PHP ON THE WEBSITE
+### ENABLED PHP ON THE WEBSITE
 
 With the default DirectoryIndex settings on Apache, a file named index.html will always take precedence over an index.php file. To change this behavior, I eddited the /etc/apache2/mods-enabled/dir.conf file and changed the order in which the index.php file was listed within the DirectoryIndex directive.
 
