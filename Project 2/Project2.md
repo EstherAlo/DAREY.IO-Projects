@@ -40,13 +40,24 @@ Used apt command to install  MySql:```
                                    ```         
  ![P2A (5)](https://user-images.githubusercontent.com/93116204/139405644-5b17265f-078c-40e0-956a-80f0b917936d.png)
  
-Command to run a security script that comes pre-installed with MySQL:``` 
-                                                                     sudo mysql_secure_installation
-                                                                     ```
+I ran this command which installs a security script that comes pre-installed with MySQL:``` 
+                                                                                         sudo mysql_secure_installation
+                                                                                         ```
 
-This script will remove some insecure default settings and lock down access to your database system.want I did not VALIDATE PASSWORD PLUGIN. Regardless of this the server asked me to select and confirm a password for the MySQL root user.
+This script removed some insecure default settings and locked down access to my database system. I did not VALIDATE PASSWORD PLUGIN. Regardless of this the server asked me to select and confirm a password for the MySQL root user.
  
- ![P2B(1)](https://user-images.githubusercontent.com/93116204/139406258-7af14b2a-9dea-482c-a3c7-53759da3e28f.png)
+ ![P2B(2)](https://user-images.githubusercontent.com/93116204/139408657-b6195770-fd53-4d9b-8771-b5d78ce99a9e.png)
 
- 
+
+I ran the following commands to test if could log into the MySQL console and also exited MySql:
+```
+sudo mysql    
+```
+
+```
+mysql> exit
+```                                                                                                   
                                   
+![P2B(3)](https://user-images.githubusercontent.com/93116204/139410870-35d4a402-f33a-4bf5-8289-c60b101fdde8.png)
+
+MySQL server is now installed and secured.
