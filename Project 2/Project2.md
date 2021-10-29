@@ -132,5 +132,18 @@ Activated my configuration by linking to the config file from Nginx’s sites-en
 ![P2C (3)](https://user-images.githubusercontent.com/93116204/139505462-f5f7ebb1-75a8-48a5-ad0b-d1cd25c1cb3b.png)
 
 
-Default Nginx host was disabled with command:  
-              
+Default Nginx host was disabled with command: ``` 
+                                             sudo unlink /etc/nginx/sites-enabled/default
+                                             ```
+
+
+In order to apply the changes I reloaded Nginx using command:``` 
+                                                             sudo systemctl reload nginx]
+                                                             ```
+                                                
+                                                
+In order to test that my new server block functions  I created a  index.html file in /var/www/projectLEMP location:
+
+```
+sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
+```
