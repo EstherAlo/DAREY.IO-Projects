@@ -30,7 +30,7 @@ Verified if my Apache HTTP server can respond to requests from the Internet.
 
 
 
-###INSTALLED MYSQL
+### INSTALLED MYSQL
 
 MYSQL is a popular relational database management system used within PHP enviroments
 
