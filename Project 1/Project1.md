@@ -7,7 +7,7 @@ Completed the following:
 * Saved the private key
 * Connected to the private key via GitBash terminal
 
-###INSTALLED APACHE AND UPDATED THE FIREWALL
+### INSTALLED APACHE AND UPDATED THE FIREWALL
 
 Installed Apache using Ubuntu's package manager by running command: ```
                                                                    sudo apt update 
