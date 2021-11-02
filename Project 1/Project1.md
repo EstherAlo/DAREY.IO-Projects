@@ -17,7 +17,7 @@ Verified that apache2 was running as a Service in my OS: ```
                                                        sudo systemctl status apache2
                                                          ```
 
-Apache2 status below 
+*Apache2 status below* 
 ![Project 1- C (2)](https://user-images.githubusercontent.com/93116204/138972237-0c769ceb-4afe-44ce-abfe-28d2e87b8560.png)
 
 Requested my Apache HTTP server on port 80: ```
@@ -26,6 +26,7 @@ Requested my Apache HTTP server on port 80: ```
 
 Verified if my Apache HTTP server can respond to requests from the Internet. 
 
+*Screenshot below*
 ![defaultpage](https://user-images.githubusercontent.com/93116204/138972873-9a287524-61b1-4506-9e6e-58232be745c3.png)
 
 
@@ -50,8 +51,9 @@ I then exited MySQL: ```
                      mysql> exit
                      ```
                      
-                    ![Project1 - D (6)](https://user-images.githubusercontent.com/93116204/139133927-8a256a08-0d8d-49a8-a00c-e07982668f5a.png)
-                    
+ *Screenshot below*
+                     
+ ![Project1 - D (6)](https://user-images.githubusercontent.com/93116204/139803926-a89676ef-24d3-4fd5-8c1b-bdf258614988.png)
                     
  
 ### INSTALLED PHP
@@ -72,7 +74,7 @@ These 3 packages were installed at once by running: ```
                                       ```
                                       
                                       
-                                      
+   *Screenshot below*                                  
   ![Project1 - G (3)](https://user-images.githubusercontent.com/93116204/139135928-1216975b-7405-43d8-be96-29b392ab3404.png)
 
 To test my setup with a PHP script, I set up a Apache Virtual Host to hold my website’s files and folders. 
@@ -121,14 +123,15 @@ The following command showed the new file in the sites-available directory: ```
                                                                             sudo ls /etc/apache2/sites-available
                                                                             ```
 
-Screenshot below shows the new file in the site-available directory. With this VirtualHost configuration, we’re telling Apache to serve projectlamp using /var/www/projectlampl as its web root directory. 
+*Screenshot below shows the new file in the site-available directory. With this VirtualHost configuration, we’re telling Apache to serve projectlamp using /var/www/projectlampl as its web root directory.* 
 ![Project 1 - F (2)](https://user-images.githubusercontent.com/93116204/139141359-ff767a0c-969e-4e27-8f7b-59df825621f2.png)
 
 
 I used the a2ensite command to enable the new virtual host:```
                                                            sudo a2ensite projectlamp
                                                            ```
-                                                           
+ 
+ *Screenshot below*                                                          
 ![Project1 - G (4)](https://user-images.githubusercontent.com/93116204/139143110-b8438846-7b52-45e0-a8f4-25716ad20dc7.png)
 
 I disabled the default website that comes installed with Apache. This is required if you’re not using a custom domain name, because in this case Apache’s default configuration would overwrite my virtual host. 
@@ -144,8 +147,10 @@ To make sure my configuration file doesn’t contain syntax errors i entered com
                                                                                    
 I reloaded Apache so these changes take effect:``` 
                                                sudo systemctl reload apache2
+     
                                                ```
-                                               
+
+*Screenshot below*                                               
 ![Project1 - G (5)](https://user-images.githubusercontent.com/93116204/139145212-6c4570d6-138f-4021-a878-a56e0fc59a17.png)
                                               
 
@@ -192,5 +197,6 @@ phpinfo();
 
 Refreshed my EC2 public ip address url page
 
+*Screenshot below*
 ![Project 1 (2)](https://user-images.githubusercontent.com/93116204/139148367-d847b8c7-f1be-43a1-b38b-d8cbc03ab1f7.png)
 
