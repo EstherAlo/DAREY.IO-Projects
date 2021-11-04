@@ -1,9 +1,9 @@
 
-## LEMP PROJECT 
+# LEMP PROJECT 
 
 
 
-### INSTALLING THE NGINX WEB SERVER
+## INSTALLING THE NGINX WEB SERVER
 
 Updated my server’s package index as it is the first time using apt: ```  
                                                                     sudo apt update
@@ -31,7 +31,7 @@ Used ‘curl’ command to request our Nginx on port 80: curl -s http://169.254.
 ![Screen-28-10-2021_095132 (3)](https://user-images.githubusercontent.com/93116204/139404540-23fcebbd-1e8a-419d-baec-a1c1d5cad000.png)
 
 
-### INSTALLING MYSQL
+## INSTALLING MYSQL
 
 Now that my web server was up and running, I needed to install a Database Management System (DBMS) to be able to store and manage data for my site in a relational database. MySQL is a popular relational database management system used within PHP environments.
 
@@ -76,7 +76,7 @@ PHP processes code and generates dynamic content for the web server. Nginx requi
 ![P2C(1)](https://user-images.githubusercontent.com/93116204/139502119-041cde9d-86b2-41d9-940b-671092603962.png)
 
   
- ### Configuring Nginx to Use PHP Processor
+ ## Configuring Nginx to Use PHP Processor
  
 * I created the root web directory for my domain by running:``` 
                                                            sudo mkdir /var/www/projectLEMP
