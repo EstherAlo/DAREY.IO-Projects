@@ -63,9 +63,11 @@ created a file index.js with the command and confirmed that it was made with the
 *Screenshot below*
 
 Installed the dotenv module: npm install dotenv
-
+                                           
+  
 Opened the index.js file with the command: vim index.js
-
+                                           
+                                           
 Here is a *screenshot* of the code that was typed into the file: 
 
 The terminal was oepned in the same directory as my index.js file.
@@ -94,6 +96,7 @@ Opened the file with command : vim api.js
 
 Copied below code in the file: 
 
+```
 const express = require ('express');
 const router = express.Router();
 
@@ -110,6 +113,7 @@ router.delete('/todos/:id', (req, res, next) => {
 })
 
 module.exports = router;
+```
 
 ### MODELS
 
