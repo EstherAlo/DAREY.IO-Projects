@@ -75,7 +75,6 @@ Installed the dotenv module: npm install dotenv
 *Screenshot below*
 ![Pic8a](./images/Pic8a.png)
 
-<<<<<<< HEAD
 Code below was added into index.js file:
 
 ````
@@ -83,15 +82,6 @@ const express = require('express');
 require('dotenv').config();
 
 const app = express();
-=======
-Installed the dotenv module: npm install dotenv
-                                           
-  
-Opened the index.js file with the command: vim index.js
-                                           
-                                           
-Here is a *screenshot* of the code that was typed into the file: 
->>>>>>> 442c241d6ec070ae55b3fb7230cd435114821b58
 
 const port = process.env.PORT || 5000;
 
@@ -633,6 +623,7 @@ margin-top: 0;
 
 In the src directory I opened and added the code below into index.css:
 
+```
 body {
 margin: 0;
 padding: 0;
@@ -650,8 +641,11 @@ code {
 font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 monospace;
 }
+```
+
                                                 ```
 I went into the Todo directory and run command: npm run dev
                                                 ```
-                                                
+
+
 The To-Do app is ready and fully functional. Functionality:creating a task, deleting a task and viewing all your tasks.
