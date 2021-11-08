@@ -641,14 +641,12 @@ code {
 font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 monospace;
 }
+
 ```
-
-
-
-                                                ```
+                                                
+                                                
 I went into the Todo directory and run command: npm run dev
-                                                ```
+                                                
 
-
-
+                                                 
 The To-Do app is ready and fully functional. Functionality:creating a task, deleting a task and viewing all your tasks.
