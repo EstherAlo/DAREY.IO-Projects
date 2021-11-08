@@ -77,7 +77,7 @@ Installed the dotenv module: npm install dotenv
 
 Code below was added into index.js file:
 
-````
+```
 const express = require('express');
 require('dotenv').config();
 
@@ -643,9 +643,12 @@ monospace;
 }
 ```
 
+
+
                                                 ```
 I went into the Todo directory and run command: npm run dev
                                                 ```
+
 
 
 The To-Do app is ready and fully functional. Functionality:creating a task, deleting a task and viewing all your tasks.
