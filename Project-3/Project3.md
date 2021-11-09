@@ -59,6 +59,7 @@ npm init
 ```
 
 *Screenshot below*  
+
 ![Pic7a](./images/Pic7a.png)
 
 
@@ -73,6 +74,7 @@ created a file index.js with the command and confirmed that it was made with the
 Installed the dotenv module: npm install dotenv
 
 *Screenshot below*
+
 ![Pic8a](./images/Pic8a.png)
 
 Code below was added into index.js file:
@@ -112,9 +114,11 @@ I confirmed the server was working by running command: node index.js
 created an inbound rule to open TCP port 5000.
 
 *Screenshot below*
+
 ![Pic1a](./images/Pic1a.png)
 
 *Accessed my server’s Public IP on my browser*
+
 ![Pic2a](./images/Pic2a.png)
 
 For each task, I created routes that will define various endpoints that the To-do app will depend on. 
@@ -156,6 +160,7 @@ Due to the app making use of Mongodb, which is a NoSQL database, I created a mod
  installed Mongoose in the Todo Directory: npm install mongoose
 
 *Screenshot below*
+
 ![Pic13a](./images/Pic13a.png)
 
 Created a new modes folder and then changed directory into the newly created ‘models’ folder with the commands: 
@@ -289,16 +294,19 @@ console.log(`Server running on port ${port}`)
 Started the server using the command: node index.js
 
 *Screenshot below*
+
 ![Pic14a](./images/Pic14a.png)
 
 Opened Postman, created a POST request to the API http://<PublicIP-or-PublicDNS>:5000/api/todos. This request sends a new task to my To-Do list so the application could store it in the database.
 
 *screenshot below*
+
 ![Pic15a](./images/Pic15a.png)
 
 Created a GET request to the API on http://<PublicIP-or-PublicDNS>:5000/api/todos. This request retrieves all existing records from out To-do application
 
 *screenshot below*
+
 ![Pic16a](./images/Pic16a.png)
 
 ## FRONTEND CREATION
@@ -311,6 +319,7 @@ The command below was run In the same root directory as the backend code, which 
 npx create-react-app client
 ```
 *Screenshot below*
+
 ![Pic20a](./images/Pic20a.png)
 
 
@@ -323,6 +332,7 @@ Install concurrently: npm install concurrently --save-dev
 Install nodemon: npm install nodemon --save-dev
 
 *Screenshot below*
+
 ![Pic21a](./images/Pic21a.png)
 
 code below was used to partly replace code in the package.json file 
@@ -349,6 +359,7 @@ Entered following command in Todo Directory: npm run dev
 ### Creating React Components
 
  For the Todo app, there will be two stateful components and one stateless component
+
 ![Pic23a](./images/Pic23a.png)
 
  Created components folder insde the src folder and made three files:
@@ -652,5 +663,7 @@ I went into the Todo directory and run command: npm run dev
 
                                                  
 The To-Do app is ready and fully functional. Functionality:creating a task, deleting a task and viewing all your tasks.
+
+*Screenshot below*
 
 ![Pic25a](./images/Pic25a.png)
