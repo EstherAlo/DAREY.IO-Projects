@@ -416,7 +416,9 @@ export default Input
 
 To make use of Axios, which is a Promise based HTTP client for the browser and node.js, I npm install axios:
 
-Screenshot below:
+*Screenshot below*
+
+![Pic23b](./images/Pic23b.png)
 
 ## FRONTEND CREATION
 
@@ -650,3 +652,5 @@ I went into the Todo directory and run command: npm run dev
 
                                                  
 The To-Do app is ready and fully functional. Functionality:creating a task, deleting a task and viewing all your tasks.
+
+![Pic25a](./images/Pic25a.png)
