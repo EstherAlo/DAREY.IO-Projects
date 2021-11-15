@@ -29,7 +29,6 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash
 ```
 
 
-
                            ```
 Command to install NodeJs: sudo apt install -y nodejs
                            ```
@@ -41,6 +40,7 @@ Command to install NodeJs: sudo apt install -y nodejs
 ## Install MongoDB
 
 MongoDB stores data in flexible, JSON-like documents. Fields in a database can vary from document to document and data structure can be changed over time. I will be adding book records to MongoDB that contain book name, isbn number, author, and number of pages.
+
 
                                           ```
 Run following command to install MongoDB: sudo apt install -y mongodb
@@ -54,15 +54,18 @@ sudo service mongodb start
 sudo systemctl status mongodb
 ```
 
+
 *Screenshot below*
 
 ![Pic1a](./images/MongoDB/Pic1a.png)
 
 Ran following command to install npm – Node package manager: 
+ 
 
 ```
 sudo apt install -y npm
 ```
+
 
 *Screenshot below*
 
@@ -75,17 +78,20 @@ Installed body-parser package by running command: sudo npm install body-parser
 
 I created a books directory and initilized npm project 
 
+
 ````
 mkdir Books && cd Books
 
 npm init
 ```
 
+
 *Screenshot below*
 
 ![Pic3a](./images/MongoDB/Pic3a.png)
 
 Added a file names server.js and eneterd the web server code:
+
 
 ```
 var express = require('express');
@@ -98,7 +104,9 @@ app.set('port', 3300);
 app.listen(app.get('port'), function() {
     console.log('Server up: http://localhost:' + app.get('port'));
 });
+
 ```
+
 
 ## Install Express and set up routes to the server
 
@@ -106,9 +114,11 @@ Express is a minimal and flexible Node.js web application framework that provide
 
 I also will use Mongoose package which provides a straight-forward, schema-based solution to model the application data. I will use Mongoose to establish a schema for the database to store data of the book register.
 
+
                                                 ```
 run this command to install express mongoose: sudo npm install express mongoose
                                                 ```
+
 
 In ‘Books’ folder, I created a folder named apps. I then created a file named routes.js. I entered code and used cat to confirm that it was entered correctly.
 
