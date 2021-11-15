@@ -79,7 +79,7 @@ Installed body-parser package by running command: sudo npm install body-parser
 I created a books directory and initilized npm project 
 
 
-````
+```
 mkdir Books && cd Books
 
 npm init
@@ -91,7 +91,6 @@ npm init
 ![Pic3a](./images/MongoDB/Pic3a.png)
 
 Added a file names server.js and eneterd the web server code:
-
 
 ```
 var express = require('express');
@@ -115,9 +114,9 @@ Express is a minimal and flexible Node.js web application framework that provide
 I also will use Mongoose package which provides a straight-forward, schema-based solution to model the application data. I will use Mongoose to establish a schema for the database to store data of the book register.
 
 
-                                                ```
+                                              ```
 run this command to install express mongoose: sudo npm install express mongoose
-                                                ```
+                                              ```
 
 
 In ‘Books’ folder, I created a folder named apps. I then created a file named routes.js. I entered code and used cat to confirm that it was entered correctly.
