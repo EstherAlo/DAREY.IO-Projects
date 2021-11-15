@@ -28,10 +28,9 @@ sudo apt -y install curl dirmngr apt-transport-https lsb-release ca-certificates
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash 
 ```
 
-
-                           ```
+                         
 Command to install NodeJs: sudo apt install -y nodejs
-                           ```
+                          
 
 *Screenshot below*
 
@@ -42,9 +41,9 @@ Command to install NodeJs: sudo apt install -y nodejs
 MongoDB stores data in flexible, JSON-like documents. Fields in a database can vary from document to document and data structure can be changed over time. I will be adding book records to MongoDB that contain book name, isbn number, author, and number of pages.
 
 
-                                          ```
-Run following command to install MongoDB: sudo apt install -y mongodb
-                                          ```
+                                          
+Ran following command to install MongoDB: sudo apt install -y mongodb
+                                          
   
 Started and run the server by running the commands below:
 
@@ -72,9 +71,9 @@ sudo apt install -y npm
 ![Pic2a](./images/MongoDB/Pic2a.png)
 
 
-                                                  ```
+                                                  
 Installed body-parser package by running command: sudo npm install body-parser
-                                                  ```
+                                                  
 
 I created a books directory and initilized npm project 
 
@@ -115,9 +114,9 @@ I also will use Mongoose package which provides a straight-forward, schema-based
 
 
                                               
-                                              ```
+                                              
 run this command to install express mongoose: sudo npm install express mongoose
-                                              ```
+                                              
 
 
 In ‘Books’ folder, I created a folder named apps. I then created a file named routes.js. I entered code and used cat to confirm that it was entered correctly.
