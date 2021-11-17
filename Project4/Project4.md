@@ -1,7 +1,6 @@
 
 # MEAN PROJECT
 
-## MEAN STACK DEPLOYMENT TO UBUNTU IN AWS
 
 MEAN Stack is a combination of following components:
 
@@ -10,7 +9,7 @@ MEAN Stack is a combination of following components:
 1. Angular (Front-end application framework) – Handles Client and Server Requests
 1. Node.js (JavaScript runtime environment) – Accepts requests and displays results to end user. This will set up the Express routes and AngularJS controllers.
 
-Install NodeJs
+## Install NodeJs
 
 Firstly I updated and upgraded ubuntu before installation of Nodejs by running commands:
 
@@ -142,4 +141,16 @@ In the ‘apps’ folder, a folder named models was created. I opened a file nam
 ![Pic3a](./images/Next/Pic3a.png)
 
 
+                                       
+Started the server by running command: node server.js
+                                
 
+opened TCP port 3300 in the AWS Web Console for my EC2 Instance
+
+![Pic7a](./images/Next/Pic7.png)
+
+
+
+Here is my fully functional Book Register web form:
+
+![Pic6a](./images/Next/Pic6a.png)
