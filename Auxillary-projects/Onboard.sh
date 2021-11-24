@@ -58,7 +58,7 @@ PASSWORD=PASSWORD
 
 # Generate a password
 sudo echo -e "$PASSWORD/n$PASSWORD"  sudo passwd "$user"
-sudp passwd -x 5 $user   
+sudo passwd -x 5 $user   
             fi
         done
     else
