@@ -23,8 +23,6 @@ I then added 20 names to the names.csv file
                                                   
 Run following command to create developers group: sudo groupadd developers
 
-*screenshot below (after switching to root user)*
-![Pic4](./Images/Pic4.png)
 
 
 Run this command to make the .sh file executable: sudo chmod +x Onboard.sh
@@ -32,3 +30,11 @@ Run this command to make the .sh file executable: sudo chmod +x Onboard.sh
 Switched to super user with command: sudo su
 
 Run the script with command: ./Onboard.sh
+
+run this command to confirm user have been created: ls -l /home/ 
+
+Run command getent group developerts to confirm developers group has been created:
+
+*Screen shot below*
+
+![Pic4](./Images/Pic4.png)
