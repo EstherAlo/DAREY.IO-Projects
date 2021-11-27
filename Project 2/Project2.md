@@ -174,7 +174,11 @@ Accessed this page in the web browser by visiting the public IP address, followe
 ![Screen-27-11-2021_080928](https://user-images.githubusercontent.com/93116204/143673967-442a47b2-1ffe-482f-ab06-69b8f2e6974e.png)
 
 
-                                                                                                               ```
-Removed the file created as it contains sensitive information about the PHP environment and the Ubuntu server: sudo rm /var/www/your_domain/info.php
-                                                                                                               ```   
+                                                                                                               
+Removed the file created as it contains sensitive information about the PHP environment and the Ubuntu server with command below: 
+
+```
+sudo rm /var/www/your_domain/info.php
+```
+                                                                                                                  
 
