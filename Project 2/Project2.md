@@ -147,3 +147,34 @@ In order to test that my new server block functions  I created a  index.html fil
 ```
 sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
 ```
+
+![Screen-27-11-2021_075153](https://user-images.githubusercontent.com/93116204/143673216-e38f1170-4812-4aba-8eb5-b38ba08850fa.png)
+
+
+## TESTING PHP WITH NGINX
+
+At this point, the LAMP stack is completely installed and fully operational.
+
+To valiate that it can correctly hand Nginx .php files off to your PHP processor I created a test PHP file in the document root by opening a new file called info.ophp
+
+```
+sudo nano /var/www/projectLEMP/info.php
+```
+
+Entered a valid PHP code that will return information about the server:
+
+```
+<?php
+phpinfo();
+```
+
+Accessed this page in the web browser by visiting the public IP address, followed by info.php
+
+
+![Screen-27-11-2021_080928](https://user-images.githubusercontent.com/93116204/143673967-442a47b2-1ffe-482f-ab06-69b8f2e6974e.png)
+
+
+                                                                                                               ```
+Removed the file created as it contains sensitive information about the PHP environment and the Ubuntu server: sudo rm /var/www/your_domain/info.php
+                                                                                                               ```   
+
