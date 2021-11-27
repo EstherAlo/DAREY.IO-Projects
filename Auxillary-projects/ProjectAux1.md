@@ -29,6 +29,8 @@ Run this command to make the .sh file executable: sudo chmod +x Onboard.sh
 
 Switched to super user with command: sudo su
 
+*Screeenshot below*
+
 Run the script with command: ./Onboard.sh
 
 run this command to confirm user have been created: ls -l /home/ 
