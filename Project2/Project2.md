@@ -148,6 +148,8 @@ In order to test that my new server block functions  I created a  index.html fil
 sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
 ```
 
+*Screeenshot below*
+
 ![Screen-27-11-2021_075153](https://user-images.githubusercontent.com/93116204/143673216-e38f1170-4812-4aba-8eb5-b38ba08850fa.png)
 
 
@@ -181,4 +183,100 @@ Removed the file created as it contains sensitive information about the PHP envi
 sudo rm /var/www/your_domain/info.php
 ```
                                                                                                                   
+## Retrieving data from MySQL database with PHP
 
+During this process I created a test database (DB) with simple "To do list" and configure access to it, so the Nginx website would be able to query data from the DB and display it.
+                                              ```
+I connected to MySql using the root account:  sudo mysql
+                                              ``
+                                                                                     
+In order to create a new database, I run the following command from MsSql console:
+
+```
+CREATE DATABASE `example_database`;
+```
+                                                                                   
+                                                                                   
+                                                                                                                                 
+To give this user permission over the example_database database I ran this commad and then exited:
+
+```
+GRANT ALL ON example_database.* TO 'example_user'@'%';
+```                                                                                                   
+                                                                                                                                           
+To to test if  the new user has the proper permissions I logged into the MySQL console again, this time using the custom user credentials:
+
+```
+-u example_user -p
+```                                                                                                                                           
+
+*Screenshot below*
+
+![2a](https://user-images.githubusercontent.com/93116204/144015251-869ea381-4e5c-452d-b520-f5839f59584d.png)
+
+                                                                                 
+To confirm that I have access to the example_database database I entered command:
+
+```
+SHOW DATABASES;
+```                                                                                 
+
+*Screenshot below*
+
+![2b](https://user-images.githubusercontent.com/93116204/144015734-502c3018-f126-43a1-b7f1-9f46ef2d24ac.png)
+
+
+A test table named todo_list was created From the MySQL console with statement:
+
+```
+CREATE TABLE example_database.todo_list (item_id INT AUTO_INCREMENT,
+content VARCHAR(255),PRIMARY KEY(item_id));
+```
+
+Inserted a few rows of content in the test table
+
+*Screenshot below*
+
+                                                                                  
+To confirm that the data was successfully saved to the table, I run this command:
+
+```
+SELECT * FROM example_database.todo_list;
+```                                                                                  
+
+![2e](https://user-images.githubusercontent.com/93116204/144017269-dcd93a4b-cf1f-4461-9fcc-2ce20fcc7ceb.png)
+
+
+A PHP script that will connect to MySQL and query for my content was made. 
+                                                                                      
+                                                                                       
+To create a new PHP file in the custom web root directory I run the following command: 
+
+```
+nano /var/www/projectLEMP/todo_list.php
+```
+
+The script below was entered into todo_list.php:
+
+```
+<?php
+$user = "example_user";
+$password = "password";
+$database = "example_database";
+$table = "todo_list";
+
+try {
+  $db = new PDO("mysql:host=localhost;dbname=$database", $user, $password);
+  echo "<h2>TODO</h2><ol>";
+  foreach($db->query("SELECT content FROM $table") as $row) {
+    echo "<li>" . $row['content'] . "</li>";
+  }
+  echo "</ol>";
+} catch (PDOException $e) {
+    print "Error!: " . $e->getMessage() . "<br/>";
+    die();
+}
+```      
+The page was accessed in my web browser by visiting the public IP address!
+
+![2f](https://user-images.githubusercontent.com/93116204/144018828-c4b6de55-056e-4bc1-bd1d-07ad289ee1a4.png)
