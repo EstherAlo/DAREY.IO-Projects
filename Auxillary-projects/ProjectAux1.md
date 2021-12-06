@@ -21,22 +21,27 @@ I then added 20 names to the names.csv file
 
 
                                                   
-Run following command to create developers group: sudo groupadd developers
+I entered this command to create developers group: sudo groupadd developers
 
 
 
-Run this command to make the .sh file executable: sudo chmod +x Onboard.sh
+ to make the .sh file executable I ran this command: sudo chmod +x Onboard.sh
 
-Switched to super user with command: sudo su
+I Switched to super user with command: sudo su
 
 *Screeenshot below*
 
-Run the script with command: ./Onboard.sh
+To run the script I entered this command: ./Onboard.sh
 
-run this command to confirm user have been created: ls -l /home/ 
+I entered this command to confirm user have been created: ls -l /home/ 
 
-Run command getent group developerts to confirm developers group has been created:
+                                                                
+To confirm developers group has been created I entered command: 
 
+```
+getent group developers:
+```
+                                                                
 *Screen shot below*
 
 ![Pic4](./Images/Pic4.png)
