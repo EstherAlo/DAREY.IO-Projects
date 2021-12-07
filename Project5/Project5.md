@@ -60,11 +60,11 @@ From mysql client Linux Server I connected remotely to mysql server Database Eng
 
 sudo mysql -u remote_user -h <ip address> -p
 
-To check that I have successfully connected to a remote MySQL server and can perform SQL queries i ran the following comand: 
+I confirmed that I have successfully connected to a remote MySQL server and can perform SQL queries with the following comand: 
 
 ```
 Show databases;
 ```
 
 *sreenshot below*
-
+![Pic12a](./images/Pic12a.png)
