@@ -335,8 +335,10 @@ Install nodemon: npm install nodemon --save-dev
 
 ![Pic21a](./images/Pic21a.png)
 
+ 
 code below was used to partly replace code in the package.json file 
 
+ 
 ```
 "scripts": {
 "start": "node index.js",
@@ -466,6 +468,7 @@ export default ListTodo
 
 In the Todo.js file i wrote the following code: 
 
+ ```
 import React, {Component} from 'react';
 import axios from 'axios';
 
@@ -525,8 +528,10 @@ export default Todo;
 In the src directory I opened added the code below into Apps.js:
 
 ```
-import React from 'react';
+ 
+imported React from 'react';
 
+ ```
 import Todo from './components/Todo';
 import './App.css';
 
