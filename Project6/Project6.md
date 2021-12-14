@@ -15,7 +15,7 @@ Launched an EC2 instance that will serve as "Web Server" and attached three volu
 
 *screenshot below*
 
-![Pic1a](./images/pic1a.png)
+![pic1a](./images/pic1a.png)
 
 To see all mounts and free space on the server I used the following command: 
 
@@ -23,13 +23,13 @@ To see all mounts and free space on the server I used the following command:
 
 *Screenshot below*
 
-![Pic1b](./images/pic1b.png)
+![pic1b](./images/pic1b.png)
 
 I used gdisk utility to create a single partition on each of the 3 disks and then to view the newly configured partition on each of the 3 disks the lsblk command: 
 
 *Screenshot below*
 
-![Pic4a](./images/pic4a.png)
+![pic4a](./images/pic4a.png)
 
 I run the following command to install lvm2: sudo yum install lvm2
 
@@ -43,7 +43,7 @@ sudo pvcreate /dev/xvdh1
 
 *screenshot below*
 
-![Pic5a](./images/pic5a.png)
+![pic5a](./images/pic5a.png)
 
 To add all 3 PVs to a volume group (VG) I run the following command:
 
@@ -59,7 +59,7 @@ sudo vgs
 
 *screenshot below*
 
-![Pic5b](./images/pic5b.png)
+![pic5b](./images/pic5b.png)
 
 I created 2 logical volumes. apps-lv, and logs-lv. apps-lv will be used to store data for the Website while, logs-lv will be used to store data for logs
 
@@ -76,7 +76,7 @@ sudo lvs
 
 *screenshot below*
 
-![Pic5c](./images/pic5c.png)
+![pic5c](./images/pic5c.png)
 
 To confirm the whole set up I ran the following commands:
 
@@ -86,7 +86,7 @@ sudo vgdisplay -v #view complete setup - VG, PV, and LV
 sudo lsblk 
 ```
 *Screenshot below*
-![Pic6a](./images/pic6a.png)
+![pic6a](./images/pic6a.png)
 
 
 I used mkfs.ext4 to format the logical volumes with ext4 filesystem with the commands below: 
@@ -126,7 +126,7 @@ sudo blk id
 
 *screenshot below*
 
-![Pic10a](./images/pic10a.png)
+![pic10a](./images/pic10a.png)
 
 
 ![fstaba](./images/fstaba.png)
