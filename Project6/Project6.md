@@ -15,7 +15,7 @@ Launched an EC2 instance that will serve as "Web Server" and attached three volu
 
 *screenshot below*
 
-![Pic1a](./Images/Pic1a.png)
+![Pic1a](./images/Pic1a.png)
 
 To see all mounts and free space on the server I used the following command: 
 
@@ -23,13 +23,13 @@ To see all mounts and free space on the server I used the following command:
 
 *Screenshot below*
 
-![Pic1b](./Images/Pic1b.png)
+![Pic1b](./images/Pic1b.png)
 
 I used gdisk utility to create a single partition on each of the 3 disks and then to view the newly configured partition on each of the 3 disks the lsblk command: 
 
 *Screenshot below*
 
-![Pic4a](./Images/Pic4a.png)
+![Pic4a](./images/Pic4a.png)
 
 I run the following command to install lvm2: sudo yum install lvm2
 
@@ -43,7 +43,7 @@ sudo pvcreate /dev/xvdh1
 
 *screenshot below*
 
-![Pic5a](./Images/Pic5a.png)
+![Pic5a](./images/Pic5a.png)
 
 To add all 3 PVs to a volume group (VG) I run the following command:
 
@@ -59,7 +59,7 @@ sudo vgs
 
 *screenshot below*
 
-![Pic5b](./Images/Pic5b.png)
+![Pic5b](./images/Pic5b.png)
 
 I created 2 logical volumes. apps-lv, and logs-lv. apps-lv will be used to store data for the Website while, logs-lv will be used to store data for logs
 
@@ -76,7 +76,7 @@ sudo lvs
 
 *screenshot below*
 
-![Pic5c](./Images/Pic5c.png)
+![Pic5c](./images/Pic5c.png)
 
 To confirm the whole set up I ran the following commands:
 
@@ -86,7 +86,7 @@ sudo vgdisplay -v #view complete setup - VG, PV, and LV
 sudo lsblk 
 ```
 *Screenshot below*
-![Pic6a](./Images/Pic6a.png)
+![Pic6a](./images/Pic6a.png)
 
 
 I used mkfs.ext4 to format the logical volumes with ext4 filesystem with the commands below: 
@@ -126,10 +126,10 @@ sudo blk id
 
 *screenshot below*
 
-![Pic10a](./Images/Pic10a.png)
+![Pic10a](./images/Pic10a.png)
 
 
-![fstaba](./Images/fstaba.png)
+![fstaba](./images/fstaba.png)
 
 To Test the configuration and reload the daemon I run command: 
 
@@ -151,11 +151,11 @@ Repeated the same steps as for the Web Server, but instead of apps-lv I created 
 *Screenshot below*
 
 
-![db-lvs](./Images/db-lvs.png)
+![db-lvs](./images/db-lvs.png)
 
 
 
-![mount](./Images/mount.png)
+![mount](./images/mount.png)
 
 Installing WordPress on your Web Server EC2
 
@@ -240,7 +240,7 @@ I did the following:
 
 *Screenshot below*
 
-![createdatabase](./Images/createdatabase.png)
+![createdatabase](./images/createdatabase.png)
 
 ### Configured WordPress to connect to remote database
 
@@ -259,7 +259,7 @@ Verified if I can successfully execute SHOW DATABASES; command and see a list of
 
 *screenshot below*
 
-![show](./Images/show.png)
+![show](./mages/show.png)
 
 Changed permissions and configuration so Apache could use WordPress and enabled TCP port 80 in Inbound Rules configuration for the Web Server EC2
 
@@ -268,7 +268,7 @@ Accessed wordpress using my browser link:
 
 *Screenshot below*
 
-![word1a](./Images/word1a.png)
+![word1a](./images/word1a.png)
 
 *Filled in my credentials*
 
@@ -278,5 +278,5 @@ My WordPress has successfully connected to my remote MySQL database!
 
 *Screenshot below*
 
-![word3a](./Images/word3a.png)
+![word3a](./images/word3a.png)
 
