@@ -1,4 +1,4 @@
-# Project Web Solution With WordPress
+# __Web Solution With WordPress__
 
 The aim of this project was prepare storage infrastructure on two Linux servers and implement a basic web solution using WordPress
 
@@ -15,7 +15,8 @@ Launched an EC2 instance that will serve as "Web Server" and attached three volu
 
 *screenshot below*
 
-![pic1a](./images/pic1a.png)
+![pic1a](./images/pic1a.png) 
+
 
 To see all mounts and free space on the server I used the following command: 
 
