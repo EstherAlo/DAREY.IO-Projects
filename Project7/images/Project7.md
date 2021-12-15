@@ -205,9 +205,11 @@ The log file for Apache was located on the Web Server and mounted to the NFS ser
 
 Git was installed and tooling source code from Darey.io was forked into my github account. The tooling website’s code was deployed to the Webserver and the html folder from the repository was also deployed to /var/www/html
 
-I disable SELinux sudo setenforce 0 and to make this change permanent – opened  config file /etc/sysconfig/selinux and set SELINUX=disabledthen restrt httpd.
+I disable SELinux sudo setenforce 0 and to make this change permanent – opened  config file /etc/sysconfig/selinux and set SELINUX=disabled. Apache was restarted and status checked.
 
-Updated the website’s configuration to connect to the database (in /var/www/html/functions.php file)
+Updated the website’s configuration to connect to the database (in /var/www/html/functions.php file) 
+
+Installed my mysql rule into my security groups of my database and editting the binding address in  /etc/mysql/mysql.conf.d/mysqld to 0.0.0.0
 
 Appllied tooling-db.sql script to my database using this command:
 
