@@ -31,6 +31,7 @@ I used gdisk utility to create a single partition on each of the 3 disks
 To view the newly configured partition on each of the 3 disks the lsblk command:
 
 *Screenshot below*
+
 ![pic4a](./images/pic4a.png)
 
 I ran the following command to install lvm2: sudo yum install lvm2
@@ -179,6 +180,7 @@ sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/ww
 I verified NFS was mounted succesfully:
 
 *screenshot below*
+
 ![pic13a](./images/pic13a.png)
 
 To ensure that the changes will will persist on Web Server after reboot I entered the below command into the ftsab file which is located in the ect directory:
@@ -230,6 +232,7 @@ I disable SELinux sudo setenforce 0 and to make this change permanent – opened
 
 
 *Screenshot below*
+
 ![pic14a](./images/pic14a.png)
 
 Updated the website’s configuration to connect to the database (in /var/www/html/functions.php file) 
