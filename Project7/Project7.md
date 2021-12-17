@@ -247,6 +247,6 @@ Applied tooling-db.sql script to my database using this command:
 
 The website below was generated using the public ip address of all webservers created and I was able to login!
 
-*screenshot*
+*screenshot below*
 
 ![pic16a](./images/pic16a.png)
