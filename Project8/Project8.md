@@ -36,8 +36,8 @@ sudo systemctl restart apache2
 *screenshot below showing status of apache*
 
 
-```
 
+```
 Next step was was to configure load balancing. The Below configuraton was entered into/etc/apache2/sites-available/000-default.conf. The command below allows the apache server to map the ip addresses of the web server to this load balancer.
 
 
@@ -51,6 +51,7 @@ Next step was was to configure load balancing. The Below configuraton was entere
         ProxyPreserveHost On
         ProxyPass / balancer://mycluster/
         ProxyPassReverse / balancer://mycluster/
+
 ```
 
 Verified that my configuration works by entering the LB public ip address into browser 
@@ -60,6 +61,7 @@ Opened two terminals for both Web Servers and run following command:
 ```
 sudo tail -f /var/log/httpd/access_log
 ```
+
 
 Refreshed my LB browser several times to make sure that both servers receive HTTP GET requests from the LB – new records appeared in each server’s log file. The number of requests to each server were approximately the same since I set loadfactor to the same value for both servers – this means that traffic will be disctributed evenly between them.
 
