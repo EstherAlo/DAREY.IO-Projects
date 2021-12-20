@@ -16,6 +16,7 @@ I created an ubuntu server and opened port 80 by creating an Inbound Rule in Sec
 
 The Apache Load Balancer was installed and configured to point traffic coming to LB to both Web Servers with the below commands:
 
+```
 #Install apache2
 sudo apt update
 sudo apt install apache2 -y
@@ -37,10 +38,9 @@ sudo systemctl restart apache2
 
 
 
-```
 Next step was was to configure load balancing. The Below configuraton was entered into/etc/apache2/sites-available/000-default.conf. The command below allows the apache server to map the ip addresses of the web server to this load balancer.
 
-
+```
 <Proxy "balancer://mycluster">
                BalancerMember http://<WebServer1-Private-IP-Address>:80 loadfactor=5 timeout=1
                BalancerMember http://<WebServer2-Private-IP-Address>:80 loadfactor=5 timeout=1
