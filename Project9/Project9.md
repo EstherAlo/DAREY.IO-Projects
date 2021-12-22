@@ -31,3 +31,8 @@ I saved the configuration and run the build manually - this was successful
 In order build to run automatically I added the below configurations 
 
 *Screenshot below*
+
+A slight change was made  in any file in your GitHub repository (e.g. README.MD file) and push the changes to the master branch
+
+In order to confirm whether a new build has been launched automatically (by webhook) and can see its results – artifact I made some change in any file in the  README.MD file) and pushed the changes to the master branch.
+
