@@ -5,7 +5,7 @@ Completed the following:
 * Creation of AWS account 
 * Launched EC2 instance t2.micro family with Ubuntu Server 20.04 LTS (HVM)  
 * Saved the private key
-* Connected to the private key via GitBash terminal
+* Connected to the private key via terminal
 
 ### INSTALLED APACHE AND UPDATED THE FIREWALL
 
