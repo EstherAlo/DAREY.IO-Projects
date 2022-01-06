@@ -34,15 +34,15 @@ The confisuration below was inserted and saved
 
 ```
 upstream web {
-    server 35.178.103.192;
-    server 3.10.232.111;
+    server <Private ip address>;
+    server <private ip address>;
   }
 
 server {
     listen 80;
     server_name esthertooling.co.uk www.esthertooling.co.uk;
     location / {
-      proxy_pass http://myproject;
+      proxy_pass http://web;
     }
   }
 
@@ -52,10 +52,58 @@ Removed default site so reverse proxy will be redirected to the new configuratio
 
 sudo rm -f /etc/nginx/sites-enabled/default
 
-check the nginx has bee successfully confidured with this command: sudo nginx -t
+checked that nginx was successfully configured with this command: 
 
-linked load balanacer config file created in sites available to sites enabled so that nginx can access the configuration
+```
+sudo nginx -t
+```
 
-/etc/nginx/sites-enabled 
+linked load balancer config file created in sites available to sites enabled so that nginx can access the configuration file
+
+```
+cd /etc/nginx/sites-enabled 
 
 sudo ln -s ../sites-available/load_balancer.conf . 
+```
+
+                                                            
+To check that this had been achieved i executed the ll commad
+
+
+  ## configure secured connection using SSL/certificates                                                      
+
+I installed certbot and dependencies by executing the following command: 
+
+```
+sudo apt insyall certbot -y
+
+sudo apt install python3-certbot-nginx -y
+
+```
+
+executed the below commands to checked syntax and reload nginx:
+
+```
+sudo nginx -t && sudo nginx -s reload
+```
+
+*Screenshot below*
+
+In order to create a ceritficate for my domain to make it secure I excuted this command 
+
+```
+sudo certbot --nginx -d esthertooling.co.uk -d www.esthertooling.co.uk
+```
+
+A valid email address was entered and service agreement accepted. To increase security I selected for incoming request from port 80 to be redirected to port 443.
+
+created a cron assignement so that the certificate will automatically renew each time it expires by executing this command:
+
+```
+crontab -e
+```
+Insert the below command which will be executed every 12 minutes of every hour:
+
+```
+* */12 * * *   root /usr/bin/certbot renew > /dev/null 2>&1
+```
