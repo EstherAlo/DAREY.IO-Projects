@@ -3,7 +3,7 @@
 During this project I will do the following:
 
 1. Register a new domain name and connect to route 53
-1. Configur Nginx as a Load Balancer
+1. Configure Nginx as a Load Balancer
 
 ## Register a new domain name and connect to route 53
 
