@@ -3,12 +3,15 @@
 During this project I will do the following:
 
 1. Register a new domain name and connect to route 53
-1. Configuring Nginx as a Load Balancer
+1. Configur Nginx as a Load Balancer
 
 ## Register a new domain name and connect to route 53
 
 I registered a www.esthertooling.co.uk on go daddy. I then went unto the route 53 dashboard on AWS and created a hosted zone, connected this to my domain. This will tell route 53 to respond to DNS queries for my domain.  
 
+*screenshot below*
+
+![pic1](./images/pic1.png)
 
 ## Configure Nginx As A Load Balancer
 
@@ -26,11 +29,15 @@ To update the server depositery and install nginx I executed this command:
 sudo apt update && sudo apt install nginx
 ```
 
+*screenshot below*
+
+![pic2](./images/pic2.png)
+
 In order to Configure Nginx LB using Web Servers’ names defined in  /etc/hosts I created a config file by executing the below command:
 
 sudo vi /etc/nginx/sites-available/load_balancer.conf  
 
-The confisuration below was inserted and saved 
+The confiuration below was inserted and saved 
 
 ```
 upstream web {
@@ -57,17 +64,21 @@ checked that nginx was successfully configured with this command:
 ```
 sudo nginx -t
 ```
+*screenshot below*
 
-linked load balancer config file created in sites available to sites enabled so that nginx can access the configuration file
+![pic3](./images/pic3.png)
+
+linked my load balancer config file created in sites available to sites enabled so that nginx can access the configuration file
 
 ```
 cd /etc/nginx/sites-enabled 
 
 sudo ln -s ../sites-available/load_balancer.conf . 
 ```
+*screenshot below*
 
+![pic4](./images/pic4.png)
                                                             
-To check that this had been achieved i executed the ll commad
 
 
   ## configure secured connection using SSL/certificates                                                      
@@ -75,7 +86,7 @@ To check that this had been achieved i executed the ll commad
 I installed certbot and dependencies by executing the following command: 
 
 ```
-sudo apt insyall certbot -y
+sudo apt install certbot -y
 
 sudo apt install python3-certbot-nginx -y
 
@@ -89,7 +100,12 @@ sudo nginx -t && sudo nginx -s reload
 
 *Screenshot below*
 
-In order to create a ceritficate for my domain to make it secure I excuted this command 
+*screenshot below*
+
+![pic5](./images/pic5.png)
+
+
+In order to create a certificate for my domain to make it secure I executed this command 
 
 ```
 sudo certbot --nginx -d esthertooling.co.uk -d www.esthertooling.co.uk
@@ -97,12 +113,18 @@ sudo certbot --nginx -d esthertooling.co.uk -d www.esthertooling.co.uk
 
 A valid email address was entered and service agreement accepted. To increase security I selected for incoming request from port 80 to be redirected to port 443.
 
-created a cron assignement so that the certificate will automatically renew each time it expires by executing this command:
+*screenshot below showing site is secure*
+
+*screenshot below*
+
+![pic6](./images/pic6.png)
+
+created a cron assignment so that the certificate will automatically renew each time it expires by executing this command:
 
 ```
 crontab -e
 ```
-Insert the below command which will be executed every 12 minutes of every hour:
+Inserted the below command which will be executed every 12 minutes of every hour:
 
 ```
 * */12 * * *   root /usr/bin/certbot renew > /dev/null 2>&1
