@@ -150,7 +150,13 @@ which wireshark
 
 My updated Ansible architure:
 
+executed on admin terminal
+```
+Get-Service ssh-agent | Set-Service -StartupType Automatic -PassThru | Start-Service
+```
 
+ssh-add <path to the key>
 
-
+SSH'd into jenkinAnsible terminal 
+ssh -A
 
