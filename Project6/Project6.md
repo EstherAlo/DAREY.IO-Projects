@@ -79,7 +79,7 @@ sudo lvs
 
 ![pic5c](./images/pic5c.png)
 
-To confirm the whole set up I ran the following commands:
+To confirm the whole set up I executed the following commands:
 
 ```
 sudo vgdisplay -v #view complete setup - VG, PV, and LV
@@ -90,14 +90,14 @@ sudo lsblk
 ![pic6a](./images/pic6a.png)
 
 
-I used mkfs.ext4 to format the logical volumes with ext4 filesystem with the commands below: 
+I used mkfs.ext4 to format the logical volumes by executing the commands below: 
 
 ```
 sudo mkfs -t ext4 /dev/webdata-vg/apps-lv
 sudo mkfs -t ext4 /dev/webdata-vg/logs-lv
 ```
 
-To create a directory to store website files and also mount this i run the following comand:
+To create a directory to store website files and also mount this I executed the following command:
 
 ```
 sudo mkdir -p /var/www/html
@@ -111,10 +111,22 @@ I then created a directory to store backup log data with the below command:
 sudo mkdir -p /home/recovery/logs
 ```
 
-Before mounting the fie system I backedup all the files in the log directory /var/log into /home/recovery/logs by running this command:
+Before mounting the fie system I backed up all the files in the log directory /var/log into /home/recovery/logs by running this command:
 
 ```
 sudo rsync -av /var/log/. /home/recovery/logs/
+```
+
+Mounted /var/log on logs-lv logical volume.
+
+```
+sudo mount /dev/webdata-vg/logs-lv /var/log
+```
+
+Restored log files back into /var/log directory
+
+```
+sudo rsync -av /home/recovery/logs/. /var/log
 ```
 
 ## UPDATE THE `/ETC/FSTAB` FILE
@@ -149,6 +161,7 @@ To verify the setup I ran command: df -h
 I Launched a second RedHat EC2 instance that has the role – ‘DB Server’
 Repeated the same steps as for the Web Server, but instead of apps-lv I created db-lv and mounted it to /db directory instead of /var/www/html/
 
+
 *Screenshot below*
 
 
@@ -160,7 +173,7 @@ Repeated the same steps as for the Web Server, but instead of apps-lv I created 
 
 Installing WordPress on your Web Server EC2
 
-Updated the repositoryand installed wget, Apache and it’s dependencies
+Updated the repository and installed wget, Apache and it’s dependencies
 
 ```
 sudo yum -y update
@@ -224,9 +237,11 @@ sudo yum update
 sudo yum install mysql-server
 ```
 
-Verified that the service is up and running by using this command:
+Restarted, enabled and Verified that the service is up and running by using this command:
 
 ```
+sudo systemctl restart mysqld
+sudo systemctl enable mysqld
 sudo systemctl status mysqld
 ```
 
