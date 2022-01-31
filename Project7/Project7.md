@@ -12,7 +12,7 @@ In this project I will implement a solution that consists of following component
 
 # PREPARE NFS SERVER
 
-Launched an EC2 instance with RHEL that will serve as "Web Server" and attached three volumes. To inspect what block devices are attached to the server I ran this command: lsblk 
+Launched an EC2 instance with RHEL that will serve as "NFS Server" and attached three volumes. To inspect what block devices are attached to the server I ran this command: lsblk 
 
 
 *screenshot below*
@@ -34,7 +34,11 @@ To view the newly configured partition on each of the 3 disks the lsblk command:
 
 ![pic4a](./images/pic4a.png)
 
-I ran the following command to install lvm2: sudo yum install lvm2
+I ran the following command to install lvm2
+
+```
+sudo yum install lvm2
+```
 
 Used pvcreate utility to mark each of 3 disks as physical volumes (PVs) to be used by LVM and verified that the physical volumes had been created successfully
 
@@ -151,6 +155,7 @@ rpcinfo -p | grep nfs
 
 ![pic10a](./images/pic10a.png)
 
+In order for NFS server to be accessible from the client, following ports: TCP 111, UDP 111, UDP 2049
 
  # CONFIGURE THE DATABASE SERVER
 
@@ -218,7 +223,7 @@ To verify whether NFS was mounted correctly I created a new file called test.md 
 ![pic10b](./images/pic10b.png)
 
 
-The log file for Apache was located on the Web Server and mounted to the NFS server’s export for logs.
+The log file for Apache was located on the Web Server and mounted to the NFS server’s export for logs and updated the fstab to ensure changes will persist on web server after reboot.
 
 *screenshot below*
 
@@ -235,15 +240,13 @@ I disable SELinux sudo setenforce 0 and to make this change permanent – opened
 
 ![pic14a](./images/pic14a.png)
 
-Updated the website’s configuration to connect to the database (in /var/www/html/functions.php file) 
+Updated the website’s configuration with tooling script to connect to the database (in /var/www/html/functions.php file)
 
+```
+mysql -h <databse-private-ip> -u <db-username> -p <db-pasword> < tooling-db.sql
+```
 Installed my mysql rule into my security groups of my database and edited the binding address in  /etc/mysql/mysql.conf.d/mysqld to 0.0.0.0
 
-Applied tooling-db.sql script to my database using this command:
-
-```
- mysql -h <databse-private-ip> -u <db-username> -p <db-pasword> < tooling-db.sql
-```
 
 The website below was generated using the public ip address of all webservers created and I was able to login!
 
