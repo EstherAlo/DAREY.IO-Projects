@@ -53,6 +53,7 @@ Next step was was to configure load balancing. The Below configuraton was entere
         ProxyPassReverse / balancer://mycluster/
 
 ```
+The bytraffic balancing method will distribute incoming load between the Web Servers according to current traffic load and the I can control in which proportion the traffic must be distributed by loadfactor parameter.
 
 Verified that my configuration works by entering the LB public ip address into browser 
 
