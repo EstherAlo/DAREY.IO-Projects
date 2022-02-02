@@ -2,13 +2,13 @@
 
 ## Install Jenkins server
 
-I created an AWS EC2 server based on Ubuntu Server 20.04 LTS and named it "Jenkins". Following this I installed JDK and Jenkins and ensured it was up and running:
+I created an AWS EC2 server based on Ubuntu Server 20.04 LTS and named it "Jenkins". Following this I installed Jenkins and ensured it was up and running:
 
 *Screenshot below*
 
 ![Pic6a](./images/Pic6a.png)
 
-Jenkins default server TCP port 8080 so a new Inbound Rule was created within my EC2 Security Group
+Jenkins default server is TCP port 8080 so a new Inbound Rule was created within my EC2 Security Group
 
 *Screenshot below*
 
