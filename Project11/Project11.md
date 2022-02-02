@@ -2,11 +2,11 @@
 
 ## INSTALL AND CONFIGURE ANSIBLE ON EC2 INSTANCE
 
-Ansible was installed unto my Jenkins server and Ansible version was checked
+Ansible was installed unto my Jenkins server and Ansible version was checked with the below command:
 
-*screenshot below*
-
-
+```
+ansible --version
+```
 Created a new Freestyle project ansible in Jenkins and pointed it to my‘ansible-config-mgt’ repository.
 
 *screenshot below*
