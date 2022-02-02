@@ -6,14 +6,18 @@ Ansible was installed unto my Jenkins server and Ansible version was checked
 
 *screenshot below*
 
-- Created a new Freestyle project ansible in Jenkins and pointed it to my‘ansible-config-mgt’ repository.
+
+Created a new Freestyle project ansible in Jenkins and pointed it to my‘ansible-config-mgt’ repository.
 
 *screenshot below*
-- Configured a Post-build job to save all (**) files
-- Created a new repository in Github, named it ansible-config-mgt 
+
+![pic1](./images/pic1.png)
+
+Configured a Post-build job to save all (**) files
+Created a new repository in Github, named it ansible-config-mgt 
 Configured Webhook and set webhook to trigger ansible build.
 
-Tested my setup by making some change in README.MD file in master branch and make sure that  builds starts automatically and that Jenkins saved the files (build artifacts) in following folder
+Tested my setup by making some change in README.MD file in master branch and made sure that  builds starts automatically and that Jenkins saved the files (build artifacts) in following folder
 
 ```
 ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
@@ -21,13 +25,15 @@ ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
 
 *screenshot below*
 
+![pic2](./images/pic2.png)
+
 ### Prepare my development environment using Visual Studio Code
 
 I configured an IDE (VCS) to connect to my ansible config respository
 
 ## BEGIN ANSIBLE DEVELOPMENT
 
-The below command was executed within vcs in order to create a new branch that will be used for development of a new feature
+The below command was executed within vsc in order to create a new branch that will be used for development of a new feature
 
 ```
 git checkout -b prj-11
@@ -37,19 +43,28 @@ Created a 'playbooks' and 'inventory' directory and within the playbooks directo
 
 ### Set up an Ansible Inventory
 
- Ansible uses TCP port 22 by default, which means it needs to ssh into target servers from Jenkins-Ansible host  in order to achieve this I copied my private (.pem) key to my ansible/jenkins server
+ Ansible uses TCP port 22 by default, which means it needs to ssh into target servers from Jenkins-Ansible host.
 
-Imported my key into ssh-agent by executing the commands below:
+ In order to achieve this I  executed below command on the admin terminal
 
 ```
-eval `ssh-agent -s`
+Get-Service ssh-agent | Set-Service -StartupType Automatic -PassThru | Start-Service
+```
+*Screenshot below*
+![pic3](./images/pic3.png)
 
-ssh-add <path-to-private-key>
+
+```
+ssh-add <path to the key>
 ```
 
-Confirmed the key had been successfuly added with the following command:
+I then ssh'd into the Jenkins-Ansible server using ssh-agent
 
+```
 ssh -A ubuntu@public-ip
+```
+
+
 
 To check that I was able to connect to my RHEL and ubuntu target servers I executed the following commands
 
@@ -58,6 +73,9 @@ ssh ec2-user@<privateipaddress>
 
 ssh ubuntu@<privateipadress>
 ```
+
+*Screenshot showing I was able to ssh into my webserver*
+![pic4](./images/pic4.png)
 
 The inventory/dev.yml file was updated with the code below:
 
@@ -76,6 +94,8 @@ The inventory/dev.yml file was updated with the code below:
 [lb]
 <Load-Balancer-Private-IP-Address> ansible_ssh_user='ubuntu'
 ```
+
+
 
 ## CREATE A COMMON PLAYBOOK
 
@@ -135,8 +155,26 @@ To verifiy that all artifacts were saved within my jenkin-ansible I executed the
 
 *screenshot below*
 
+![pic5](./images/pic5.png)
+
 
 ## RUN FIRST ANSIBLE TEST
+
+Updated config file with below code and connected to ansible via ssh on vscode 
+
+Host jenkins_ansible
+    Host name <Public ip>
+    User ubuntu
+    IdentityFile <path to pem>
+    ForwardAgent yes
+    ControlPath /tmp/ansible-ssh-%h-%p_%r
+    ControlMaster auto
+    ControlPersist 10m
+
+   
+   
+ Opened the ubuntu home directory into vscode.
+
 
 To execute ansible-playbook command and verify that the playbook works I executed the below command. 
 
@@ -148,15 +186,7 @@ To verify on each server that wireshark was installed I executed the below comma
 which wireshark
 ```
 
-My updated Ansible architure:
+![pic6](./images/pic6.png)
 
-executed on admin terminal
-```
-Get-Service ssh-agent | Set-Service -StartupType Automatic -PassThru | Start-Service
-```
 
-ssh-add <path to the key>
-
-SSH'd into jenkinAnsible terminal 
-ssh -A
 
