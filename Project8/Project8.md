@@ -35,11 +35,7 @@ sudo a2enmod lbmethod_bytraffic
 sudo systemctl restart apache2
 ```
 
-*screenshot below showing status of apache*
-
-
-
-- Next step was was to configure load balancing. The Below configuraton was entered into/etc/apache2/sites-available/000-default.conf. The command below allows the apache server to map the ip addresses of the web server to this load balancer.
+- The Below configuraton was entered into/etc/apache2/sites-available/000-default.conf. The command below allows the apache server to map the ip addresses of the web server to this load balancer.
 
 ```
 <Proxy "balancer://mycluster">
@@ -54,17 +50,19 @@ sudo systemctl restart apache2
         ProxyPassReverse / balancer://mycluster/
 
 ```
-The bytraffic balancing method will distribute incoming load between the Web Servers according to current traffic load and the I can control in which proportion the traffic must be distributed by loadfactor parameter.
+- The bytraffic balancing method will distribute incoming load between the Web Servers according to current traffic load and the I can control in which proportion the traffic must be distributed by loadfactor parameter.
 
-Verified that my configuration works by entering the LB public ip address into browser 
+- Verified that my configuration works by entering the LB public ip address into browser 
 
-Opened two terminals for both Web Servers and run following command: 
+- Opened two terminals for both Web Servers and run following command: 
 
 ```
 sudo tail -f /var/log/httpd/access_log
 ```
 
 
-Refreshed my LB browser several times to make sure that both servers receive HTTP GET requests from the LB – new records appeared in each server’s log file. The number of requests to each server were approximately the same since I set loadfactor to the same value for both servers – this means that traffic will be disctributed evenly between them.
+- Refreshed my LB browser several times to make sure that both servers receive HTTP GET requests from the LB – new records appeared in each server’s log file. 
+
+The number of requests to each server were approximately the same since I set loadfactor to the same value for both servers – this means that traffic will be disctributed evenly between them.
 
 *screenshot below*
