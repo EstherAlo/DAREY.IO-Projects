@@ -1,6 +1,7 @@
 # __CONFIGURING APACHE AS A LOAD BALANCER__
 
-A Load Balancer (LB) distributes clients’ requests among underlying Web Servers and makes sure that the load is distributed in an optimal way. In this project I will enhance my Tooling Website solution by adding a Load Balancer to distribute traffic between Web Servers and allow users to access my website using a single URL.
+- A Load Balancer (LB) distributes clients’ requests among underlying Web Servers and makes sure that the load is distributed in an optimal way. 
+- In this project I will enhance my Tooling Website solution by adding a Load Balancer to distribute traffic between Web Servers and allow users to access my website using a single URL.
 
 Prior to this project I had the following servers installed and configured within:
 
@@ -11,10 +12,10 @@ Prior to this project I had the following servers installed and configured withi
 
 ## Configure Apache As A Load Balancer
 
-I created an ubuntu server and opened port 80 by creating an Inbound Rule in Security Group
+- I created an ubuntu server and opened port 80 by creating an Inbound Rule in Security Group
 
 
-The Apache Load Balancer was installed and configured to point traffic coming to LB to both Web Servers with the below commands:
+- The Apache Load Balancer was installed and configured to point traffic coming to LB to both Web Servers with the below commands:
 
 ```
 #Install apache2
@@ -38,7 +39,7 @@ sudo systemctl restart apache2
 
 
 
-Next step was was to configure load balancing. The Below configuraton was entered into/etc/apache2/sites-available/000-default.conf. The command below allows the apache server to map the ip addresses of the web server to this load balancer.
+- Next step was was to configure load balancing. The Below configuraton was entered into/etc/apache2/sites-available/000-default.conf. The command below allows the apache server to map the ip addresses of the web server to this load balancer.
 
 ```
 <Proxy "balancer://mycluster">
