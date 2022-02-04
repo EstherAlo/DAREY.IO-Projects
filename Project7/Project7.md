@@ -367,13 +367,14 @@ sudo cp -R /var/log/httpd.bak/. /var/log/httpd
  sudo yum install git
 
  git clone https://github.com/EstherAlo/tooling.git
- 
+
 
 - The tooling website’s code was deployed to the Webserver and the html folder from the repository was also deployed to /var/www/html
 
 ```
 sudo cp -R ~/tooling/html/. /var/www/html
 ```
+
 Disabled Apache default page and restarted httpd
 
 ```
@@ -383,23 +384,46 @@ sudo systemctl restart httpd.
 ```
 
 *Screenshot below*
+
 ![pic14b](./images/pic14b.png)
 
 
 - I disabled SELinux sudo setenforce 0 and to make this change permanent – opened  config file /etc/sysconfig/selinux and set SELINUX=disabled. Apache was restarted and status checked.
 
+```
+sudo setenforce 0
+```
 
 *Screenshot below*
 
 ![pic14a](./images/pic14a.png)
 
-- Updated the website’s configuration with tooling script to connect to the database (in /var/www/html/functions.php file)
+Installed mysql client
+
+```
+sudo yum install mysql -y
+```
+- Updated the website’s configuration with tooling script to connect to the database /var/www/html/functions.php file
+
+```
+sudo vi /var/www/html/functions.php file
+```
+
+*screenshow below*
+
+- Open mysql/aurora in the security group 
+
+- change bind addresss to 000 in the mysql config file
+
+```
+sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+
+Apply tooling-db.sql script within the tooling directory to the webserver using below command
 
 ```
 mysql -h <databse-private-ip> -u <db-username> -p <db-pasword> < tooling-db.sql
 ```
-
-- Installed my mysql rule into my security groups of my database and edited the binding address in  /etc/mysql/mysql.conf.d/mysqld to 0.0.0.0
 
 
 - The website below was generated using the public ip address of all webservers created and I was able to login!
