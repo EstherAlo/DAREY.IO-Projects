@@ -339,14 +339,23 @@ sudo mv /var/log/httpd /var/log/httpd.bak
 
 sudo mkdir /var/log/httpd
 ```
+
  - mounted to the NFS server’s export for logs to var/log/httpd, updated the fstab to ensure changes will persist on web server after reboot and reloaded.
 
 ```
  sudo mount -t nfs -o rw,nosuid <NFS Private IP address>:/mnt/logs /var/log/httpd
 
+```
+
+To make sure changes persist after reboot run I updated the fstab 
+
+```
+sudo vi /etc/fstab
+
  sudo systemctl daemon-reload 
 ```
-- Copy the content of httpd.bak into httpd folder since mount has already taken place 
+
+- Copied the content of httpd.bak into httpd folder since mount has already taken place 
 
 ```
 sudo cp -R /var/log/httpd.bak/. /var/log/httpd
@@ -358,6 +367,7 @@ sudo cp -R /var/log/httpd.bak/. /var/log/httpd
  sudo yum install git
 
  git clone https://github.com/EstherAlo/tooling.git
+ 
 
 - The tooling website’s code was deployed to the Webserver and the html folder from the repository was also deployed to /var/www/html
 
