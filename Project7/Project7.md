@@ -116,7 +116,30 @@ sudo mkfs -t xfs /dev/webdata-vg/logs-lv
 sudo mkfs -t xfs /dev/webdata-vg/opt-lv
 ```
 
-- Created mount points on /mnt directory for the logical volumes and mounted:
+- Created mount points on /mnt directory for the logical volumes 
+
+```
+sudo mkdir /mnt/apps
+
+sudo mkdir /mnt/apps
+
+sudo mkdir /mnt/opt 
+```
+
+
+mounted logical volumes:
+
+```
+sudo mount /dev/webdata-vg/lv-apps /mnt/apps
+
+sudo mount /dev/webdata-vg/lv-logs /mnt/logs
+
+sudo mount /dev/webdata-vg/lv-opt /mnt/opt
+
+#for confirmation
+
+df -h
+```
 
 *Screenshot below*
 
