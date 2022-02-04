@@ -28,6 +28,15 @@ In this project I will implement a solution that consists of following component
 
 *Screenshot below*
 
+ sudo gdisk /dev/xvdf
+
+ sudo gdisk /dev/xvdg
+
+ sudo gdisk /dev/xvdh
+
+ 
+
+
 ![pic3a](./images/pic3a.png)
 
 - To view the newly configured partition on each of the 3 disks the lsblk command:
@@ -102,9 +111,9 @@ sudo lsblk
 - I used mkfs.xfs to format the logical volumes with xfs filesystem with the commands below: 
 
 ```
-sudo xfs -t /dev/webdata-vg/apps-lv
-sudo xfs -t /dev/webdata-vg/logs-lv
-sudo xfs -t /dev/webdata-vg/opt-lv
+sudo mkfs -t xfs /dev/webdata-vg/apps-lv
+sudo mkfs -t xfs /dev/webdata-vg/logs-lv
+sudo mkfs -t xfs /dev/webdata-vg/opt-lv
 ```
 
 - Created mount points on /mnt directory for the logical volumes and mounted:
@@ -165,9 +174,13 @@ rpcinfo -p | grep nfs
 
 ```
 sudo apt install mysql-server
+
 sudo systemctl start mysql 
+
 sudo systemctl enable mysql 
+
 sudo systemctl status mysql
+
 sudo mysql_secure_installation
 ```
 
