@@ -361,6 +361,7 @@ sudo vi /etc/fstab
 sudo cp -R /var/log/httpd.bak/. /var/log/httpd
 ```
 
+```
 - Git was installed and tooling source code from Darey.io was forked into my github account. 
 
 ```
@@ -391,7 +392,7 @@ sudo systemctl restart httpd.
 - I disabled SELinux sudo setenforce 0 and to make this change permanent – opened  config file /etc/sysconfig/selinux and set SELINUX=disabled. Apache was restarted and status checked.
 
 ```
-sudo setenforce 0
+sudo vi setenforce 0
 ```
 
 *Screenshot below*
@@ -403,6 +404,7 @@ Installed mysql client
 ```
 sudo yum install mysql -y
 ```
+
 - Updated the website’s configuration with tooling script to connect to the database /var/www/html/functions.php file
 
 ```
