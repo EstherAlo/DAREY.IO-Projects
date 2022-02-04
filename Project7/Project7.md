@@ -127,14 +127,14 @@ sudo mkdir /mnt/opt
 ```
 
 
-mounted logical volumes:
+- mounted logical volumes:
 
 ```
-sudo mount /dev/webdata-vg/lv-apps /mnt/apps
+sudo mount /dev/webdata-vg/apps-lv /mnt/apps
 
-sudo mount /dev/webdata-vg/lv-logs /mnt/logs
+sudo mount /dev/webdata-vg/logs-lv /mnt/logs
 
-sudo mount /dev/webdata-vg/lv-opt /mnt/opt
+sudo mount /dev/webdata-vg/opt-lv /mnt/opt
 
 #for confirmation
 
@@ -146,6 +146,21 @@ df -h
 ![pic9a](./images/pic9a.png)
 
 ![pic9b](./images/pic9b.png)
+
+- Retrieved UUID of the devices and updated the ftsab file:
+
+```
+sudo blkid
+
+sudo vi /etc/fstab
+```
+- To confirm the mount was okay and reload:
+
+```
+sudo mount -a
+
+sudo systemctl daemon-reload
+```
 
 - To install, configure the NFS to start on reboot and confirm that it is running I ran the commands below:
 
@@ -175,9 +190,16 @@ sudo systemctl restart nfs-server.service
 
 
 ```
+#open exports file
+sudo vi /etc/exports
+
+
 /mnt/apps <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash)
 /mnt/logs <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash)
 /mnt/opt <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash)
+
+#export
+sudo exportfs -arv
 ```
 - I ran the command below to check  which port is used by NFS and open it within the Security Groups:
 
@@ -189,7 +211,7 @@ rpcinfo -p | grep nfs
 
 ![pic10a](./images/pic10a.png)
 
-- In order for NFS server to be accessible from the client, following ports: TCP 111, UDP 111, UDP 2049
+- In order for NFS server to be accessible from the client, I open the following ports and allowed access from the web subcidrs: TCP 111, UDP 111, UDP 2049
 
  # CONFIGURE THE DATABASE SERVER
 
@@ -207,8 +229,17 @@ sudo systemctl status mysql
 sudo mysql_secure_installation
 ```
 
- 
+
   I then created a database called tooling, a database user (webaccess) and granted permission to webaccess user on tooling database to do anything only from the webservers subnet cidr. 
+
+
+```
+ CREATE USER 'webaccess'@'172.31.32.0/20' IDENTIFIED BY 'password';
+
+ grant all privileges on tooling.* to 'webaccess' @'172.31.32.0/20';
+
+ flush privileges;
+ ```
 
  *Screenshot showing database has been created*
 
@@ -242,7 +273,10 @@ During this process I did the following:
 - A www directory was created and the NFS server export for apps was mounted on /var/www using the below commands:
 
 ```
+#create www directory
 sudo mkdir /var/www
+
+#mount nfs server export
 sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/www
 ```
 
@@ -288,6 +322,10 @@ sudo setsebool -P httpd_execmem 1
 ```
 
 - To verify whether NFS was mounted correctly I created a new file called test.md from my web server and checked whether it was visible within my NFS server:
+
+```
+sudo touch /var/www/test.md
+```
 
 *screenshot below*
 
