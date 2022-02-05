@@ -67,6 +67,7 @@ checked that nginx was successfully configured with this command:
 ```
 sudo nginx -t
 ```
+
 *screenshot below*
 
 ![pic3](./images/pic3.png)
@@ -78,15 +79,9 @@ sudo systemctl restart nginx
 
  sudo systemctl status nginx.
 ```
-cd /etc/nginx/sites-enabled 
 
-sudo ln -s ../sites-available/load_balancer.conf . 
-```
-*screenshot below*
 
-![pic4](./images/pic4.png)
-                                                            
-
+                                                        
 ## Register a new domain name and connect to route 53
 
 - I registered a www.esthertooling.co.uk on go daddy. 
@@ -96,6 +91,7 @@ sudo ln -s ../sites-available/load_balancer.conf .
 *screenshot below*
 
 ![pic1](./images/pic1.png)
+
 
   ## configure secured connection using SSL/certificates                                                      
 
@@ -117,7 +113,6 @@ sudo nginx -t && sudo nginx -s reload
 sudo systemctl status snapd
 ```
 
-
 *screenshot below*
 
 ![pic5](./images/pic5.png)
@@ -133,17 +128,17 @@ A valid email address was entered and service agreement accepted. To increase se
 
 *screenshot below showing site is secure*
 
-*screenshot below*
-
 ![pic6](./images/pic6.png)
 
 - created a cron assignment so that the certificate will automatically renew each time it expires by executing this command:
+
 
 ```
 crontab -e
 ```
 
 Inserted the below command which will be executed every 12 minutes of every hour:
+
 
 ```
 * */12 * * *   root /usr/bin/certbot renew > /dev/null 2>&1
