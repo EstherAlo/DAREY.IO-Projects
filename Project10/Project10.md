@@ -36,13 +36,13 @@ sudo apt update && sudo apt install nginx
 ![pic2](./images/pic2.png)
 
 
-In order to Configure Nginx LB using Web Servers’ names defined in  /etc/hosts I created a config file by executing the below command:
+- In order to Configure Nginx LB using Web Servers’ names defined in  /etc/hosts I created a config file by executing the below command:
 
 ```
 sudo vi /etc/nginx/nginx.conf 
 ```
 
-The confiuration below was inserted and saved 
+- The confiuration below was inserted and saved 
 
 ```
 upstream web {
@@ -62,7 +62,7 @@ server {
 
 
 
-checked that nginx was successfully configured with this command: 
+- checked that nginx was successfully configured with this command: 
 
 ```
 sudo nginx -t
@@ -72,7 +72,7 @@ sudo nginx -t
 
 ![pic3](./images/pic3.png)
 
-Restart Nginx and made sure the service is up 
+- Restart Nginx and made sure the service is up 
 
 ```
 sudo systemctl restart nginx
@@ -95,7 +95,7 @@ sudo systemctl restart nginx
 
   ## configure secured connection using SSL/certificates                                                      
 
-I installed certbot and dependencies by executing the following command: 
+- I installed certbot and dependencies by executing the following command: 
 
 ```
 sudo apt install certbot -y
@@ -104,7 +104,7 @@ sudo apt install python3-certbot-nginx -y
 
 ```
 
-executed the below commands to checked syntax and reload nginx:
+- executed the below commands to checked syntax and reload nginx:
 
 ```
 sudo nginx -t && sudo nginx -s reload
@@ -118,13 +118,13 @@ sudo systemctl status snapd
 ![pic5](./images/pic5.png)
 
 
-In order to create a certificate for my domain to make it secure I executed this command 
+- In order to create a certificate for my domain to make it secure I executed this command 
 
 ```
 sudo certbot --nginx -d esthertooling.co.uk -d www.esthertooling.co.uk
 ```
 
-A valid email address was entered and service agreement accepted. To increase security I selected for incoming request from port 80 to be redirected to port 443.
+- A valid email address was entered and service agreement accepted. To increase security I selected for incoming request from port 80 to be redirected to port 443.
 
 *screenshot below showing site is secure*
 
