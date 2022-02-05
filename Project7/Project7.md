@@ -425,6 +425,7 @@ sudo vi /var/www/html/functions.php file
 ```
 
 *screenshow below*
+
 ![pic19](./images/pic19.png)
 
 - Open mysql/aurora in the security group 
