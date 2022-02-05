@@ -355,11 +355,15 @@ To make sure changes persist after reboot run I updated the fstab
 ```
 sudo vi /etc/fstab
 
- sudo systemctl daemon-reload 
-
 #Update with the below
 
  172.31.30.141:/mnt/logs /var/log/httpd nfs defaults 0 0
+```
+
+- reloaded the system
+
+```
+ sudo systemctl daemon-reload 
 ```
 
 - Copied the content of httpd.bak into httpd folder since mount has already taken place 
@@ -394,11 +398,14 @@ sudo systemctl restart httpd.
 
 ![pic14b](./images/pic14b.png)
 
+- If unbale to restart httpd do the below:
 
 - I disabled SELinux sudo setenforce 0 and to make this change permanent – opened  config file /etc/sysconfig/selinux and set SELINUX=disabled. Apache was restarted and status checked.
 
 ```
-sudo vi setenforce 0
+sudo setenforce 0
+
+sudo vi /etc/sysconfig/selinux 
 ```
 
 *Screenshot below*
@@ -418,6 +425,7 @@ sudo vi /var/www/html/functions.php file
 ```
 
 *screenshow below*
+![pic19](./images/pic19.png)
 
 - Open mysql/aurora in the security group 
 
