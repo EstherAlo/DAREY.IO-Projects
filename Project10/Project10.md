@@ -5,6 +5,8 @@ During this project I will do the following:
 1. Register a new domain name and connect to route 53
 1. Configure Nginx as a Load Balancer
 
+![pic8](./images/pic8.png)
+
 ## Register a new domain name and connect to route 53
 
 I registered a www.esthertooling.co.uk on go daddy. I then went unto the route 53 dashboard on AWS and created a hosted zone, connected this to my domain. This will tell route 53 to respond to DNS queries for my domain.  
@@ -23,7 +25,7 @@ In order to do this I completed the following:
 
 1. Installed and configured Nginx as a load balancer to point traffic to the resolvable DNS names of the webservers
 
-To update the server depositery and install nginx I executed this command:
+To update the server depositry and install nginx I executed this command:
 
 ```
 sudo apt update && sudo apt install nginx
@@ -33,9 +35,13 @@ sudo apt update && sudo apt install nginx
 
 ![pic2](./images/pic2.png)
 
+- Updated /etc/hosts file for local DNS with Web Servers' name and their local IP addressess.
+
 In order to Configure Nginx LB using Web Servers’ names defined in  /etc/hosts I created a config file by executing the below command:
 
-sudo vi /etc/nginx/sites-available/load_balancer.conf  
+```
+sudo vi /etc/nginx/nginx.conf 
+```
 
 The confiuration below was inserted and saved 
 
@@ -55,9 +61,7 @@ server {
 
   ```
 
-Removed default site so reverse proxy will be redirected to the new configuration file 
 
-sudo rm -f /etc/nginx/sites-enabled/default
 
 checked that nginx was successfully configured with this command: 
 
@@ -68,7 +72,6 @@ sudo nginx -t
 
 ![pic3](./images/pic3.png)
 
-linked my load balancer config file created in sites available to sites enabled so that nginx can access the configuration file
 
 ```
 cd /etc/nginx/sites-enabled 
@@ -98,7 +101,6 @@ executed the below commands to checked syntax and reload nginx:
 sudo nginx -t && sudo nginx -s reload
 ```
 
-*Screenshot below*
 
 *screenshot below*
 
@@ -129,3 +131,10 @@ Inserted the below command which will be executed every 12 minutes of every hour
 ```
 * */12 * * *   root /usr/bin/certbot renew > /dev/null 2>&1
 ```
+
+- Set up periodical renewal of your SSL/TLS certificate. By default, LetsEncrypt certificate is valid for 90 days, so it is recommended to renew it at least every 60 days or more frequently.
+
+- You can test renewal command in dry-run mode 
+
+
+

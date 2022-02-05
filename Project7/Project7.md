@@ -234,9 +234,9 @@ sudo mysql_secure_installation
 
 
 ```
- CREATE USER 'webaccess'@'172.31.32.0/20' IDENTIFIED BY 'password';
+ CREATE USER 'webaccess'@'172.31.16.0/20' IDENTIFIED BY 'password';
 
- grant all privileges on tooling.* to 'webaccess' @'172.31.32.0/20';
+ grant all privileges on tooling.* to 'webaccess' @'172.31.16.0/20';
 
  flush privileges;
  ```
@@ -250,8 +250,11 @@ sudo mysql_secure_installation
 
 sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf 
 
-- restart mysql sudo systemctl restart mysql.
+- restart mysql 
 
+```
+sudo systemctl restart mysql
+```
 
 ## Prepare the Web Servers
 
@@ -353,6 +356,10 @@ To make sure changes persist after reboot run I updated the fstab
 sudo vi /etc/fstab
 
  sudo systemctl daemon-reload 
+
+#Update with the below
+
+ 172.31.30.141:/mnt/logs /var/log/httpd nfs defaults 0 0
 ```
 
 - Copied the content of httpd.bak into httpd folder since mount has already taken place 
@@ -361,14 +368,13 @@ sudo vi /etc/fstab
 sudo cp -R /var/log/httpd.bak/. /var/log/httpd
 ```
 
-```
 - Git was installed and tooling source code from Darey.io was forked into my github account. 
 
 ```
  sudo yum install git
 
  git clone https://github.com/EstherAlo/tooling.git
-
+```
 
 - The tooling website’s code was deployed to the Webserver and the html folder from the repository was also deployed to /var/www/html
 

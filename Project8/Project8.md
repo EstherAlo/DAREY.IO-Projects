@@ -3,6 +3,8 @@
 - A Load Balancer (LB) distributes clients’ requests among underlying Web Servers and makes sure that the load is distributed in an optimal way. 
 - In this project I will enhance my Tooling Website solution by adding a Load Balancer to distribute traffic between Web Servers and allow users to access my website using a single URL.
 
+![pic1](./images/pic1.png)
+
 Prior to this project I had the following servers installed and configured within:
 
 1. Two RHEL8 Web Servers
@@ -38,6 +40,8 @@ sudo systemctl restart apache2
 - The Below configuraton was entered into/etc/apache2/sites-available/000-default.conf. The command below allows the apache server to map the ip addresses of the web server to this load balancer.
 
 ```
+sudo vi /etc/apache2/sites-available/000-default.conf
+
 <Proxy "balancer://mycluster">
                BalancerMember http://<WebServer1-Private-IP-Address>:80 loadfactor=5 timeout=1
                BalancerMember http://<WebServer2-Private-IP-Address>:80 loadfactor=5 timeout=1
@@ -50,6 +54,9 @@ sudo systemctl restart apache2
         ProxyPassReverse / balancer://mycluster/
 
 ```
+*screemshot below*
+![pic1](./images/pic2.png)
+
 - The bytraffic balancing method will distribute incoming load between the Web Servers according to current traffic load and the I can control in which proportion the traffic must be distributed by loadfactor parameter.
 
 - Verified that my configuration works by entering the LB public ip address into browser 
@@ -65,4 +72,3 @@ sudo tail -f /var/log/httpd/access_log
 
 The number of requests to each server were approximately the same since I set loadfactor to the same value for both servers – this means that traffic will be disctributed evenly between them.
 
-*screenshot below*
