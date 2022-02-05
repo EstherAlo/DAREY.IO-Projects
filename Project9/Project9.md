@@ -1,6 +1,6 @@
 # __CONTINOUS INTERGRATION PIPELINE FOR TOOLING WEBSITE__
 
-- The task of this project is to ennhance the architecture prepared in Project 8 by adding a Jenkins server, configure a job to automatically deploy source codes changes from Git to NFS server
+- The task of this project is to enhance the architecture prepared in Project 8 by adding a Jenkins server in order to configure a job to automatically deploy source codes changes from Git to NFS server
 
 ![Pic8](./images/Pic8.png)
 
