@@ -256,6 +256,8 @@ sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
 sudo systemctl restart mysql
 ```
 
+- Open mysql/aurora in the security group 
+
 ## Prepare the Web Servers
 
 During this process I did the following:
@@ -428,20 +430,13 @@ sudo vi /var/www/html/functions.php file
 
 ![pic19](./images/pic19.png)
 
-- Open mysql/aurora in the security group 
 
-- change bind addresss to 000 in the mysql config file
 
-```
-sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
-```
-
-Apply tooling-db.sql script within the tooling directory to the webserver using below command
+- Apply tooling-db.sql script within the tooling directory to the webserver using below command
 
 ```
-mysql -h <databse-private-ip> -u <db-username> -p <db-pasword> < tooling-db.sql
+mysql -h <databse-private-ip> -u <db-username> -p tooling < tooling-db.sql
 ```
-
 
 - The website below was generated using the public ip address of all webservers created and I was able to login!
 
