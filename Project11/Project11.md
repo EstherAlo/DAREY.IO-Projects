@@ -82,7 +82,7 @@ ssh-add <path to the key>
 - I then ssh'd into the Jenkins-Ansible server using ssh-agent
 
 ```
-ssh -A ubuntu@public-ip
+ssh -A ubuntu@<public-ip>
 ```
 
 - To check that I was able to connect to my RHEL and ubuntu target servers I executed the following commands
@@ -152,7 +152,7 @@ ssh ubuntu@<privateipadress>
 
 ### Update GIT with the latest code
 
-- To Commit the code into GitHub i executed the below command and made a pull request:
+- To Commit the code into GitHub I executed the below command and made a pull request:
 
 ```
 git status
@@ -192,7 +192,7 @@ Host jenkins_ansible
 
    
    
-- Opened the ubuntu home directory into vscode.
+- Opened the ubuntu directory into vscode.
 
 
 - To execute ansible-playbook command and verify that the playbook works I executed the below command. 
