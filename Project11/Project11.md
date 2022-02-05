@@ -1,21 +1,35 @@
 # __ANSIBLE AUTOMATION PROJECT__
 
+- Project 7-10 consisted of manual operations for setting up virtual servers, installing and configuring required softwares.
+The aim of this project is to automate most of the tasks with Ansible Configuration Management.
+
 ## INSTALL AND CONFIGURE ANSIBLE ON EC2 INSTANCE
 
-Ansible was installed unto my Jenkins server and Ansible version was checked with the below command:
+- Ansible was installed unto my Jenkins server and Ansible version was checked with the below command:
 
 ```
+sudo apt update
+
+sudo apt install ansible
+
 ansible --version
 ```
-Created a new Freestyle project ansible in Jenkins and pointed it to my‘ansible-config-mgt’ repository.
+
+
+- Updated the name tag on our Jenkins EC2 Instance to Jenkins-Ansible, it is the server that will be used to run the playbook.
+
+- created a new repository within my github account and named this ansible-config.
+
+- Created a new freestyle project called "ansible" in Jenkins and pointed it to the "ansible-config" repository and configured a Post-build job to save all (**) files
 
 *screenshot below*
 
 ![pic1](./images/pic1.png)
 
-Configured a Post-build job to save all (**) files
-Created a new repository in Github, named it ansible-config-mgt 
-Configured Webhook and set webhook to trigger ansible build.
+- Configured Webhook and set webhook to trigger ansible build.
+
+- Jenkins was configured to build each time content within the repository was commited
+
 
 Tested my setup by making some change in README.MD file in master branch and made sure that  builds starts automatically and that Jenkins saved the files (build artifacts) in following folder
 
@@ -27,13 +41,19 @@ ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
 
 ![pic2](./images/pic2.png)
 
+
 ### Prepare my development environment using Visual Studio Code
 
-I configured an IDE (VCS) to connect to my ansible config respository
+- I configured an IDE (VCS) to connect to my ansible config respository
+
+- installed remote development pack on VSCODE
+
+- cloned my repositry into VSCODE 
+
 
 ## BEGIN ANSIBLE DEVELOPMENT
 
-The below command was executed within vsc in order to create a new branch that will be used for development of a new feature
+- The below command was executed within vsc in order to create a new branch that will be used for development of a new feature
 
 ```
 git checkout -b prj-11
@@ -43,30 +63,29 @@ Created a 'playbooks' and 'inventory' directory and within the playbooks directo
 
 ### Set up an Ansible Inventory
 
- Ansible uses TCP port 22 by default, which means it needs to ssh into target servers from Jenkins-Ansible host.
+ - Ansible uses TCP port 22 by default, which means it needs to ssh into target servers from Jenkins-Ansible host.
 
- In order to achieve this I  executed below command on the admin terminal
+ - In order to achieve this I  executed below command into the admin terminal which only needs to be done once
 
 ```
 Get-Service ssh-agent | Set-Service -StartupType Automatic -PassThru | Start-Service
+
+
+ssh-add <path to the key>
 ```
+
 *Screenshot below*
 ![pic3](./images/pic3.png)
 
 
-```
-ssh-add <path to the key>
-```
 
-I then ssh'd into the Jenkins-Ansible server using ssh-agent
+- I then ssh'd into the Jenkins-Ansible server using ssh-agent
 
 ```
 ssh -A ubuntu@public-ip
 ```
 
-
-
-To check that I was able to connect to my RHEL and ubuntu target servers I executed the following commands
+- To check that I was able to connect to my RHEL and ubuntu target servers I executed the following commands
 
 ```
 ssh ec2-user@<privateipaddress>
@@ -77,7 +96,7 @@ ssh ubuntu@<privateipadress>
 *Screenshot showing I was able to ssh into my webserver*
 ![pic4](./images/pic4.png)
 
-The inventory/dev.yml file was updated with the code below:
+- The inventory/dev.yml file was updated with the code below:
 
 
 ```
@@ -99,7 +118,7 @@ The inventory/dev.yml file was updated with the code below:
 
 ## CREATE A COMMON PLAYBOOK
 
- The below playbook is divided into two parts, each of them is intended to perform the same task: install wireshark utility (or make sure it is updated to the latest version) on my RHEL 8 and Ubuntu servers. It uses root user to perform this task and respective package manager: yum for RHEL 8 and apt for Ubuntu.
+ - The below playbook is divided into two parts, each of them is intended to perform the same task: install wireshark utility (or make sure it is updated to the latest version) on my RHEL 8 and Ubuntu servers. It uses root user to perform this task and respective package manager: yum for RHEL 8 and apt for Ubuntu.
 
  
 ```
@@ -133,7 +152,7 @@ The inventory/dev.yml file was updated with the code below:
 
 ### Update GIT with the latest code
 
-To Commit the code into GitHub i executed the below command and made a pull request:
+- To Commit the code into GitHub i executed the below command and made a pull request:
 
 ```
 git status
@@ -147,7 +166,7 @@ git commit -m "commit message"
 
 *Screenshot showing pull request successful*
 
-To verifiy that all artifacts were saved within my jenkin-ansible I executed the below commad:
+- To verifiy that all artifacts were saved within my jenkin-ansible I executed the below commad:
 
 ```
 /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
@@ -173,14 +192,16 @@ Host jenkins_ansible
 
    
    
- Opened the ubuntu home directory into vscode.
+- Opened the ubuntu home directory into vscode.
 
 
-To execute ansible-playbook command and verify that the playbook works I executed the below command. 
+- To execute ansible-playbook command and verify that the playbook works I executed the below command. 
 
+```
 ansible-playbook -i /var/lib/jenkins/jobs/ansible/builds/5/archive/inventory/dev.yml /var/lib/jenkins/jobs/ansible/builds/5/archive/playbooks/common.yml
+```
 
-To verify on each server that wireshark was installed I executed the below command:
+- To verify on each server that wireshark was installed I executed the below command:
 
 ```
 which wireshark

@@ -130,7 +130,7 @@ sudo certbot --nginx -d esthertooling.co.uk -d www.esthertooling.co.uk
 
 ![pic6](./images/pic6.png)
 
-- created a cron assignment so that the certificate will automatically renew each time it expires by executing this command:
+- Created a cron assignment so that the certificate will automatically renew each time it expires by executing this command:
 
 
 ```
