@@ -1,30 +1,29 @@
 
 ## LAMP PROJECT
 
-Completed the following: 
-* Creation of AWS account 
-* Launched EC2 instance t2.micro family with Ubuntu Server 20.04 LTS (HVM)  
-* Saved the private key
-* Connected to the private key via terminal
+- Installation of apache (web server software) and updating the firewall.
+- Installation of mysql for storing and managing data for a site.
+- Installation of php for processing code to display dynamic content to end user.
+- Creating a virtual host for website using apache.
+- Enabling php on the website.
 
 ### INSTALLED APACHE AND UPDATED THE FIREWALL
 
-Installed Apache using Ubuntu's package manager by running command: ```
-                                                                   sudo apt update 
-                                                                    ```
+- Updated the repositries and installed Apache using Ubuntu's package manager by running command: ```                                                                                                                                                               sudo apt update 
+                                                                                                  ```
 
-Verified that apache2 was running as a Service in my OS: ```
-                                                       sudo systemctl status apache2
-                                                         ```
+- Verified that apache2 was running as a Service in my OS: ```
+                                                           sudo systemctl status apache2
+                                                           ```
 
 *Apache2 status below* 
 ![Project 1- C (2)](https://user-images.githubusercontent.com/93116204/138972237-0c769ceb-4afe-44ce-abfe-28d2e87b8560.png)
 
-Requested my Apache HTTP server on port 80: ```
+- Requested my Apache HTTP server on port 80: ```
                                         curl http://localhost:80
                                             ```
 
-Verified if my Apache HTTP server can respond to requests from the Internet. 
+- Verified if my Apache HTTP server can respond to requests from the Internet. 
 
 *Screenshot below*
 ![defaultpage](https://user-images.githubusercontent.com/93116204/138972873-9a287524-61b1-4506-9e6e-58232be745c3.png)
@@ -33,21 +32,21 @@ Verified if my Apache HTTP server can respond to requests from the Internet.
 
 ### INSTALLED MYSQL
 
-MYSQL is a popular relational database management system used within PHP enviroments
+- MYSQL is a popular relational database management system used within PHP enviroments
 
-Installed MySQL by running this command: ```sudo apt install mysql-server
+- Installed MySQL by running this command: ```sudo apt install mysql-server
                                          ```
 
-Ran a security script that comes pre-installed with MySQL: 
+- Ran a security script that comes pre-installed with MySQL: 
 
-Prompted to set up password after running:  ```
+- Prompted to set up password after running:  ```
                                            sudo mysql secure installation.
                                             ```
 
-I logged into MySQL to test connection: ```
+- I logged into MySQL to test connection: ```
                                         sudo mysql
                                         ```
-I then exited MySQL: ```
+- I then exited MySQL: ```
                      mysql> exit
                      ```
                      
@@ -58,45 +57,45 @@ I then exited MySQL: ```
  
 ### INSTALLED PHP
 
-PHP is the component of our setup that will process code to display dynamic content to the end user.
+- PHP is the component of our setup that will process code to display dynamic content to the end user.
 
-In addition to the php package, my server will need php-mysql, a PHP module that allows PHP to communicate with MySQL-based databases.
+- In addition to the php package, my server will need php-mysql, a PHP module that allows PHP to communicate with MySQL-based databases.
 
-libapache2-mod-php will be required to enable Apache to handle PHP files. Core PHP packages will automatically be installed as dependencies.
+- libapache2-mod-php will be required to enable Apache to handle PHP files. Core PHP packages will automatically be installed as dependencies.
 
-These 3 packages were installed at once by running: ```
+- These 3 packages were installed at once by running: ```
                                                     sudo apt install php libapache2-mod-php php-mysql
                                                     ```
                                                    
                                                     
- confirmed my PHP version by running: ```
-                                      php -v
-                                      ```
+ - confirmed my PHP version by running: ```
+                                        php -v
+                                        ```
                                       
                                       
    *Screenshot below*                                  
   ![Project1 - G (3)](https://user-images.githubusercontent.com/93116204/139135928-1216975b-7405-43d8-be96-29b392ab3404.png)
 
-To test my setup with a PHP script, I set up a Apache Virtual Host to hold my website’s files and folders. 
+- To test my setup with a PHP script, I set up a Apache Virtual Host to hold my website’s files and folders. 
 
-The objective is to setup a domain called ‘projectlamp’.
+- The objective is to setup a domain called ‘projectlamp’.
 
-Apache on Ubuntu 20.04 has one server block enabled by default that is configured to serve documents from the /var/www/html directory. 
+- Apache on Ubuntu 20.04 has one server block enabled by default that is configured to serve documents from the /var/www/html directory. 
 
-I will add my own directory next next to the default one.
+- Added my own directory next next to the default one.
 
-I created the directory for projectlamp using ‘mkdir’ command:``` 
+- I created the directory for projectlamp using ‘mkdir’ command:``` 
                                                               sudo mkdir /var/www/projectlamp
                                                               ```
                                                               
- Assigned ownership of the directory with my current system user: ```      
+ - Assigned ownership of the directory with my current system user: ```      
                                                                   sudo chown -R $USER:$USER /var/www/projectlamp   
                                                                   ```
                                                                   
- Created and opened a new configuration file in Apache’s sites-available directory:``` 
+ - Created and opened a new configuration file in Apache’s sites-available directory:``` 
                                                                                    sudo vi /etc/apache2/sites-available/projectlamp.conf
                                                                                    ```
-This created a new blank file. I then pasted  in the following bare-bones configuration by hitting on i on the keyboard to enter the insert mode, and paste the text:
+- This created a new blank file. I then pasted  in the following bare-bones configuration by hitting on i on the keyboard to enter the insert mode, and paste the text:
 
 ```
 <VirtualHost *:80>
@@ -127,34 +126,34 @@ The following command showed the new file in the sites-available directory: ```
 ![Project 1 - F (2)](https://user-images.githubusercontent.com/93116204/139141359-ff767a0c-969e-4e27-8f7b-59df825621f2.png)
 
 
-I used the a2ensite command to enable the new virtual host:```
+- I used the a2ensite command to enable the new virtual host:```
                                                            sudo a2ensite projectlamp
                                                            ```
  
  *Screenshot below*                                                          
 ![Project1 - G (4)](https://user-images.githubusercontent.com/93116204/139143110-b8438846-7b52-45e0-a8f4-25716ad20dc7.png)
 
-I disabled the default website that comes installed with Apache. This is required if you’re not using a custom domain name, because in this case Apache’s default configuration would overwrite my virtual host. 
+- I disabled the default website that comes installed with Apache. This is required if you’re not using a custom domain name, because in this case Apache’s default configuration would overwrite my virtual host. 
 
 
-Command to disable Apache’s default website:``` 
+- Command to disable Apache’s default website:``` 
                                             sudo a2dissite 000-default
                                             ```
 
-To make sure my configuration file doesn’t contain syntax errors i entered command:``` 
+- To make sure my configuration file doesn’t contain syntax errors i entered command:``` 
                                                                                    sudo apache2ctl configtest
                                                                                    ```
                                                                                    
-I reloaded Apache so these changes take effect:``` 
-                                               sudo systemctl reload apache2
+- I reloaded Apache so these changes take effect:``` 
+                                                 sudo systemctl reload apache2
      
-                                               ```
+                                                 ```
 
 *Screenshot below*                                               
 ![Project1 - G (5)](https://user-images.githubusercontent.com/93116204/139145212-6c4570d6-138f-4021-a878-a56e0fc59a17.png)
                                               
 
-Created an index.html file in that location so that I could test that the virtual host works as expected:
+- Created an index.html file in that location so that I could test that the virtual host works as expected:
 
 ```
 sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
@@ -163,7 +162,7 @@ sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/met
 
 ### ENABLED PHP ON THE WEBSITE
 
-With the default DirectoryIndex settings on Apache, a file named index.html will always take precedence over an index.php file. To change this behavior, I eddited the /etc/apache2/mods-enabled/dir.conf file and changed the order in which the index.php file was listed within the DirectoryIndex directive.
+- With the default DirectoryIndex settings on Apache, a file named index.html will always take precedence over an index.php file. To change this behavior, I eddited the /etc/apache2/mods-enabled/dir.conf file and changed the order in which the index.php file was listed within the DirectoryIndex directive.
 
 ```
 sudo vim /etc/apache2/mods-enabled/dir.conf
@@ -178,11 +177,11 @@ sudo vim /etc/apache2/mods-enabled/dir.conf
 </IfModule>
 ```
 
-I reloaded Apache so the changes take effect:``` 
+- I reloaded Apache so the changes take effect:``` 
                                              sudo systemctl reload apache2
                                              ```
                                              
- Created a PHP test script to confirm that Apache is able to handle and process requests for PHP files by opening a new file named index.php inside my custom web root folder:
+- Created a PHP test script to confirm that Apache is able to handle and process requests for PHP files by opening a new file named index.php inside my custom web root folder:
  
  ``` 
 vim /var/www/projectlamp/index.php
@@ -195,7 +194,7 @@ I entered the text below inside the file, saved and closed:
 phpinfo();
 ```
 
-Refreshed my EC2 public ip address url page
+- Refreshed my EC2 public ip address url page
 
 *Screenshot below*
 ![Project 1 (2)](https://user-images.githubusercontent.com/93116204/139148367-d847b8c7-f1be-43a1-b38b-d8cbc03ab1f7.png)
