@@ -5,6 +5,7 @@
 
 *screenshot of Ansible architecture*
 
+![pic2](./images/pic2.png)
 
 
 ## Jenkins job enhancement
@@ -28,15 +29,23 @@ chmod -R 0777 /home/ubuntu/ansible-config-artifact
 
 *screenshot below* 
 
+![pic1](./images/pic1.png)
+
 - Created a new Freestyle project and named it save_artifacts. This project will be triggered by completion of the existing ansible project. 
 
 *screenshot below* 2
+
+![pic3](./images/pic3.png)
+
+![pic6](./images/pic6.png)
 
 - The main idea of save_artifacts project is to save artifacts into /home/ubuntu/ansible-config-artifact directory. To achieve this, I created a Build step and chose Copy artifacts from other project, specified ansible as a source project and /home/ubuntu/ansible-config-artifact as a target directory.
 
 - Tested my set up by making some change in README.MD file inside the ansible-config repository (right inside master branch).
 
 *screenshot showing build was made in saved_artifacts*
+
+![pic5](./images/pic5.png)
 
 ## Refactor Ansible Code By Importing Other Playbooks Into site.yml
 
@@ -68,44 +77,81 @@ git clone https://github.com/EstherAlo/ansible-config-mgt.git
 
 *screenshot below*
 
+![pic7](./images/pic7.png)
+
+
+In /etc/ansible/ansible.cfg file uncomment inventory string and provided a full path to the inventory directory = /home/ubuntu/ansible/ansible-config/inventory, so Ansible could know where to find configured roles.
+
+
+![pic8](./images/pic8.png)
+
 - updated site.yml with import_playbook: ../static-assignments/common-del.yml instead of common.yml and excuted the below command against the dev servers
 
 ```
-sudo ansible-playbook -i /home/ubuntu/ansible-config-artifact/inventory/dev.yml /home/ubuntu/ansible-config-artifact/playbooks/site.yml
+sudo ansible-playbook -i /home/ubuntu/ansible-config-mgt/inventory/dev.yml /home/ubuntu/ansible-config-mgt/playbooks/site.yml
 ```
+*screenshot below*
 
+![pic11](./images/pic10.png)
 ## CONFIGURE UAT WEBSERVERS WITH A ROLE ‘WEBSERVER’
 
 - Launched 2 EC2 instances using RHEL 8 image, this was used as the uat servers, and were named – Web1-UAT and Web2-UAT.
 
-- In order to create a role, you must create a directory called roles/, relative to the playbook file or in /etc/ansible/ directory
+- I created a role directory within my ansible_config_mgt directory. The role directory must be relative to the playbook file or in /etc/ansible/ directory
 
-- Create a roles directory in the root, cd into the directory, use an Ansible utility called ansible-galaxy,
 
-```
- mkdir roles && cd roles && ansible-galaxy init webserver
- ```
-
- - The entire folder structure should like below.
+ - The roles structure should look like this.
 
  *Screenshot below*
 
- - After removing unnecesary directories and files, the roles structure should look like this.
-
- *Screenshot below*
+![pic11](./images/pic11.png)
 
 - Updated the inventory ansible-config/inventory/uat.yml file with IP addresses of the 2 UAT Webservers.
 
 *screenshot below*
 
-- In /etc/ansible/ansible.cfg file uncommented roles_path string and provideed a full path to my roles directory roles_path = /home/ubuntu/ansible-config/roles, so Ansible will know where to find configured roles.
+![pic12](./images/pic12.png)
+
+- In /etc/ansible/ansible.cfg file uncommented roles_path string and provided a full path to my roles directory roles_path = /home/ubuntu/ansible-config-mgt/roles, so Ansible will know where to find configured roles.
 
 *screenshot below*
 
+![pic9](./images/pic9.png)
+
+
 - Went into the tasks directory, and within the main.yml file, wrote configuration tasks to do the following: 
 
-1. Install and configure Apache (httpd service) 
+
+1. install and configure Apache (httpd service) 
 1. Clone Tooling website from GitHub https://github.com/EstherAlo/tooling.git. 
 1. Ensure the tooling website code is deployed to /var/www/html on each of 2 UAT Web servers. 
 1. Make sure httpd service is started.
 
+
+*screenshot below*
+ ![pic13](./images/pic13.png)
+
+
+## Reference ‘Webserver’ role
+- Within the static-assignments folder, created a new assignment for uat-webservers uat-webservers.yml. This is where I will reference the role.
+
+*screenshot below*
+
+ ![pic14](./images/pic14.png)
+
+## Commit & Test
+
+ - Committed my changes, created a Pull Request and merged them to master (main) branch, made sure webhook triggered two consequent Jenkins jobs, then ran successfully and copied all the files to your Jenkins-Ansible server into /home/ubuntu/ansible/ansible-config/ directory.
+
+- Executed the playbook against the uat inventory.
+
+```
+ansible-playbook -i /home/ubuntu/ansible-config-mgt/inventory/uat.yml /home/ubuntu/ansible-config-mgt/playbooks/site.yml
+```
+
+![pic15](./images/pic15.png)
+
+I WAS able to see both of the UAT Web servers configured and able reach them from the browser: 
+
+*screenshot below*
+![pic16](./images/pic16.png)
