@@ -181,6 +181,7 @@ git commit -m "commit message"
 
 Updated config file with below code and connected to ansible via ssh on vscode 
 
+```
 Host jenkins_ansible
     Host name <Public ip>
     User ubuntu
@@ -189,10 +190,10 @@ Host jenkins_ansible
     ControlPath /tmp/ansible-ssh-%h-%p_%r
     ControlMaster auto
     ControlPersist 10m
-
+```
    
    
-- Opened the ubuntu directory into vscode.
+- Opened the ansible directory into vscode.
 
 
 - To execute ansible-playbook command and verify that the playbook works I executed the below command. 

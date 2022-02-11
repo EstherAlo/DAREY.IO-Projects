@@ -1,4 +1,4 @@
-#__INTRODUCING DYNAMIC ASSIGNMENT INTO OUR STRUCTURE__
+# __INTRODUCING DYNAMIC ASSIGNMENT INTO OUR STRUCTURE__
 
 - Within my Github repositry (ansible_config_mgt) I created a new folder, named dynamic-assignments. Then inside this folder, created a new file and named it env-vars.yml. I later instructed site.yml to include this playbook later.
 
@@ -96,6 +96,8 @@ git add .
 git commit -m "Commit new role files into GitHub"
 git push --set-upstream origin roles-feature
 ```
+
+- Create a pull request amd merge it with the main branch on Github.
 
 ## LOAD BALANCER ROLES
 

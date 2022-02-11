@@ -3,9 +3,6 @@
 - In this project I continued working with my ansible-config-mgt repository and made some improvements to my code. 
 - I refactored the Ansible code, created assignments, and used the imports functionality. Imports allow to effectively re-use previously created playbooks in a new playbook – it allows you to organize your tasks and reuse them when needed.
 
-*screenshot of Ansible architecture*
-
-![pic2](./images/pic2.png)
 
 
 ## Jenkins job enhancement
@@ -78,6 +75,8 @@ git clone https://github.com/EstherAlo/ansible-config-mgt.git
 *screenshot below*
 
 ![pic7](./images/pic7.png)
+
+(add more information here )
 
 
 In /etc/ansible/ansible.cfg file uncomment inventory string and provided a full path to the inventory directory = /home/ubuntu/ansible/ansible-config/inventory, so Ansible could know where to find configured roles.
@@ -155,3 +154,9 @@ I WAS able to see both of the UAT Web servers configured and able reach them fro
 
 *screenshot below*
 ![pic16](./images/pic16.png)
+
+
+
+*screenshot of Ansible architecture*
+
+![pic2](./images/pic2.png)
