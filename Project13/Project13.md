@@ -12,6 +12,8 @@ git checkout -b dynamic-assignments
 
 *screenshot below*
 
+![pic1](./images/pic1.png)
+
 - Input the below code into the env-vars.yml file.
 
 ```
@@ -57,9 +59,9 @@ Updated site.yml file to make use of the dynamic assignment.
 
 *Screenshot below*
 
-## Download Mysql Ansible Role
+![pic2](./images/pic2.png)
 
-You can browse available community roles here
+## Download Mysql Ansible Role
 
 I used a MySQL role developed by geerlingguy.
 
@@ -85,11 +87,16 @@ renamed the folder to mysql
 mv geerlingguy.mysql/ mysql
 ```
 
+- When you install roles it automatically puts it into .ansible directory so this was moved to roles folder created previously
+
 - Read README.md file, and edited roles configuration to use correct credentials for MySQL required for the tooling website.
 
-*screenshot*
+*screenshot below*
+
+![pic3](./images/pic3.png)
 
 uploaded the changes into GitHub
+
 
 ```
 git add .
@@ -98,6 +105,8 @@ git push --set-upstream origin roles-feature
 ```
 
 - Create a pull request amd merge it with the main branch on Github.
+
+
 
 ## LOAD BALANCER ROLES
 
@@ -117,19 +126,18 @@ ansible-galaxy install geerlingguy.apache
 mv geerlingguy.apache/ apache
 ```
 
-- You cannot use both Nginx and Apache load balancer, you need to add a condition to enable either one – this is where you can make use of variables.
+- You cannot use both Nginx and Apache load balancer, you need to add a condition to enable either one – this is where you can make use of variables. 
 
-- Declared a variable in defaults/main.yml file inside the Nginx and Apache roles. Name each variables enable_nginx_lb and enable_apache_lb respectively.
-
-- Set both values to false like this enable_nginx_lb: false and enable_apache_lb: false.
-
-- Declare another variable in both roles load_balancer_is_required and set its value to false as well
+- Declared a variable in defaults/main.yml file inside the Nginx and Apache roles. Name each variables enable_nginx_lb and enable_apache_lb respectively. Set both values to false like this enable_nginx_lb: false and enable_apache_lb: false. Declared another variable in both roles load_balancer_is_required and set its value to false as well
 
 *screenshot below*
 
-Update both assignment and site.yml files respectively
+![pic4](./images/pic4.png)
 
-loadbalancers.yml file
+![pic5](./images/pic5.png)
+
+
+created a loadbalancers.yml file within static assignments 
 
 ```
 - hosts: lb
