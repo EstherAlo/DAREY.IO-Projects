@@ -329,4 +329,95 @@ stage('Checkout SCM') {
        }
 ```
 
-- In Jenkins, go to the main branch and click on Build Parameters and change to ci 
+- In Jenkins, go to the main branch and click on Build Parameters and change to ci, as such always change the inventory path in Jenkins dashboard.
+
+*screenshot below*
+
+- Login into the Artifactory with port 8081 and enter username and password (admin, password), create new password
+
+*screenshot below*
+
+- Create repository -> Select Package Type -> Generic, enter Repository Key as PBL, save and finish
+
+- In Jenkins configure the server ID, URL and Credentials, run Test Connection
+*screenshot below*
+
+- Integrate the Artifactory repository with Jenkins by creating a Jenkinsfile in the php-todo folder, copy the content below
+
+```
+pipeline {
+    agent any
+
+  stages {
+
+     stage("Initial cleanup") {
+          steps {
+            dir("${WORKSPACE}") {
+              deleteDir()
+            }
+          }
+        }
+
+    stage('Checkout SCM') {
+      steps {
+            git branch: 'main', url: 'https://github.com/EstherAlo/php-todo.git'
+      }
+    }
+
+    stage('Prepare Dependencies') {
+      steps {
+             sh 'mv .env.sample .env'
+             sh 'composer install'
+             sh 'php artisan migrate'
+             sh 'php artisan db:seed'
+             sh 'php artisan key:generate'
+      }
+    }
+  }
+}
+```
+- On the database server, create database and user by updating roles -> mysql -> defaults -> main.yml. Ensure the Ip address used in the database is the ip for Jenkins server.
+
+*screenshot below*
+
+- Push the code and build (it should be done in the php-todo folder), ensure the parameter is in dev.
+
+- To confirm the database were created and user, launch the db (mysql-server) instance and execute the code below:
+
+```
+sudo mysql 
+show databases;
+select user, host from mysql.user;
+```
+
+- Set the bind address of the database of the MYSQL server to allow connections from remote hosts.
+
+```
+sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+
+- Change bind-address = 0.0.0.0 and restart mysql 
+
+```
+sudo systemctl restart mysql
+```
+
+- Create a new pipeline in blue ocean and link the php-todo repo to it. It will start building since there is a jenkinsfile in it
+
+- Install mysql client on Jenkins
+
+```
+sudo apt install mysql-client
+```
+
+- In the .env.sample update the database connectivity requirements with the screenshot below. The IP address used is for the database
+
+*screenshot below*
+
+- Connect to the database from Jenkins
+
+```
+ mysql -h 172.31.1.102 -u homestead -p
+ ```
+
+ - Push the code in from php-todo folder
