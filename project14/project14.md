@@ -268,3 +268,65 @@ environment {
 - Push the code with the new updates in the Jenkinsfile.
 
 *screenshot below*
+
+
+- If we need to deploy to other environment, manually updating the Jenkinfile is not an option, thus we need to use parametization.
+
+- The parameters need to be global and edit content of 'Run Ansible Playbook'. The parameters block of the code below sets dev as the default value 
+
+```
+parameters {
+      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+    }
+    
+ stage('Run Ansible playbook') {
+    steps {
+       ansiblePlaybook become: true, colorized: true, credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory:'${WORKSPACE}/inventory/${inventory}', playbook: 'playbooks/site.yml'
+            }
+```
+
+       
+       
+- Merge code with the main branch.
+
+- Since we included parameters in our Jenkinsfile, when you check the branch where the Jenkinfile was laucnched, you will see "Build with Parameters".
+
+*screenshot below*
+
+## CI/CD PIPELINE FOR TODO APPLICATION
+
+- The aim is to deploy the application onto servers directly from Artifactory rather than from git. 
+
+- Fork and clone the below repository to the jenkins instance outside of the ansible-config_mgt folder
+
+https://github.com/darey-devops/php-todo.git
+
+On the Jenkins server, install PHP, its dependencies and Composer tool
+
+```
+ sudo apt install -y zip libapache2-mod-php phploc php-{xml,bcmath,bz2,intl,gd,mbstring,mysql,zip}
+ ```
+
+ *screenshot below*
+
+ - Install the Plot Plugin and Artifactory plugin in the Jenkins UI (Manage Jenkins)
+
+ - The plot plugin will be used to display tests reports, and code coverage information and the Artifactory plugin will be used to easily upload code artifacts into an Artifactory server.
+
+- Create an instance for Artifactory and copy the ip address into the inventory/ci enviroment
+
+- Configure all settings in the playbook/site.yml , roles and static assignment so as to install Artifactory.
+
+*screenshot below*
+
+Edit the Jenkinfile to the below and push code
+
+```
+stage('Checkout SCM') {
+         steps{
+            git branch: 'main', url: 'https://github.com/EstherAlo/ansible-config-mgt.git'
+         }
+       }
+```
+
+- In Jenkins, go to the main branch and click on Build Parameters and change to ci 
