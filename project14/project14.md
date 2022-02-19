@@ -1,6 +1,13 @@
 ## __EXPERIENCE CONTINUOUS INTEGRATION WITH JENKINS | ANSIBLE | ARTIFACTORY | SONARQUBE | PHP__
 
 - This project is continuation of project 13
+
+- Add a SonarQube role: SonarQube is an open-source platform developed by SonarSource for continuous inspection of code quality, it is used to perform automatic reviews with static analysis of code to detect bugs, code smells, and security vulnerabilities.
+
+- Add a Artifactory role: Artifactory is a product by JFrog that serves as a binary repository manager. The binary repository is a natural extension to the source code repository, in that the outcome of your build process is stored. It can be used for certain other automation, but we will it strictly to manage our build artifacts.
+
+## Configuring Ansible For Jenkins Deployment
+
 - Install Blue Ocean plugin in Jenkins Manage Jenkins and open it when installed.
 
 - Select 'create a new pipeline'
@@ -339,10 +346,10 @@ stage('Checkout SCM') {
 
 - Create repository -> Select Package Type -> Generic, enter Repository Key as PBL, save and finish
 
-- In Jenkins configure the server ID, URL and Credentials, run Test Connection
+- In Jenkins configure the artifactory server ID, URL and Credentials, run Test Connection
 *screenshot below*
 
-- Integrate the Artifactory repository with Jenkins by creating a Jenkinsfile in the php-todo folder, copy the content below
+- Integrate the Artifactory repository with Jenkins by creating a Jenkinsfile in the php-todo folder and copying the content below. The required file by PHP is .env so we are renaming env.sample to .env Composer is used by PHP to install all the dependent libraries used by the applicationphp artisan uses the .env file to setup the required database objects 
 
 ```
 pipeline {
@@ -410,14 +417,151 @@ sudo systemctl restart mysql
 sudo apt install mysql-client
 ```
 
-- In the .env.sample update the database connectivity requirements with the screenshot below. The IP address used is for the database
+- In the .env.sample of the mysql role update the database connectivity requirements with the screenshot below. The IP address used is for the database
 
 *screenshot below*
 
 - Connect to the database from Jenkins
 
 ```
- mysql -h 172.31.1.102 -u homestead -p
+ mysql -h <mysql privateip> -u homestead -p
  ```
 
  - Push the code in from php-todo folder
+
+ Update the Jenkinsfile in the php folder to include Unit tests step
+
+```
+  stage('Execute Unit Tests') {
+  steps {
+     sh './vendor/bin/phpunit'
+  } 
+  ```
+
+## Code Quality Analysis
+
+  - Code Quality Analysis is one of the areas where developers, architects and many stakeholders are mostly interested in as far as product development is concerned. For PHP the most commonly tool used for code quality analysis is phploc.
+
+  ```
+  sudo apt-get install -y phploc
+  ```
+
+- Update the jenkins file with the below. The output of the data will be saved in build/logs/phploc.csv file:
+
+```
+  stage('Code Analysis') {
+      steps {
+        sh 'phploc app/ --log-csv build/logs/phploc.csv'
+      }
+    }
+```
+
+- Plot the data using the plot Jenkins plugin.
+
+*screenshot below*
+
+- install zip firstly in order to do the below
+
+```
+sudo apt install zip -y
+```
+
+You can only deploy to artifactory unless unit test has been done so add the below stage:
+
+```
+ stage('Execute Unit Tests') {
+  steps {
+     sh './vendor/bin/phpunit'
+  } 
+```
+
+Add the code analysis step in Jenkinsfile. The output of the data will be saved in build/logs/phploc.csv file.
+
+```
+stage('Code Analysis') {
+      steps {
+        sh 'phploc app/ --log-csv build/logs/phploc.csv'
+      }
+    }
+```
+
+Publish the resulted artifact into Artifactory
+
+```
+stage ('Package Artifact') {
+      steps {
+          sh 'zip -qr php-todo.zip ${WORKSPACE}/*'
+      }
+    }
+    
+ stage ('Upload Artifact to Artifactory') {
+      steps {
+        script { 
+          def server = Artifactory.server 'artifactory-server'                 
+          def uploadSpec = """{
+                    "files": [
+                      {
+                       "pattern": "php-todo.zip",
+                       "target": "PBL/php-todo",
+                       "props": "type=zip;status=ready"
+                       }
+                    ]
+                 }""" 
+
+          server.upload spec: uploadSpec
+        }
+      }
+  
+    }
+```
+
+- Bundle the application code into an artifact (archived package),  upload to Artifactory. 
+
+```
+stage ('Package Artifact') {
+    steps {
+            sh 'zip -qr php-todo.zip ${WORKSPACE}/*'
+     }
+    }
+```
+
+- Publish the resulted artifact into Artifactory
+
+```
+stage ('Upload Artifact to Artifactory') {
+          steps {
+            script { 
+                 def server = Artifactory.server 'artifactory-server'                 
+                 def uploadSpec = """{
+                    "files": [
+                      {
+                       "pattern": "php-todo.zip",
+                       "target": "<name-of-artifact-repository>/php-todo",
+                       "props": "type=zip;status=ready"
+
+                       }
+                    ]
+                 }""" 
+
+                 server.upload spec: uploadSpec
+               }
+            }
+
+        }
+```
+
+
+
+Deploy the application to the dev environment by launching Ansible pipeline
+
+```
+stage ('Deploy to Dev Environment') {
+    steps {
+    build job: 'ansible-project/main', parameters: [[$class: 'StringParameterValue', name: 'env', value: 'dev']], propagate: false, wait: true
+    }
+  }
+```
+
+## SONARQUBE INSTALLATION
+
+
