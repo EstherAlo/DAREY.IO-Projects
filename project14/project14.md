@@ -312,6 +312,12 @@ On the Jenkins server, install PHP, its dependencies and Composer tool
 
 ```
  sudo apt install -y zip libapache2-mod-php phploc php-{xml,bcmath,bz2,intl,gd,mbstring,mysql,zip}
+
+ sudo apt install composer
+
+ sudo php /tmp/composer-setup.php sudo mv composer.phar /usr/bin/composer
+
+ sudo mv composer.phar /usr/bin/composer
  ```
 
  *screenshot below*
@@ -344,7 +350,7 @@ stage('Checkout SCM') {
 
 *screenshot below*
 
-- Create repository -> Select Package Type -> Generic, enter Repository Key as PBL, save and finish
+- Create repository -> Select general repository -> Generic, enter Repository Key as PBL, save and finish
 
 - In Jenkins configure the artifactory server ID, URL and Credentials, run Test Connection
 *screenshot below*
@@ -383,6 +389,7 @@ pipeline {
   }
 }
 ```
+
 - On the database server, create database and user by updating roles -> mysql -> defaults -> main.yml. Ensure the Ip address used in the database is the ip for Jenkins server.
 
 *screenshot below*
@@ -396,6 +403,9 @@ sudo mysql
 show databases;
 select user, host from mysql.user;
 ```
+- Create a new pipeline in blue ocean and link the php-todo repo to it. It will start building since there is a jenkinsfile in it
+
+## Connecting to MYSQL from Jenkins server 
 
 - Set the bind address of the database of the MYSQL server to allow connections from remote hosts.
 
@@ -409,9 +419,8 @@ sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf
 sudo systemctl restart mysql
 ```
 
-- Create a new pipeline in blue ocean and link the php-todo repo to it. It will start building since there is a jenkinsfile in it
 
-- Install mysql client on Jenkins
+- Install mysql client on Jenkins in the php folder 
 
 ```
 sudo apt install mysql-client
@@ -427,9 +436,9 @@ sudo apt install mysql-client
  mysql -h <mysql privateip> -u homestead -p
  ```
 
- - Push the code in from php-todo folder
+- Push the code in from php-todo folder
 
- Update the Jenkinsfile in the php folder to include Unit tests step
+- Update the Jenkinsfile in the php folder to include Unit tests step
 
 ```
   stage('Execute Unit Tests') {
@@ -438,6 +447,16 @@ sudo apt install mysql-client
   } 
   ```
 
+
+  You can only deploy to artifactory unless unit test has been done so add the below stage:
+
+```
+ stage('Execute Unit Tests') {
+  steps {
+     sh './vendor/bin/phpunit'
+  } 
+```
+
 ## Code Quality Analysis
 
   - Code Quality Analysis is one of the areas where developers, architects and many stakeholders are mostly interested in as far as product development is concerned. For PHP the most commonly tool used for code quality analysis is phploc.
@@ -445,6 +464,7 @@ sudo apt install mysql-client
   ```
   sudo apt-get install -y phploc
   ```
+
 
 - Update the jenkins file with the below. The output of the data will be saved in build/logs/phploc.csv file:
 
@@ -458,7 +478,29 @@ sudo apt install mysql-client
 
 - Plot the data using the plot Jenkins plugin.
 
-*screenshot below*
+```
+stage('Plot Code Coverage Report') {
+      steps {
+
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Lines of Code (LOC),Comment Lines of Code (CLOC),Non-Comment Lines of Code (NCLOC),Logical Lines of Code (LLOC)                          ', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'A - Lines of code', yaxis: 'Lines of Code'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Directories,Files,Namespaces', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'B - Structures Containers', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Average Class Length (LLOC),Average Method Length (LLOC),Average Function Length (LLOC)', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'C - Average Length', yaxis: 'Average Lines of Code'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Cyclomatic Complexity / Lines of Code,Cyclomatic Complexity / Number of Methods ', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'D - Relative Cyclomatic Complexity', yaxis: 'Cyclomatic Complexity by Structure'      
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Classes,Abstract Classes,Concrete Classes', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'E - Types of Classes', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Methods,Non-Static Methods,Static Methods,Public Methods,Non-Public Methods', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'F - Types of Methods', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Constants,Global Constants,Class Constants', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'G - Types of Constants', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Test Classes,Test Methods', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'I - Testing', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Logical Lines of Code (LLOC),Classes Length (LLOC),Functions Length (LLOC),LLOC outside functions or classes ', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'AB - Code Structure by Logical Lines of Code', yaxis: 'Logical Lines of Code'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Functions,Named Functions,Anonymous Functions', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'H - Types of Functions', yaxis: 'Count'
+            plot csvFileName: 'plot-396c4a6b-b573-41e5-85d8-73613b2ffffb.csv', csvSeries: [[displayTableFlag: false, exclusionValues: 'Interfaces,Traits,Classes,Methods,Functions,Constants', file: 'build/logs/phploc.csv', inclusionFlag: 'INCLUDE_BY_STRING', url: '']], group: 'phploc', numBuilds: '100', style: 'line', title: 'BB - Structure Objects', yaxis: 'Count'
+
+      }
+    }
+```
+
+- add, commit and push
+
+- You should now see a Plot menu item on the left menu. Click on it to see the charts
 
 - install zip firstly in order to do the below
 
@@ -466,24 +508,10 @@ sudo apt install mysql-client
 sudo apt install zip -y
 ```
 
-You can only deploy to artifactory unless unit test has been done so add the below stage:
-
-```
- stage('Execute Unit Tests') {
-  steps {
-     sh './vendor/bin/phpunit'
-  } 
-```
 
 Add the code analysis step in Jenkinsfile. The output of the data will be saved in build/logs/phploc.csv file.
 
-```
-stage('Code Analysis') {
-      steps {
-        sh 'phploc app/ --log-csv build/logs/phploc.csv'
-      }
-    }
-```
+
 
 Publish the resulted artifact into Artifactory
 
@@ -556,12 +584,131 @@ Deploy the application to the dev environment by launching Ansible pipeline
 
 ```
 stage ('Deploy to Dev Environment') {
-    steps {
-    build job: 'ansible-project/main', parameters: [[$class: 'StringParameterValue', name: 'env', value: 'dev']], propagate: false, wait: true
+      steps {
+        build job: 'ansible-config-mgt/main', parameters: [[$class: 'StringParameterValue', name: 'env', value: 'dev']], propagate: false, wait: true
+      }
     }
-  }
 ```
+- spin up an instance that will be the php 'todo' server and update the inventory/dev with the private ip address
+
+
+- on jfrog click on 'set me up' --> enter password --> click on deploy --> copy password. click on the artifact and the URL to be placed deployment.yml is there.
+
+- - update the deployment.yml file in static assignments with the artifactory details such as the ip address and password.
+
 
 ## SONARQUBE INSTALLATION
 
+- Even though we have implemented Unit Tests and Code Coverage Analysis with phpunit and phploc, we still need to implement Quality Gate to ensure that ONLY code with the required code coverage, and other quality standards make it through to the environments
+
+- Create an instance for Sonarqube, the minimum requirement is 4GB RAM and 2 vCPUs and update the Ip details in ansible-config inventory/ci and site.yml for complete installation.
+
+- Push the code and run from the build - ensure you comment out the unecesary playbooks 
+
+- some bugs came with the screenshot below, so we had to run ansible via command line.
+
+- To run the command we need to update the roles_path in ansible.cfg located in the deploy folder, just for the purpose of the Sonarqube installation
+
+```
+roles_path=/home/ubuntu/ansible-config/roles
+```
+
+- After updating the roles_path in the ansible.cfg, enter the following command in the terminal
+
+```
+export ANSIBLE_CONFIG=/home/ubuntu/ansible-config-mg/deploy/ansible.cfg
+```
+
+- Before running ansible-playbook ensure the ansible machine can talk to the server via SSH agent
+
+```
+ssh-add -l
+```
+If you you ssh agent is not running do the below:
+
+```
+eval 'ssh-agent'
+
+ssh-add -k <privatekey.pem>
+
+#connect to host and check if key has been added
+
+ssh-add -l
+```
+
+- install postgresql
+
+```
+ansible-galaxy collection install community.postgresql
+```
+
+- Run ansible-playbook 
+
+```
+ansible-playbook -i inventory/ci playbooks/site.yml
+```
+
+- Connect to the sonarqube instance via port 9000, password and username is both admin.
+
+- In Jenkins, install SonarScanner plugin. Navigate to configure system in Jenkins. Add SonarQube server as shown below:
+
+*screenshot below*
+
+- Generate authentication token in SonarQube
+
+*screenshot below*
+
+- Configure Quality Gate Jenkins Webhook in SonarQube – The URL should point to your Jenkins server http://{JENKINS_HOST}/sonarqube-webhook/
+
+*screenshot below*
+
+- Setup SonarQube scanner from Jenkins – Global Tool Configuration
+
+*screenshot below*
+
+- Update Jenkins Pipeline to include SonarQube scanning and Quality Gate, it should be placed before "Package Artifact". This needs to be done befroe we can edit 
+
+```
+    stage('SonarQube Quality Gate') {
+        environment {
+            scannerHome = tool 'SonarQubeScanner'
+        }
+        steps {
+            withSonarQubeEnv('sonarqube') {
+                sh "${scannerHome}/bin/sonar-scanner"
+            }
+
+        }
+    }
+    }
+```
+
+
+- We have to update sonar-scanner.properties for the build to work:
+
+```
+cd /var/lib/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/SonarQubeScanner/conf/
+
+sudo vi sonar-scanner.properties
+```
+
+As a DevOps engineer working on the pipeline, we must ensure that the quality gate step causes the pipeline to fail if the conditions for quality are not met. If within the Sonarqube stage, it has some bugs, bad coverage and code smells as such, we do not want it to be pushed to any environment. We will update the Jenkinsfile with; 
+
+```
+stage('SonarQube Quality Gate') {
+      when { branch pattern: "^develop*|^hotfix*|^release*|^main*", comparator: "REGEXP"}
+        environment {
+            scannerHome = tool 'SonarQubeScanner'
+        }
+        steps {
+            withSonarQubeEnv('sonarqube') {
+                sh "${scannerHome}/bin/sonar-scanner -Dproject.settings=sonar-project.properties"
+            }
+            timeout(time: 1, unit: 'MINUTES') {
+                waitForQualityGate abortPipeline: true
+            }
+        }
+    }
+
+```   
 
