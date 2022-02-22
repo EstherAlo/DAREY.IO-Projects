@@ -13,45 +13,53 @@
 - Select 'create a new pipeline'
 
 *screenshot below*
+
 ![pic1](./images/pic1.png)
 
 - Select 'GitHub'
 
 *screenshot below*
+
 ![pic2](./images/pic2.png)
 
 
 - Select 'Create an access token'
 
 *screenshot below*
+
 ![pic3](./images/pic3.png)
 
 - Name the token and generate 
 
 *screenshot below*
+
 ![pic4](./images/pic4.png)
 
 
 - Copy the access token 
 
 *screenshot below*
+
 ![pic6](./images/pic6.png)
 
 
 Paste the tpken and connect
 
 *screenshot below*
+
 ![pic7](./images/pic7.png)
 
 
 - Select 'create a new pipeline' and select repository
 
 *screenshot below*
+
 ![pic8](./images/pic8.png)
 
 Click on 'new pipeline and click adminstration to exit Blue Ocean.
 
 *screenshot below*
+
 ![pic9](./images/pic9.png)
 
 - Create a new directory 'deploy' and start a new file 'Jenkinsfile' inside the directory
@@ -79,16 +87,19 @@ pipeline {
  - Go back into the Ansible_config_mgt pipeline in Jenkins, and select 'configure'
 
  *screenshot*
+
 ![pic10](./images/pic10.png)
 
  - In the configure section , go to the build configuration under Script path and specify the path were the jenkinsfile is, then save the settings.
 
  *screenshot below*
+
 ![pic11](./images/pic11.png)
 
  - Immediately the jenkins file path is set the job will start building automatically, then open Blue Ocean in a different tab to see the build.
 
  *screenshot below*
+
 ![pic12](./images/pic12.png)
 
  - This pipeline is a multibranch one, which means that if there were more than one branch in GitHub, Jenkins would have scanned the repository to discover them all and we would have been able to trigger a build for each branch
@@ -128,16 +139,19 @@ pipeline {
 - To ensure that Jenkins detects our new branch, go to the ansible-config-mgt jobs and click on Scan Repository and refresh the page to show the new branch 
 
 *screenshot below*
+
 ![pic13](./images/pic13.png)
 
 - Open Blue Ocean and click on the new branch to see the content
 
 *screenshot below*
+
 ![pic14](./images/pic14.png)
 
 - Push the code to the main branch from feature/jenkinspipeline-stages and the following changes will take place in the main branch
 
 *screenshot below*
+
 ![pic15](./images/pic15.png)
 
 - For every job created in Jenkins, it creates a workspace for each job, thus if Jenkins perform a lot of job lots of workspace will be created which will affect storage. To avoid this type of issue, its a good practice to ensure that at the beginning of the Jenkinsfile you clean the workspace and at the end also.
@@ -204,6 +218,7 @@ pipeline {
 - Jenkins scans each branch for any changes and it starts to build. 
 
 *screenshot below*
+
 ![pic16](./images/pic16.png)
 
 ![pic17](./images/pic17.png)
@@ -212,6 +227,7 @@ pipeline {
 - After installing ansible plugin in the Jenkins UI, go to global tool configuration under Ansible. Give descriptive name and path to ansible executable folder. You can retrieve this with the which ansible command. copy the path ignoring the ansible part.
 
 *screenshot below*
+
 ![pic18](./images/pic18.png)
 
 - In the deploy folder, create a file name ansible.cfg file and copy the content below inside the file. By default when we install ansible, we have the default configuration file in /etc/ansible/ansible.cfg, now we are creating our own config file
@@ -241,6 +257,7 @@ environment {
 - To run Ansible playbook via the Jenkinsfile, go to Dashoard -> Manage Jenkins -> Manage Credentials -> Credentials -> Add Credentials. Fill in the blanks, by entering content of the pem key and username (ubuntu or ec-user) To ensure our ansible run against inventory/dev
 
  *screenshot below*
+
  ![pic16](./images/pic16.png)
 
 - Go to Dashboard -> ansib-config -> Pipeline Sytnax, configure path to the playbook and inventory path, ssh-user and colorized output. Generate pipeline script, copy the script and paste in the Jenkinsfile.
@@ -303,6 +320,7 @@ environment {
 - Push the code with the new updates in the Jenkinsfile.
 
 *screenshot below*
+
 ![pic20](./images/pic20.png)
 ![pic21](./images/pic21.png)
 
@@ -374,6 +392,7 @@ stage('Checkout SCM') {
 - In Jenkins, go to the main branch and click on Build Parameters and change to ci, as such always change the inventory path in Jenkins dashboard.
 
 *screenshot below*
+
 ![pic23](./images/pic23.png)
 
 ![pic24](./images/pic24.png)
@@ -390,6 +409,7 @@ stage('Checkout SCM') {
 - In Jenkins configure the artifactory server ID, URL and Credentials, run Test Connection
 
 *screenshot below*
+
 ![pic26](./images/pic26.png)
 
 
@@ -431,6 +451,7 @@ pipeline {
 - On the database server, create database and user by updating roles -> mysql -> defaults -> main.yml. Ensure the Ip address used in the database is the ip for Jenkins server.
 
 *screenshot below*
+
 ![pic27](./images/pic27.png)
 
 - Push the code and build (it should be done in the php-todo folder), ensure the parameter is in dev.
@@ -476,6 +497,8 @@ sudo apt install mysql-client
 ```
  mysql -h <mysql privateip> -u homestead -p
  ```
+
+*screenshot below*
 
 ![pic29](./images/pic29.png)
 
@@ -679,22 +702,26 @@ ansible-playbook -i inventory/ci playbooks/site.yml
 - In Jenkins, install SonarScanner plugin. Navigate to configure system in Jenkins. Add SonarQube server as shown below:
 
 *screenshot below*
+
 ![pic36](./images/pic36.png)
 
 
 - Generate authentication token in SonarQube
 
 *screenshot below*
+
 ![pic37](./images/pic37.png)
 
 - Configure Quality Gate Jenkins Webhook in SonarQube – The URL should point to your Jenkins server http://{JENKINS_HOST}/sonarqube-webhook/
 
 *screenshot below*
+
 ![pic38](./images/pic38.png)
 
 - Setup SonarQube scanner from Jenkins – Global Tool Configuration
 
 *screenshot below*
+
 ![pic39](./images/pic39.png)
 
 - Update Jenkins Pipeline to include SonarQube scanning and Quality Gate, it should be placed before "Package Artifact". This needs to be done before we can edit sonar-scanner.properties
