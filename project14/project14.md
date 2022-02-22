@@ -13,32 +13,46 @@
 - Select 'create a new pipeline'
 
 *screenshot below*
+![pic1](./images/pic1.png)
 
 - Select 'GitHub'
 
 *screenshot below*
+![pic2](./images/pic2.png)
+
 
 - Select 'Create an access token'
+
 *screenshot below*
+![pic3](./images/pic3.png)
 
 - Name the token and generate 
 
 *screenshot below*
+![pic4](./images/pic4.png)
+
 
 - Copy the access token 
 
 *screenshot below*
+![pic6](./images/pic6.png)
+
 
 Paste the tpken and connect
+
 *screenshot below*
+![pic7](./images/pic7.png)
+
 
 - Select 'create a new pipeline' and select repository
 
 *screenshot below*
+![pic8](./images/pic8.png)
 
-Click on 'new pipelin'e and click adminstration to exit Blue Ocean.
+Click on 'new pipeline and click adminstration to exit Blue Ocean.
 
 *screenshot below*
+![pic9](./images/pic9.png)
 
 - Create a new directory 'deploy' and start a new file 'Jenkinsfile' inside the directory
 
@@ -61,17 +75,21 @@ pipeline {
 ```
 
  - push code to the main repository.
+
  - Go back into the Ansible_config_mgt pipeline in Jenkins, and select 'configure'
 
  *screenshot*
+![pic10](./images/pic10.png)
 
  - In the configure section , go to the build configuration under Script path and specify the path were the jenkinsfile is, then save the settings.
 
  *screenshot below*
+![pic11](./images/pic11.png)
 
  - Immediately the jenkins file path is set the job will start building automatically, then open Blue Ocean in a different tab to see the build.
 
  *screenshot below*
+![pic12](./images/pic12.png)
 
  - This pipeline is a multibranch one, which means that if there were more than one branch in GitHub, Jenkins would have scanned the repository to discover them all and we would have been able to trigger a build for each branch
 
@@ -110,14 +128,17 @@ pipeline {
 - To ensure that Jenkins detects our new branch, go to the ansible-config-mgt jobs and click on Scan Repository and refresh the page to show the new branch 
 
 *screenshot below*
+![pic13](./images/pic13.png)
 
 - Open Blue Ocean and click on the new branch to see the content
 
 *screenshot below*
+![pic14](./images/pic14.png)
 
 - Push the code to the main branch from feature/jenkinspipeline-stages and the following changes will take place in the main branch
 
 *screenshot below*
+![pic15](./images/pic15.png)
 
 - For every job created in Jenkins, it creates a workspace for each job, thus if Jenkins perform a lot of job lots of workspace will be created which will affect storage. To avoid this type of issue, its a good practice to ensure that at the beginning of the Jenkinsfile you clean the workspace and at the end also.
 
@@ -180,16 +201,18 @@ pipeline {
 }
 ```
 
-- Jenkins scan each branch for any changes and it starts to build. 
+- Jenkins scans each branch for any changes and it starts to build. 
 
 *screenshot below*
+![pic16](./images/pic16.png)
 
-*screenshow showing workspace was cleared*
+![pic17](./images/pic17.png)
 
 
-- After installing ansible plugin in the Jenkins UI, go to global tool configuration under Ansible. Give descriptive name and path to ansible executable folder. You can retrieve this with the  which ansible command. copy the path ignoring the ansible part.
+- After installing ansible plugin in the Jenkins UI, go to global tool configuration under Ansible. Give descriptive name and path to ansible executable folder. You can retrieve this with the which ansible command. copy the path ignoring the ansible part.
 
 *screenshot below*
+![pic18](./images/pic18.png)
 
 - In the deploy folder, create a file name ansible.cfg file and copy the content below inside the file. By default when we install ansible, we have the default configuration file in /etc/ansible/ansible.cfg, now we are creating our own config file
 
@@ -215,13 +238,16 @@ environment {
  }
  ```
 
- - To run Ansible playbook via the Jenkinsfile, go to Dashoard -> Manage Jenkins -> Manage Credentials -> Credentials -> Add Credentials. Fill in the blanks, by entering content of the pem key and username (ubuntu or ec-user) To ensure our ansible run against inventory/dev
-
- *screeemshot below*
-
- - Go to Dashboard -> ansib-config -> Pipeline Sytnax, configure path to the playbook and inventory path, ssh-user and colorized output. Generate pipeline script, copy the script and paste in the Jenkinsfile.
+- To run Ansible playbook via the Jenkinsfile, go to Dashoard -> Manage Jenkins -> Manage Credentials -> Credentials -> Add Credentials. Fill in the blanks, by entering content of the pem key and username (ubuntu or ec-user) To ensure our ansible run against inventory/dev
 
  *screenshot below*
+ ![pic16](./images/pic16.png)
+
+- Go to Dashboard -> ansib-config -> Pipeline Sytnax, configure path to the playbook and inventory path, ssh-user and colorized output. Generate pipeline script, copy the script and paste in the Jenkinsfile.
+
+ *screenshot below*
+
+ ![pic19](./images/pic19.png)
 
  - Copy the code below into the Jenkinsfile
 
@@ -272,10 +298,13 @@ environment {
 ```
 
 - Update the inventory/dev file with 2 instances (nginx and db)
+
+
 - Push the code with the new updates in the Jenkinsfile.
 
 *screenshot below*
-
+![pic20](./images/pic20.png)
+![pic21](./images/pic21.png)
 
 - If we need to deploy to other environment, manually updating the Jenkinfile is not an option, thus we need to use parametization.
 
@@ -292,13 +321,14 @@ parameters {
             }
 ```
 
-       
-       
+        
 - Merge code with the main branch.
 
-- Since we included parameters in our Jenkinsfile, when you check the branch where the Jenkinfile was laucnched, you will see "Build with Parameters".
+- Since we included parameters in our Jenkinsfile, when you check the branch where the Jenkinfile was launched, you will see "Build with Parameters".
 
 *screenshot below*
+
+![pic22](./images/pic22.png)
 
 ## CI/CD PIPELINE FOR TODO APPLICATION
 
@@ -320,7 +350,7 @@ On the Jenkins server, install PHP, its dependencies and Composer tool
  sudo mv composer.phar /usr/bin/composer
  ```
 
- *screenshot below*
+*screenshot below*
 
  - Install the Plot Plugin and Artifactory plugin in the Jenkins UI (Manage Jenkins)
 
@@ -330,7 +360,6 @@ On the Jenkins server, install PHP, its dependencies and Composer tool
 
 - Configure all settings in the playbook/site.yml , roles and static assignment so as to install Artifactory.
 
-*screenshot below*
 
 Edit the Jenkinfile to the below and push code
 
@@ -345,15 +374,24 @@ stage('Checkout SCM') {
 - In Jenkins, go to the main branch and click on Build Parameters and change to ci, as such always change the inventory path in Jenkins dashboard.
 
 *screenshot below*
+![pic23](./images/pic23.png)
+
+![pic24](./images/pic24.png)
+
 
 - Login into the Artifactory with port 8081 and enter username and password (admin, password), create new password
 
 *screenshot below*
 
+![pic25](./images/pic25.png)
+
 - Create repository -> Select general repository -> Generic, enter Repository Key as PBL, save and finish
 
 - In Jenkins configure the artifactory server ID, URL and Credentials, run Test Connection
+
 *screenshot below*
+![pic26](./images/pic26.png)
+
 
 - Integrate the Artifactory repository with Jenkins by creating a Jenkinsfile in the php-todo folder and copying the content below. The required file by PHP is .env so we are renaming env.sample to .env Composer is used by PHP to install all the dependent libraries used by the applicationphp artisan uses the .env file to setup the required database objects 
 
@@ -393,6 +431,7 @@ pipeline {
 - On the database server, create database and user by updating roles -> mysql -> defaults -> main.yml. Ensure the Ip address used in the database is the ip for Jenkins server.
 
 *screenshot below*
+![pic27](./images/pic27.png)
 
 - Push the code and build (it should be done in the php-todo folder), ensure the parameter is in dev.
 
@@ -430,11 +469,15 @@ sudo apt install mysql-client
 
 *screenshot below*
 
+![pic28](./images/pic28.png)
+
 - Connect to the database from Jenkins
 
 ```
  mysql -h <mysql privateip> -u homestead -p
  ```
+
+![pic29](./images/pic29.png)
 
 - Push the code in from php-todo folder
 
@@ -500,6 +543,10 @@ stage('Plot Code Coverage Report') {
 
 - add, commit and push
 
+*screenshot below*
+
+![pic30](./images/pic30.png)
+
 - You should now see a Plot menu item on the left menu. Click on it to see the charts
 
 - install zip firstly in order to do the below
@@ -509,11 +556,17 @@ sudo apt install zip -y
 ```
 
 
-Add the code analysis step in Jenkinsfile. The output of the data will be saved in build/logs/phploc.csv file.
+- Add the code analysis step in Jenkinsfile. The output of the data will be saved in build/logs/phploc.csv file.
 
+```
+stage('Code Analysis') {
+      steps {
+        sh 'phploc app/ --log-csv build/logs/phploc.csv'
+      }
+    }
+```
 
-
-Publish the resulted artifact into Artifactory
+- Bundle the application code into an artifact (archived package),  upload to Artifactory.
 
 ```
 stage ('Package Artifact') {
@@ -543,44 +596,8 @@ stage ('Package Artifact') {
     }
 ```
 
-- Bundle the application code into an artifact (archived package),  upload to Artifactory. 
 
-```
-stage ('Package Artifact') {
-    steps {
-            sh 'zip -qr php-todo.zip ${WORKSPACE}/*'
-     }
-    }
-```
-
-- Publish the resulted artifact into Artifactory
-
-```
-stage ('Upload Artifact to Artifactory') {
-          steps {
-            script { 
-                 def server = Artifactory.server 'artifactory-server'                 
-                 def uploadSpec = """{
-                    "files": [
-                      {
-                       "pattern": "php-todo.zip",
-                       "target": "<name-of-artifact-repository>/php-todo",
-                       "props": "type=zip;status=ready"
-
-                       }
-                    ]
-                 }""" 
-
-                 server.upload spec: uploadSpec
-               }
-            }
-
-        }
-```
-
-
-
-Deploy the application to the dev environment by launching Ansible pipeline
+- Deploy the application to the dev environment by launching Ansible pipeline
 
 ```
 stage ('Deploy to Dev Environment') {
@@ -592,9 +609,15 @@ stage ('Deploy to Dev Environment') {
 - spin up an instance that will be the php 'todo' server and update the inventory/dev with the private ip address
 
 
-- on jfrog click on 'set me up' --> enter password --> click on deploy --> copy password. click on the artifact and the URL to be placed deployment.yml is there.
+- on jfrog click on 'set me up' --> enter password --> click on deploy --> copy password. click on the artifact and the URL to be placed static assignments/deployment.yml is there.
 
-- - update the deployment.yml file in static assignments with the artifactory details such as the ip address and password.
+*screenshot below*
+
+![pic31](./images/pic31.png)
+
+- Update the deployment.yml file in static assignments with the artifactory details such as the ip address and password.
+
+![pic34](./images/pic34.png)
 
 
 ## SONARQUBE INSTALLATION
@@ -606,6 +629,8 @@ stage ('Deploy to Dev Environment') {
 - Push the code and run from the build - ensure you comment out the unecesary playbooks 
 
 - some bugs came with the screenshot below, so we had to run ansible via command line.
+
+![pic35](./images/pic35.png)
 
 - To run the command we need to update the roles_path in ansible.cfg located in the deploy folder, just for the purpose of the Sonarqube installation
 
@@ -644,6 +669,7 @@ ansible-galaxy collection install community.postgresql
 
 - Run ansible-playbook 
 
+
 ```
 ansible-playbook -i inventory/ci playbooks/site.yml
 ```
@@ -653,20 +679,25 @@ ansible-playbook -i inventory/ci playbooks/site.yml
 - In Jenkins, install SonarScanner plugin. Navigate to configure system in Jenkins. Add SonarQube server as shown below:
 
 *screenshot below*
+![pic36](./images/pic36.png)
+
 
 - Generate authentication token in SonarQube
 
 *screenshot below*
+![pic37](./images/pic37.png)
 
 - Configure Quality Gate Jenkins Webhook in SonarQube – The URL should point to your Jenkins server http://{JENKINS_HOST}/sonarqube-webhook/
 
 *screenshot below*
+![pic38](./images/pic38.png)
 
 - Setup SonarQube scanner from Jenkins – Global Tool Configuration
 
 *screenshot below*
+![pic39](./images/pic39.png)
 
-- Update Jenkins Pipeline to include SonarQube scanning and Quality Gate, it should be placed before "Package Artifact". This needs to be done befroe we can edit 
+- Update Jenkins Pipeline to include SonarQube scanning and Quality Gate, it should be placed before "Package Artifact". This needs to be done before we can edit sonar-scanner.properties
 
 ```
     stage('SonarQube Quality Gate') {
@@ -712,3 +743,8 @@ stage('SonarQube Quality Gate') {
 
 ```   
 
+![pic40](./images/pic40.png)
+
+![pic41](./images/pic41.png)
+
+![pic42](./images/pic42.png)
