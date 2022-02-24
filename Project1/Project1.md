@@ -9,10 +9,14 @@
 
 ### INSTALLED APACHE AND UPDATED THE FIREWALL
 
-- Updated the repositries and installed Apache using Ubuntu's package manager by running command: ```                                                                                                                                                               sudo apt update 
-                                                                                                  ```
+- Update the repositries and install Apache using Ubuntu's package manager by running command: 
+                                                                       
+```                                                                                   sudo apt update 
+sudo apt install apache2
+```
+                                                                                                  
 
-- Verified that apache2 was running as a Service in my OS: ```
+- Verify that apache2 is running as a Service in the OS: ```
                                                            sudo systemctl status apache2
                                                            ```
 
