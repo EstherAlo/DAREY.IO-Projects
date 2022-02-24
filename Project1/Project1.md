@@ -7,7 +7,7 @@
 - Creating a virtual host for website using apache.
 - Enabling php on the website.
 
-### STEP 1: INSTALLING APACHE 
+### STEP 1: INSTALL APACHE 
 
 - Update the repositries and install Apache using Ubuntu's package manager by running command: 
  
