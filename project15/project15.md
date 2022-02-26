@@ -342,6 +342,7 @@ yum install -y ansible
    * Select the ELB health check 
    * Leave the desire capacity as the default settings
    * select target tracking scaling policy and set target value as 90 and click next
-   * create topic and email 
+
+
 
 
