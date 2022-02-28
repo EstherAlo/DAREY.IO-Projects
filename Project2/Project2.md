@@ -15,7 +15,7 @@ Updated my server’s package index as it is the first time using apt:
 sudo apt update
 ```     
                                        
-- install  Nginx:
+- Install  Nginx
 
 ```
 sudo apt install nginx
