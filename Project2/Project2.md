@@ -1,5 +1,5 @@
 
-# LEMP PROJECT 
+## __LEMP PROJECT__ 
 
 LEMP is an open-source web application stack used to develop web applications. The term LEMP is an acronym that represents L for the Linux Operating system, Nginx (pronounced as engine-x, hence the E in the acronym) web server, M for MySQL database, and P for PHP scripting language
 
@@ -125,7 +125,7 @@ sudo chown -R $USER:$USER /var/www/projectLEMP
 ![P2C (2)](https://user-images.githubusercontent.com/93116204/139503892-11fb19f7-e99c-4e0b-8035-fb309211b588.png)
 
 
-Paste in the following bare-bones configuration 
+- Paste in the following bare-bones configuration 
 
 ```
 
@@ -152,14 +152,14 @@ server {
 }
                                                                        
 ```
-Activate the configuration by linking tconfig file to the Nginx’s sites-enabled directory. This will tell Nginx to use the configuration next time it is reloaded.
+
+- Activate the configuration by linking tconfig file to the Nginx’s sites-enabled directory. This will tell Nginx to use the configuration next time it is reloaded.
 
 ```
 sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
 ```
 
-
- Test the configuration for syntax errors:
+- Test the configuration for syntax errors:
 
 ```
  sudo nginx -t
@@ -167,20 +167,20 @@ sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
  
 ![P2C (3)](https://user-images.githubusercontent.com/93116204/139505462-f5f7ebb1-75a8-48a5-ad0b-d1cd25c1cb3b.png)
 
-Default Nginx host was disabled with command: 
+- Default Nginx host was disabled with command: 
 
 ```
 sudo unlink /etc/nginx/sites-enabled/default
 ```
 
-In order to apply the changes I reloaded Nginx using command:
+- In order to apply the changes I reloaded Nginx using command:
 
 ```
 sudo systemctl reload nginx]
 ```
                                                 
                                                 
-In order to test that the new server block functions  create a  index.html file in /var/www/projectLEMP location:
+- In order to test that the new server block functions  create a  index.html file in /var/www/projectLEMP location:
 
 ```
 sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
@@ -193,29 +193,27 @@ sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/met
 
 ## TEST PHP WITH NGINX
 
-At this point, the LAMP stack is completely installed and fully operational.
-
-To valiate that it can correctly hand Nginx .php files off to your PHP processor I created a test PHP file in the document root by opening a new file called info.ophp
+- At this point, the LAMP stack is completely installed and fully operational. To validate that it can correctly hand Nginx .php files off to your PHP processor I create a test PHP file in the document root by opening a new file called info.ophp
 
 ```
-sudo nano /var/www/projectLEMP/info.php
+sudo vi /var/www/projectLEMP/info.php
 ```
 
-Entered a valid PHP code that will return information about the server:
+- Enter a valid PHP code that will return information about the server:
 
 ```
 <?php
 phpinfo();
 ```
 
-Accessed this page in the web browser by visiting the public IP address, followed by info.php
+- Access this page in the web browser by visiting the public IP address, followed by info.php
 
 
 ![Screen-27-11-2021_080928](https://user-images.githubusercontent.com/93116204/143673967-442a47b2-1ffe-482f-ab06-69b8f2e6974e.png)
 
 
                                                                                                                
-Removed the file created as it contains sensitive information about the PHP environment and the Ubuntu server with command below: 
+- Removed the file created as it contains sensitive information about the PHP environment and the Ubuntu server with command below: 
 
 ```
 sudo rm /var/www/your_domain/info.php
@@ -223,26 +221,24 @@ sudo rm /var/www/your_domain/info.php
                                                                                                                   
 ## Retrieving data from MySQL database with PHP
 
-During this process I created a test database (DB) with simple "To do list" and configure access to it, so the Nginx website would be able to query data from the DB and display it.
-                                              ```
-I connected to MySql using the root account:  sudo mysql
-                                              ``
+- Connect to MySql using the root account:  
+
+```
+sudo mysql
+```                                              
                                                                                      
-In order to create a new database, I run the following command from MsSql console:
+- Create a new database called example_database
 
 ```
 CREATE DATABASE `example_database`;
-```
-                                                                                   
-                                                                                   
-                                                                                                                                 
-To give this user permission over the example_database database I ran this commad and then exited:
+```                                                                                                                                                                                                        
+- Give user permission over the example_database database:
 
 ```
 GRANT ALL ON example_database.* TO 'example_user'@'%';
 ```                                                                                                   
                                                                                                                                            
-To to test if  the new user has the proper permissions I logged into the MySQL console again, this time using the custom user credentials:
+- To to test if the new user has the proper permissions to log into the MySQL console again, this time use the custom user credentials:
 
 ```
 -u example_user -p
@@ -253,7 +249,7 @@ To to test if  the new user has the proper permissions I logged into the MySQL c
 ![2a](https://user-images.githubusercontent.com/93116204/144015251-869ea381-4e5c-452d-b520-f5839f59584d.png)
 
                                                                                  
-To confirm that I have access to the example_database database I entered command:
+- Confirm that you have access to the example_database database:
 
 ```
 SHOW DATABASES;
@@ -264,19 +260,20 @@ SHOW DATABASES;
 ![2b](https://user-images.githubusercontent.com/93116204/144015734-502c3018-f126-43a1-b7f1-9f46ef2d24ac.png)
 
 
-A test table named todo_list was created From the MySQL console with statement:
+- Create a test table named todo_list was created From the MySQL console with statement:
 
 ```
 CREATE TABLE example_database.todo_list (item_id INT AUTO_INCREMENT,
 content VARCHAR(255),PRIMARY KEY(item_id));
 ```
 
-Inserted a few rows of content in the test table
+- Insert a few rows of content in the test table. You might want to repeat the next command a few times, using different VALUES:
 
-*Screenshot below*
+```
+mysql> INSERT INTO example_database.todo_list (content) VALUES ("My first important item");
+``` 
 
-                                                                                  
-To confirm that the data was successfully saved to the table, I run this command:
+- To confirm that the data was successfully saved to the table, I run this command:
 
 ```
 SELECT * FROM example_database.todo_list;
@@ -284,17 +281,18 @@ SELECT * FROM example_database.todo_list;
 
 ![2e](https://user-images.githubusercontent.com/93116204/144017269-dcd93a4b-cf1f-4461-9fcc-2ce20fcc7ceb.png)
 
+- exit mysql 
 
-A PHP script that will connect to MySQL and query for my content was made. 
-                                                                                      
-                                                                                       
-To create a new PHP file in the custom web root directory I run the following command: 
+```
+mysql> exit
+```
+- Now you can create a PHP script that will connect to MySQL and query for your content. Create a new PHP file in your custom web root directory using your preferred editor. We’ll use vi for that:                                                                                                                                                                       
 
 ```
 nano /var/www/projectLEMP/todo_list.php
 ```
 
-The script below was entered into todo_list.php:
+- Enter the script below into todo_list.php:
 
 ```
 <?php
@@ -315,6 +313,7 @@ try {
     die();
 }
 ```      
-The page was accessed in my web browser by visiting the public IP address!
+
+- You can now access this page in your web browser by visiting the domain name or public IP address configured for your website, followed by /todo_list.php:
 
 ![2f](https://user-images.githubusercontent.com/93116204/144018828-c4b6de55-056e-4bc1-bd1d-07ad289ee1a4.png)
