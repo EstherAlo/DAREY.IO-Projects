@@ -9,52 +9,66 @@ LEMP is an open-source web application stack used to develop web applications. T
 N stands for Nginx: It is a web server that follows an event-driven approach and handles multiple requests within one thread. Nginx supports all Unix-like OS and also supports windows partially. When a web browser requests a web page that request is handled by the web server, here that web server is Nginx. Then the webserver passes that request to server-side technologies used in the LEMP stack for instance as a server-side scripting language like PHP to communicate with server and database.
 Updated my server’s package index as it is the first time using apt:
 
+- Update the ubuntu repositries 
+
 ```
 sudo apt update
 ```     
-       
-                                                     
-                                    
-Used apt command to install  Nginx:``` 
-                                   sudo apt install nginx
-                                   ```                                               
+                                       
+- install  Nginx:
+
+```
+sudo apt install nginx
+```
+
+                                             
 ![P2A (2)](https://user-images.githubusercontent.com/93116204/139219823-c58a21a6-ed11-4c40-b271-fec20fc17e0e.png)
 
 
-To verify that nginx was successfully installed and was running as a service in Ubuntu:``` 
-                                                                                       sudo systemctl status nginx
-                                                                                       ```
+Verify that nginx has  successfully installed:
+
+```
+sudo systemctl status nginx
+```
+
+
 ![P2A (3)](https://user-images.githubusercontent.com/93116204/139220994-be597f62-5f49-4aaf-9324-72b4a75200eb.png)
 
-Opened TCP port 80 which is default port that web brousers use to access web pages in the Internet.
+- Opened TCP port 80 which is default port that web brousers use to access web pages in the Internet.
                                                 
-                                                
-                                                
-                                                    ```
-Used ‘curl’ command to request our Nginx on port 80: curl -s http://169.254.169.254/latest/meta-data/public-ipv4                                                                                                                       ```
+                                                                                      
+- Use ‘curl’ command to request oNginx on port 80:
+
+```
+ curl -s http://169.254.169.254/latest/meta-data/public-ipv4                                                                                                                       ```
+```
 
 ![Screen-28-10-2021_095132 (3)](https://user-images.githubusercontent.com/93116204/139404540-23fcebbd-1e8a-419d-baec-a1c1d5cad000.png)
 
 
 ## INSTALLING MYSQL
 
-Now that my web server was up and running, I needed to install a Database Management System (DBMS) to be able to store and manage data for my site in a relational database. MySQL is a popular relational database management system used within PHP environments.
+M stands for MySQL: It is an open-source SQL-based database that is used to store data and manipulate data while maintaining data consistency and integrity. It organizes data in tabular form in rows and columns. It is also ACID-compliant. MySQL is a popular relational database management system used within PHP environments.
 
-Used apt command to install  MySql:``` 
-                                   sudo apt mysql-server
-                                   ```         
+- Install  MySql: 
+
+```                                
+sudo apt mysql-server                                   
+```     
+
  ![P2A (5)](https://user-images.githubusercontent.com/93116204/139405644-5b17265f-078c-40e0-956a-80f0b917936d.png)
- 
-I ran this command which installs a security script that comes pre-installed with MySQL:``` 
-                                                                                         sudo mysql_secure_installation
-                                                                                         ```
 
-This script removed some insecure default settings and locked down access to my database system. I did not VALIDATE PASSWORD PLUGIN. Regardless of this the server asked me to select and confirm a password for the MySQL root user.
+- Install the security script. This script removes some insecure default settings and locks down access to your database system. if you do not VALIDATE PASSWORD PLUGIN. The server will still ask for you to  select and confirm a password for the MySQL root user.
+
+```
+sudo mysql_secure_installation
+``` 
  
  ![P2B(2)](https://user-images.githubusercontent.com/93116204/139408657-b6195770-fd53-4d9b-8771-b5d78ce99a9e.png)
 
 
-I ran the following commands to test if could log into the MySQL console and also exited MySql:
+- Log into my sql
+
 ```
 sudo mysql    
 ```
@@ -70,9 +84,9 @@ MySQL server is now installed and secured.
 
 ### INSTALLING PHP
 
-PHP processes code and generates dynamic content for the web server. Nginx requires an external program to handle PHP processing and act as a bridge between the PHP interpreter itself and the web server. 
+P stands for PHP: It stands for Hypertext Preprocessor and is a scripting language that works on the server-side and communicates with the database MySQL and does all operations which user requests like fetching data, adding data, or manipulating data, or processing the data. PHP processes code and generates dynamic content for the web server. Nginx requires an external program to handle PHP processing and act as a bridge between the PHP interpreter itself and the web server. 
 
-* php-fpm, which stands for “PHP fastCGI process manager”, and tell Nginx to pass PHP requests to this software for processing
+* php-fpm, which stands for “PHP fastCGI process manager”, tell Nginx to pass PHP requests to this software for processing
 * php-mysql, allows PHP to communicate with MySQL-based databases
 
  I installed php-fpm and php-mysql by running command:``` 
