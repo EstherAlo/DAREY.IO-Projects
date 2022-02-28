@@ -4,7 +4,7 @@
 LEMP is an open-source web application stack used to develop web applications. The term LEMP is an acronym that represents L for the Linux Operating system, Nginx (pronounced as engine-x, hence the E in the acronym) web server, M for MySQL database, and P for PHP scripting language
 
 
-## INSTALLING THE NGINX WEB SERVER
+## INSTALL THE NGINX WEB SERVER
 
 N stands for Nginx: It is a web server that follows an event-driven approach and handles multiple requests within one thread. Nginx supports all Unix-like OS and also supports windows partially. When a web browser requests a web page that request is handled by the web server, here that web server is Nginx. Then the webserver passes that request to server-side technologies used in the LEMP stack for instance as a server-side scripting language like PHP to communicate with server and database.
 Updated my server’s package index as it is the first time using apt:
@@ -46,7 +46,7 @@ sudo systemctl status nginx
 ![Screen-28-10-2021_095132 (3)](https://user-images.githubusercontent.com/93116204/139404540-23fcebbd-1e8a-419d-baec-a1c1d5cad000.png)
 
 
-## INSTALLING MYSQL
+## INSTALL MYSQL
 
 M stands for MySQL: It is an open-source SQL-based database that is used to store data and manipulate data while maintaining data consistency and integrity. It organizes data in tabular form in rows and columns. It is also ACID-compliant. MySQL is a popular relational database management system used within PHP environments.
 
@@ -58,7 +58,7 @@ sudo apt mysql-server
 
  ![P2A (5)](https://user-images.githubusercontent.com/93116204/139405644-5b17265f-078c-40e0-956a-80f0b917936d.png)
 
-- Install the security script. This script removes some insecure default settings and locks down access to your database system. if you do not VALIDATE PASSWORD PLUGIN. The server will still ask for you to  select and confirm a password for the MySQL root user.
+- Run the security script - this comes pre-installed with mysql. This script removes some insecure default settings and locks down access to your database system. if you do not VALIDATE PASSWORD PLUGIN. The server will still ask for you to  select and confirm a password for the MySQL root user.
 
 ```
 sudo mysql_secure_installation
@@ -82,39 +82,52 @@ mysql> exit
 MySQL server is now installed and secured.
 
 
-### INSTALLING PHP
+### INSTALL PHP
 
 P stands for PHP: It stands for Hypertext Preprocessor and is a scripting language that works on the server-side and communicates with the database MySQL and does all operations which user requests like fetching data, adding data, or manipulating data, or processing the data. PHP processes code and generates dynamic content for the web server. Nginx requires an external program to handle PHP processing and act as a bridge between the PHP interpreter itself and the web server. 
 
 * php-fpm, which stands for “PHP fastCGI process manager”, tell Nginx to pass PHP requests to this software for processing
 * php-mysql, allows PHP to communicate with MySQL-based databases
 
- I installed php-fpm and php-mysql by running command:``` 
-                                                      sudo apt install php-fpm php-mysql
-                                                      ```
+Install php-fpm and php-mysql by running command:
+
+``` 
+sudo apt install php-fpm php-mysql
+```
+
 ![P2C(1)](https://user-images.githubusercontent.com/93116204/139502119-041cde9d-86b2-41d9-940b-671092603962.png)
 
   
- ## Configuring Nginx to Use PHP Processor
+ ## Configure Nginx to Use PHP Processor
+
+On Ubuntu 20.04, Nginx has one server block enabled by default and is configured to serve documents out of a directory at /var/www/html. While this works well for a single site, it can become difficult to manage if you are hosting multiple sites. Instead of modifying /var/www/html, we’ll create a directory structure within /var/www for the your_domain website, leaving /var/www/html in place as the default directory to be served if a client request does not match any other sites.
+
  
-* I created the root web directory for my domain by running:``` 
-                                                           sudo mkdir /var/www/projectLEMP
-                                                           ```
-                                                           
-* I assign ownership of the directory with the $USER environment variable:``` 
-                                                                        sudo chown -R $USER:$USER /var/www/projectLEMP
-                                                                        ```
-                                                                        
-* I opened a new configuration file in Nginx’s sites-available directory:```
-                                                                       sudo nano /etc/nginx/sites-available/projectLEMP
-                                                                       ```
+* I create the root web directory for your domain:
+
+```
+sudo mkdir /var/www/projectLEMP
+```
+
+* I assign ownership of the directory with the $USER environment variable:
+
+```
+sudo chown -R $USER:$USER /var/www/projectLEMP
+```
+
+
+* I opened a new configuration file in Nginx’s sites-available directory:
+
+```
+ sudo vi /etc/nginx/sites-available/projectLEMP
+ ```
                                                                        
 ![P2C (2)](https://user-images.githubusercontent.com/93116204/139503892-11fb19f7-e99c-4e0b-8035-fb309211b588.png)
 
 
-This created a new blank file. I then Pasted in the following bare-bones configuration and closed using 'CTRL+X':
+Paste in the following bare-bones configuration 
+
 ```
-#/etc/nginx/sites-available/projectLEMP
 
 server {
     listen 80;
@@ -139,40 +152,46 @@ server {
 }
                                                                        
 ```
+Activate the configuration by linking tconfig file to the Nginx’s sites-enabled directory. This will tell Nginx to use the configuration next time it is reloaded.
 
-Activated my configuration by linking to the config file from Nginx’s sites-enabled directory:``` 
-                                                                                             sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
-                                                                                             ```
-* This will tell Nginx to use the configuration next time it is reloaded. 
+```
+sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
+```
 
- Tested my configuration for syntax errors by typing:```
-                                                     sudo nginx -t
-                                                     ```
+
+ Test the configuration for syntax errors:
+
+```
+ sudo nginx -t
+ ```
+ 
 ![P2C (3)](https://user-images.githubusercontent.com/93116204/139505462-f5f7ebb1-75a8-48a5-ad0b-d1cd25c1cb3b.png)
 
+Default Nginx host was disabled with command: 
 
-Default Nginx host was disabled with command: ``` 
-                                             sudo unlink /etc/nginx/sites-enabled/default
-                                             ```
+```
+sudo unlink /etc/nginx/sites-enabled/default
+```
 
+In order to apply the changes I reloaded Nginx using command:
 
-In order to apply the changes I reloaded Nginx using command:``` 
-                                                             sudo systemctl reload nginx]
-                                                             ```
+```
+sudo systemctl reload nginx]
+```
                                                 
                                                 
-In order to test that my new server block functions  I created a  index.html file in /var/www/projectLEMP location:
+In order to test that the new server block functions  create a  index.html file in /var/www/projectLEMP location:
 
 ```
 sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
 ```
 
-*Screeenshot below*
+*Screenshot below*
 
 ![Screen-27-11-2021_075153](https://user-images.githubusercontent.com/93116204/143673216-e38f1170-4812-4aba-8eb5-b38ba08850fa.png)
 
 
-## TESTING PHP WITH NGINX
+## TEST PHP WITH NGINX
 
 At this point, the LAMP stack is completely installed and fully operational.
 
