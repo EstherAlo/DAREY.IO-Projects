@@ -6,13 +6,13 @@
 
 - Create a VPC using  a large enough CIDR block (/16) & enable DNS hostnames
 
-![pi2c2](./images/pic2.png)
+![pic2](./images/pic2.png)
 
 ![pic3](./images/pic3.png)
 
 - Create subnets as shown in the diagram above. For the public subnet, we create 2 subnets in availability zone A and B respectively and for the private subnet we create 4 subnets.
 
-* Create a route table and associate it with the public subnets
+* Create a route table and associate  it with the public subnets
   * Select the route table you created, click Actions on the top and click 'Edit Subnet associations'
   * Select the public subnets and click save
 * Create a route table for the private subnets
@@ -330,11 +330,25 @@ yum install -y ansible
 * Update the reverse.conf file with the domain name
 
 
+* shh into bastion host 
+
+```
+ssh -A ec2-user@<privateip>
+```
+
+* connect to RDS and create a toolingdb and wordpressdb 
+
+```
+mysql -h <RDS endoint -u <RDSusername> -p 
+create database wordpressdb;
+create wordpressdp;
+show databases;
+```
 ## Step 6 : Create Autoscaling Group  
 
 *  Create Autoscaling Group for Bastion, Nginx, WordPress and Tooling. The same setting used for the Bastion server will be used for Nginx, the only difference is the Load Balancer is added to Nginx, Wordpress and Tooling as the Bastion does not make use of load balancer.
    * Create autoscaling group
-   * Name the autuGroup 
+   * Name the autoGroup 
    * Select bastion template and click next
    * Select adhere to launch template
    * select VPC
@@ -344,5 +358,14 @@ yum install -y ansible
    * select target tracking scaling policy and set target value as 90 and click next
 
 
+## Step 7: Configure DNS with Route 53
 
+![pic37](./images/pic37.png)
+![pic38](./images/pic38.png)
+![pic39](./images/pic39.png)
+![pic40](./images/pic40.png)
+
+* Check if All target group are healthy
+
+![pic41](./images/pic41.png)
 
