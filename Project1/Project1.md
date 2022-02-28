@@ -1,11 +1,7 @@
 
 ## LAMP PROJECT
 
-- Installation of apache (web server software) and updating the firewall.
-- Installation of mysql for storing and managing data for a site.
-- Installation of php for processing code to display dynamic content to end user.
-- Creating a virtual host for website using apache.
-- Enabling php on the website.
+LAMP stack is a collection of Linux OS, Apache Server, MySQL Database, PHP. LAMP is basically a collection of software that you require to create a dynamic website and web applications. These tools are capable enough that you don’t require any other tool for the purpose. The interesting thing about LAMP is that all the tools in it are free and open-source.
 
 ### STEP 1: INSTALL APACHE 
 
@@ -17,16 +13,20 @@ sudo apt install apache2
 ```
                                                                                                   
 
-- Verify that apache2 is running as a Service in the OS: ```
-                                                         sudo systemctl status apache2
-                                                          ```
+- Verify that apache2 is running as a Service in the OS: 
+
+```
+sudo systemctl status apache2
+```
 
 *Apache2 status below* 
 ![Project 1- C (2)](https://user-images.githubusercontent.com/93116204/138972237-0c769ceb-4afe-44ce-abfe-28d2e87b8560.png)
 
-- Requested my Apache HTTP server on port 80: ```
-                                        curl http://localhost:80
-                                            ```
+- Requested my Apache HTTP server on port 80: 
+
+```
+curl http://localhost:80
+```
 
 - Verify if Apache HTTP server can respond to requests from the Internet. 
 
