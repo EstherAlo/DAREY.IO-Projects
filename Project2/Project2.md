@@ -1,13 +1,18 @@
 
 # LEMP PROJECT 
 
+LEMP is an open-source web application stack used to develop web applications. The term LEMP is an acronym that represents L for the Linux Operating system, Nginx (pronounced as engine-x, hence the E in the acronym) web server, M for MySQL database, and P for PHP scripting language
 
 
 ## INSTALLING THE NGINX WEB SERVER
 
-Updated my server’s package index as it is the first time using apt: ```  
-                                                                    sudo apt update
-                                                                     ```
+N stands for Nginx: It is a web server that follows an event-driven approach and handles multiple requests within one thread. Nginx supports all Unix-like OS and also supports windows partially. When a web browser requests a web page that request is handled by the web server, here that web server is Nginx. Then the webserver passes that request to server-side technologies used in the LEMP stack for instance as a server-side scripting language like PHP to communicate with server and database.
+Updated my server’s package index as it is the first time using apt:
+
+```
+sudo apt update
+```     
+       
                                                      
                                     
 Used apt command to install  Nginx:``` 
