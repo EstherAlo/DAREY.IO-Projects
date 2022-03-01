@@ -34,10 +34,10 @@ sudo systemctl status nginx
 
 ![P2A (3)](https://user-images.githubusercontent.com/93116204/139220994-be597f62-5f49-4aaf-9324-72b4a75200eb.png)
 
-- Opened TCP port 80 which is default port that web brousers use to access web pages in the Internet.
+- Open TCP port 80 which is default port that web browsers use to access web pages in the Internet.
                                                 
                                                                                       
-- Use ‘curl’ command to request oNginx on port 80:
+- Use ‘curl’ command to request Nginx on port 80:
 
 ```
  curl -s http://169.254.169.254/latest/meta-data/public-ipv4                                                                                                                       ```
@@ -79,7 +79,7 @@ mysql> exit
                                   
 ![P2B(3)](https://user-images.githubusercontent.com/93116204/139410870-35d4a402-f33a-4bf5-8289-c60b101fdde8.png)
 
-MySQL server is now installed and secured.
+- MySQL server is now installed and secured.
 
 
 ### INSTALL PHP
@@ -103,20 +103,20 @@ sudo apt install php-fpm php-mysql
 On Ubuntu 20.04, Nginx has one server block enabled by default and is configured to serve documents out of a directory at /var/www/html. While this works well for a single site, it can become difficult to manage if you are hosting multiple sites. Instead of modifying /var/www/html, we’ll create a directory structure within /var/www for the your_domain website, leaving /var/www/html in place as the default directory to be served if a client request does not match any other sites.
 
  
-* I create the root web directory for your domain:
+* Create the root web directory for your domain:
 
 ```
 sudo mkdir /var/www/projectLEMP
 ```
 
-* I assign ownership of the directory with the $USER environment variable:
+* Assign ownership of the directory with the $USER environment variable:
 
 ```
 sudo chown -R $USER:$USER /var/www/projectLEMP
 ```
 
 
-* I opened a new configuration file in Nginx’s sites-available directory:
+* Open a new configuration file in Nginx’s sites-available directory:
 
 ```
  sudo vi /etc/nginx/sites-available/projectLEMP
@@ -153,7 +153,7 @@ server {
                                                                        
 ```
 
-- Activate the configuration by linking tconfig file to the Nginx’s sites-enabled directory. This will tell Nginx to use the configuration next time it is reloaded.
+- Activate the configuration by linking to config file to the Nginx’s sites-enabled directory. This will tell Nginx to use the configuration next time it is reloaded.
 
 ```
 sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
@@ -193,7 +193,7 @@ sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/met
 
 ## TEST PHP WITH NGINX
 
-- At this point, the LAMP stack is completely installed and fully operational. To validate that it can correctly hand Nginx .php files off to your PHP processor I create a test PHP file in the document root by opening a new file called info.ophp
+- At this point, the LAMP stack is completely installed and fully operational. To validate that it can correctly hand Nginx .php files off to your PHP processor create a test PHP file in the document root by opening a new file called info.ophp
 
 ```
 sudo vi /var/www/projectLEMP/info.php
@@ -213,7 +213,7 @@ phpinfo();
 
 
                                                                                                                
-- Removed the file created as it contains sensitive information about the PHP environment and the Ubuntu server with command below: 
+- Remov the file created as it contains sensitive information about the PHP environment and the Ubuntu server with command below: 
 
 ```
 sudo rm /var/www/your_domain/info.php

@@ -141,8 +141,6 @@ Saved and closed the file, as shown below:
 
 1. Hit ENTER to save the file
 
-The following command showed the new file in the sites-available directory
-
 ```
 sudo ls /etc/apache2/sites-available
 ```
@@ -172,7 +170,7 @@ sudo ls /etc/apache2/sites-available
   sudo apache2ctl configtest
   ```                                                                                 
                                                                                    
-- reload Apache so these changes take effect 
+- Reload Apache so these changes take effect 
 
 ```
 sudo systemctl reload apache2
@@ -183,7 +181,7 @@ sudo systemctl reload apache2
 ![Project1 - G (5)](https://user-images.githubusercontent.com/93116204/139145212-6c4570d6-138f-4021-a878-a56e0fc59a17.png)
                                               
 
-- Create an index.html file in that location so that I you can test that the virtual host works as expected:
+- Create an index.html file in that location so that you can test that the virtual host works as expected:
 
 ```
 sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectlamp/index.html
