@@ -1,5 +1,5 @@
 
-## LAMP PROJECT
+## __LAMP PROJECT__
 
 LAMP stack is a collection of Linux OS, Apache Server, MySQL Database, PHP. LAMP is basically a collection of software that you require to create a dynamic website and web applications. These tools are capable enough that you don’t require any other tool for the purpose. The interesting thing about LAMP is that all the tools in it are free and open-source.
 
