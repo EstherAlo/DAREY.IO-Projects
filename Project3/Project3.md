@@ -1,16 +1,15 @@
-# MERN PROJECT
+# __MERN PROJECT__
 
-
-**MERN** Web stack consists of following components:
+MERN Stack: MERN Stack is a Javascript Stack that is used for easier and faster deployment of full-stack web applications. Web stack consists of following components:
 1. MongoDB: A document-based, No-SQL database used to store application data in a form of documents
 1. ExpressJS: A server side Web Application framework for Node.js.
 1. ReactJS: A frontend framework developed by Facebook. It is based on JavaScript, used to build User Interface (UI) components.
 1. Node.js: A JavaScript runtime environment. It is used to run JavaScript on a machine rather than in a browser.
 
 
-## BACKEND CONFIGURATION
+## STEP 1: BACKEND CONFIGURATION
 
-I updated and upgraded ubuntu using the following commands: 
+- Update and upgrade ubuntu
 
 ```
 sudo apt update  
@@ -18,7 +17,8 @@ sudo apt update
 sudo apt upgrade
 ````
 
-The location of Node.js was found from Ubuntu repositries by running command: 
+- Lets get the location of Node.js software from Ubuntu repositories
+
 ```
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 ```
@@ -27,11 +27,15 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
  
 ![Pic5a](./images/Pic5a.png)
 
-Node.js was installed by running command: sudo apt-get install -y nodejs
+- Install Node.js
 
-The command above installs both nodejs and npm. NPM is a package manager for Node like apt for Ubuntu, it is used to install Node modules & packages and to manage dependency conflicts.
+```
+sudo apt-get install -y nodejs
+```
 
-The node installation was verified with the commands below: 
+- The command above installs both nodejs and npm. NPM is a package manager for Node like apt for Ubuntu, it is used to install Node modules & packages and to manage dependency conflicts.
+
+- Verify the node installation with the command below
 
 ```
 node -v 
@@ -40,19 +44,36 @@ node -v
 ```
 npm -v 
 ```
+
 *Screenshot below*
 
    ![Pic6a](./images/Pic6a.png)          
 
 
-I then Created a new directory for your To-Do project using command: mkdir Todo
+- Create a new directory for your To-Do project
+
+```
+mkdir Todo
+```
+
+*Screenshot below*
+
+   ![Pic6b](./images/Pic6b.png)   
 
 
-*Screeshot below*
+- Run the command below to verify that the Todo directory is created with ls command
 
-   ![Pic6b](./images/Pic6b.png)                                                                  
+```
+ls
+```
 
-The command npm init was entered to initialise my project, so that a new file named package.json will be created. This file will normally contain information about your application and the dependencies that it needs to run.
+- Change your current directory to the newly created one:
+
+```
+cd Todo
+```
+
+ Initialise project, so that a new file named package.json will be created. This file will normally contain information about your application and the dependencies that it needs to run.
 
 ```
 npm init
@@ -63,21 +84,44 @@ npm init
 ![Pic7a](./images/Pic7a.png)
 
 
-## INSTALL EXPRESSJS
+- Run the command ls to confirm that you have package.json file created
 
+
+# STEP 1.1: INSTALL EXPRESSJS
+
+Express is a framework for Node.js, it helps to define routes of your application based on HTTP methods and URLs.
                                  
-Installed express using command: npm install express
+- Install express 
 
+```
+ npm install express
+```
                
-created a file index.js with the command and confirmed that it was made with the command ls: touch index.js
+- create a file index.js with the command below
 
-Installed the dotenv module: npm install dotenv
+```
+touch index.js
+```
+
+- Run ls to confirm that your index.js file is successfully created
+
+- Install the dotenv module
+
+```
+ npm install dotenv
+```
+
+- Open the index.js file
+
+```
+vim index.js
+```
 
 *Screenshot below*
 
 ![Pic8a](./images/Pic8a.png)
 
-Code below was added into index.js file:
+- Enter code below into index.js file:
 
 ```
 const express = require('express');
@@ -102,37 +146,59 @@ console.log(`Server running on port ${port}`)
 });
 ```
 
-
+- We  have specified to use port 5000 in the code. This will be required later when we go on the browser.
 
                                                     
-I confirmed the server was working by running command: node index.js
+Open your terminal in the same directory as your index.js file and type
+
+```
+node index.js
+```
+
+- You should see Server running on port 5000 in your terminal
 
 ![Pic8b](./images/Pic8b.png)
-
-
                                                        
-created an inbound rule to open TCP port 5000.
+- Create an inbound rule to open TCP port 5000.
 
 *Screenshot below*
 
 ![Pic1a](./images/Pic1a.png)
 
-*Accessed my server’s Public IP on my browser*
+- Open up your browser and try to access your server’s Public IP or Public DNS name followed by port 5000:
 
 ![Pic2a](./images/Pic2a.png)
 
-For each task, I created routes that will define various endpoints that the To-do app will depend on. 
 
-                                             
-Routes folder was created by running commad: mkdir routes
+# STEP 2.2: ROUTES
 
-Changed directory to routes folder and created a file api.js with commands:
+There are three actions that our To-Do application needs to be able to do:
 
+1. Create a new task
+2. Display list of all tasks
+3. Delete a completed task
+
+Each task will be associated with some particular endpoint and will use different standard HTTP request methods: POST, GET, DELETE. For each task, we need to create routes that will define various endpoints that the To-do app will depend on.
+
+- Create a routes folder 
+
+```                                     
+ mkdir routes
+```
+
+- Change directory to routes folder
+
+```
 cd routes
+```
 
+- Create a file called api.js 
+
+```
 touch api.js
+```
 
-Added code below into the file: 
+- Add code below into the file: 
 
 ```
 const express = require ('express');
@@ -153,17 +219,21 @@ router.delete('/todos/:id', (req, res, next) => {
 module.exports = router;
 ```
 
-### MODELS
+# STEP 2.3 MODELS
 
-Due to the app making use of Mongodb, which is a NoSQL database, I created a model. A model is at the heart of JavaScript based applications, and it is what makes it interactive. The models were to define the database schema. To create a Schema and a model, I installed mongoose which is a Node.js package that makes working with mongodb easier.
+Due to the app making use of Mongodb, which is a NoSQL database, I create a model. A model is at the heart of JavaScript based applications, and it is what makes it interactive. The models are to define the database schema. To create a Schema and a model, I instal mongoose which is a Node.js package that makes working with mongodb easier.
 
- installed Mongoose in the Todo Directory: npm install mongoose
 
+- Change directory back Todo folder with cd and install Mongoose
+
+```
+npm install mongoose
+```
 *Screenshot below*
 
 ![Pic13a](./images/Pic13a.png)
 
-Created a new modes folder and then changed directory into the newly created ‘models’ folder with the commands: 
+- Create a new modes folder and then change directory into the newly created ‘models’ folder
 
 ```
 mkdir models
@@ -171,9 +241,13 @@ mkdir models
 cd models
 ```
 
-Inside the models folder, created a file and named it todo.js: touch todo.js
+Inside the models folder, create a file and nam it todo.js
 
-Added the code below into the todo.js file:
+```
+touch todo.js
+```
+
+Add the code below into the todo.js file:
 
 ```
 const mongoose = require('mongoose');
@@ -192,8 +266,9 @@ const Todo = mongoose.model('todo', TodoSchema);
 
 module.exports = Todo;
 ```
+- Update our routes from the file api.js in ‘routes’ directory to make use of the new model
 
-I then updated routes from the file api.js in ‘routes’ directory to make use of the new model by deleting code in vim api.js and adding code below:
+- In Routes directory, open api.js with vim api.js, delete the code inside with :%d command and paste there code below into it then save and exit
 
 ```
 const express = require ('express');
@@ -229,11 +304,23 @@ Todo.findOneAndDelete({"_id": req.params.id})
 module.exports = router;
 ```
 
-## MONGODB DATABASE
+## STEP 2.4: MONGODB DATABASE
 
-mLab provides MongoDB database as a service solution. 
+We need a database where we will store our data. For this we will make use of mLab. mLab provides MongoDB database as a service solution (DBaaS), so to make life easy, you will need to sign up for a shared clusters free account, which is ideal for our use case
 
-In the index.js file, we specified process.env to access environment variables. I Created, opened file in the Todo directory:
+![pic44](./images/pic44.png)
+
+- Allow access to the MongoDB database from anywhere (Not secure, but it is ideal for testing)
+
+![pic26](./images/pic26.png)
+
+![pic27](./images/pic27.png)
+
+![pic29](./images/pic29.png)
+
+In the index.js file, we specified process.env to access environment variables, but we have not yet created this file. So we need to do that now.
+
+- Create a file in your Todo directory and name it .env.
 
 ```
 touch .env
@@ -241,14 +328,21 @@ touch .env
 vi .env
 ```
 
-I Added the connection string to access the database in it, in the format below:
+- Add the connection string to access the database in it, just as below:
 
 ```
 DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites=true&w=majority'
 ```
 
+- Here is how to get your connection string
 
- To reflect the use of .env so that Node.js can connect to the database, the existing content in the file index.js was deleted, and updated it with the entire code below: 
+![pic30](./images/pic30.png)
+
+![pic30](./images/pic30.png)
+
+Now we need to update the index.js to reflect the use of .env so that Node.js can connect to the database.  delete existing content in the file, and update it with the entire code below.
+
+
 
 
 ```
@@ -291,11 +385,19 @@ console.log(`Server running on port ${port}`)
 });
 
 ```
-Started the server using the command: node index.js
+Start your server 
 
+```
+ node index.js
+```
+
+ENDED HERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
 *Screenshot below*
 
 ![Pic14a](./images/Pic14a.png)
+
+In this project, we will use Postman to test our API.
+Click Install Postman to download and install postman on your machine.
 
 Opened Postman, created a POST request to the API http://<PublicIP-or-PublicDNS>:5000/api/todos. This request sends a new task to my To-Do list so the application could store it in the database.
 
