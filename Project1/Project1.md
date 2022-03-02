@@ -22,7 +22,7 @@ sudo systemctl status apache2
 *Apache2 status below* 
 ![Project 1- C (2)](https://user-images.githubusercontent.com/93116204/138972237-0c769ceb-4afe-44ce-abfe-28d2e87b8560.png)
 
-- Requested my Apache HTTP server on port 80: 
+- Requested Apache HTTP server on port 80: 
 
 ```
 curl http://localhost:80
