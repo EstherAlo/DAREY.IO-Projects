@@ -6,8 +6,7 @@ LEMP is an open-source web application stack used to develop web applications. T
 
 ## INSTALL THE NGINX WEB SERVER
 
-N stands for Nginx: It is a web server that follows an event-driven approach and handles multiple requests within one thread. Nginx supports all Unix-like OS and also supports windows partially. When a web browser requests a web page that request is handled by the web server, here that web server is Nginx. Then the webserver passes that request to server-side technologies used in the LEMP stack for instance as a server-side scripting language like PHP to communicate with server and database.
-Updated my server’s package index as it is the first time using apt:
+N stands for Nginx: An open source software for web serving, reverse proxying, caching, load balancing, media streaming, and more. When a web browser requests a web page that request is handled by the web server, here that web server is Nginx. Then the webserver passes that request to server-side technologies used in the LEMP stack for instance as a server-side scripting language like PHP to communicate with server and database.
 
 - Update the ubuntu repositries 
 
@@ -48,7 +47,7 @@ sudo systemctl status nginx
 
 ## INSTALL MYSQL
 
-M stands for MySQL: It is an open-source SQL-based database that is used to store data and manipulate data while maintaining data consistency and integrity. It organizes data in tabular form in rows and columns. It is also ACID-compliant. MySQL is a popular relational database management system used within PHP environments.
+M stands for MySQL: MySQL is a popular relational database management system used within PHP environments.
 
 - Install  MySql: 
 
@@ -58,7 +57,7 @@ sudo apt mysql-server
 
  ![P2A (5)](https://user-images.githubusercontent.com/93116204/139405644-5b17265f-078c-40e0-956a-80f0b917936d.png)
 
-- Run the security script - this comes pre-installed with mysql. This script removes some insecure default settings and locks down access to your database system. if you do not VALIDATE PASSWORD PLUGIN. The server will still ask for you to  select and confirm a password for the MySQL root user.
+- Run the security script - this comes pre-installed with mysql. This script removes some insecure default settings and locks down access to your database system. if you do not VALIDATE PASSWORD PLUGIN the server will still ask for you to  select and confirm a password for the MySQL root user.
 
 ```
 sudo mysql_secure_installation
@@ -84,9 +83,9 @@ mysql> exit
 
 ### INSTALL PHP
 
-P stands for PHP: It stands for Hypertext Preprocessor and is a scripting language that works on the server-side and communicates with the database MySQL and does all operations which user requests like fetching data, adding data, or manipulating data, or processing the data. PHP processes code and generates dynamic content for the web server. Nginx requires an external program to handle PHP processing and act as a bridge between the PHP interpreter itself and the web server. 
+P stands for PHP: It stands for Hypertext Preprocessor and is a scripting language that works on the server-side and communicates with the database MySQL and does all operations which user requests, like fetching data, adding data, or manipulating data, or processing the data. PHP processes code and generates dynamic content for the web server. Nginx requires an external program to handle PHP processing and act as a bridge between the PHP interpreter itself and the web server. 
 
-* php-fpm, which stands for “PHP fastCGI process manager”, tell Nginx to pass PHP requests to this software for processing
+* php-fpm, which stands for “PHP fastCGI process manager”, tells Nginx to pass PHP requests to this software for processing
 * php-mysql, allows PHP to communicate with MySQL-based databases
 
 Install php-fpm and php-mysql by running command:
@@ -167,7 +166,7 @@ sudo ln -s /etc/nginx/sites-available/projectLEMP /etc/nginx/sites-enabled/
  
 ![P2C (3)](https://user-images.githubusercontent.com/93116204/139505462-f5f7ebb1-75a8-48a5-ad0b-d1cd25c1cb3b.png)
 
-- Default Nginx host was disabled with command: 
+- Disable the Default Nginx host  
 
 ```
 sudo unlink /etc/nginx/sites-enabled/default
@@ -180,7 +179,7 @@ sudo systemctl reload nginx]
 ```
                                                 
                                                 
-- In order to test that the new server block functions  create a  index.html file in /var/www/projectLEMP location:
+- In order to test that the new server block functions create a  index.html file in /var/www/projectLEMP location:
 
 ```
 sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/meta-data/public-hostname) 'with public IP' $(curl -s http://169.254.169.254/latest/meta-data/public-ipv4) > /var/www/projectLEMP/index.html
@@ -193,7 +192,7 @@ sudo echo 'Hello LEMP from hostname' $(curl -s http://169.254.169.254/latest/met
 
 ## TEST PHP WITH NGINX
 
-- At this point, the LAMP stack is completely installed and fully operational. To validate that it can correctly hand Nginx .php files off to your PHP processor create a test PHP file in the document root by opening a new file called info.ophp
+- At this point, the LAMP stack is completely installed and fully operational. To validate that it can correctly hand Nginx php files off to your PHP processor create a test PHP file in the document root by opening a new file called info.ophp
 
 ```
 sudo vi /var/www/projectLEMP/info.php
@@ -260,7 +259,7 @@ SHOW DATABASES;
 ![2b](https://user-images.githubusercontent.com/93116204/144015734-502c3018-f126-43a1-b7f1-9f46ef2d24ac.png)
 
 
-- Create a test table named todo_list was created From the MySQL console with statement:
+- Create a test table named todo_list From the MySQL console with statement:
 
 ```
 CREATE TABLE example_database.todo_list (item_id INT AUTO_INCREMENT,
@@ -273,7 +272,7 @@ content VARCHAR(255),PRIMARY KEY(item_id));
 mysql> INSERT INTO example_database.todo_list (content) VALUES ("My first important item");
 ``` 
 
-- To confirm that the data was successfully saved to the table, I run this command:
+- To confirm that the data was successfully saved to the table, run this command:
 
 ```
 SELECT * FROM example_database.todo_list;
@@ -286,10 +285,10 @@ SELECT * FROM example_database.todo_list;
 ```
 mysql> exit
 ```
-- Now you can create a PHP script that will connect to MySQL and query for your content. Create a new PHP file in your custom web root directory using your preferred editor. We’ll use vi for that:                                                                                                                                                                       
+- Now you can create a PHP script that will connect to MySQL and query for your content. Create a new PHP file in your custom web root directory using your preferred editor                                                                                                                                                                      
 
 ```
-nano /var/www/projectLEMP/todo_list.php
+vi /var/www/projectLEMP/todo_list.php
 ```
 
 - Enter the script below into todo_list.php:
