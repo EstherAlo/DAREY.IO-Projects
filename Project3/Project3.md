@@ -7,7 +7,7 @@ MERN Stack: MERN Stack is a Javascript Stack that is used for easier and faster 
 1. Node.js: A JavaScript runtime environment. It is used to run JavaScript on a machine rather than in a browser.
 
 
-## STEP 1: BACKEND CONFIGURATION
+## STEP 1: BACKEND CONFIGURATION - INSTALL NODE.JS
 
 - Update and upgrade ubuntu
 
@@ -73,10 +73,10 @@ ls
 cd Todo
 ```
 
- Initialise project, so that a new file named package.json will be created. This file will normally contain information about your application and the dependencies that it needs to run.
+ Initialise project, so that a new file named package.json will be created. This file will normally contain information about your application and the dependencies that it needs to run. Follow the prompts after running the command. You can press Enter several times to accept default values, then accept to write out the package.json file by typing yes.
 
 ```
-npm init
+npm init -y
 ```
 
 *Screenshot below*  
@@ -221,7 +221,7 @@ module.exports = router;
 
 # STEP 1.3 MODELS
 
-Due to the app making use of Mongodb, which is a NoSQL database, I create a model. A model is at the heart of JavaScript based applications, and it is what makes it interactive. The models are to define the database schema. To create a Schema and a model, I instal mongoose which is a Node.js package that makes working with mongodb easier.
+ install mongoose which is a Node.js package that allow us to communicate with our database in a very manner.
 
 
 - Change directory back Todo folder with cd and install Mongoose
@@ -229,11 +229,12 @@ Due to the app making use of Mongodb, which is a NoSQL database, I create a mode
 ```
 npm install mongoose
 ```
+
 *Screenshot below*
 
 ![pic13a](./images/pic13a.png)
 
-- Create a new modes folder and then change directory into the newly created ‘models’ folder
+- Create a new models folder and then change directory into the newly created ‘models’ folder
 
 ```
 mkdir models
@@ -799,7 +800,7 @@ return (
 export default App;
 ```
 
-AIn the src directory open the App.css Then paste the following code into App.css:
+In the src directory open the App.css Then paste the following code into App.css:
 
 ```
 .App {
@@ -921,8 +922,11 @@ monospace;
 cd ../..
 
 npm run dev
-```                                               
-- The To-Do app is ready and fully functional. Functionality: creating a task, deleting a task and viewing all your tasks.
+```         
+
+- The To-Do app is ready and fully functional. 
+
+- Functionality: creating a task, deleting a task and viewing all your tasks.
 
 Assuming no errors when saving all these files, our To-Do app should be ready and fully functional with the functionality discussed earlier: creating a task, deleting a task and viewing all your tasks.
 
