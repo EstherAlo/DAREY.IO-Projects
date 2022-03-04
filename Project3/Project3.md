@@ -170,7 +170,7 @@ node index.js
 ![Pic2a](./images/Pic2a.png)
 
 
-# STEP 2.2: ROUTES
+# STEP 1.2: ROUTES
 
 There are three actions that our To-Do application needs to be able to do:
 
@@ -219,7 +219,7 @@ router.delete('/todos/:id', (req, res, next) => {
 module.exports = router;
 ```
 
-# STEP 2.3 MODELS
+# STEP 1.3 MODELS
 
 Due to the app making use of Mongodb, which is a NoSQL database, I create a model. A model is at the heart of JavaScript based applications, and it is what makes it interactive. The models are to define the database schema. To create a Schema and a model, I instal mongoose which is a Node.js package that makes working with mongodb easier.
 
@@ -304,7 +304,7 @@ Todo.findOneAndDelete({"_id": req.params.id})
 module.exports = router;
 ```
 
-## STEP 2.4: MONGODB DATABASE
+## STEP 1.4: MONGODB DATABASE
 
 We need a database where we will store our data. For this we will make use of mLab. mLab provides MongoDB database as a service solution (DBaaS), so to make life easy, you will need to sign up for a shared clusters free account, which is ideal for our use case
 
@@ -341,8 +341,6 @@ DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites
 ![pic30](./images/pic30.png)
 
 Now we need to update the index.js to reflect the use of .env so that Node.js can connect to the database.  delete existing content in the file, and update it with the entire code below.
-
-
 
 
 ```
@@ -416,7 +414,7 @@ Note: make sure your set header key Content-Type as application/json
 
 ![Pic16a](./images/Pic16a.png)
 
-## sTEP 2: FRONTEND CREATION
+# STEP 2: FRONTEND CREATION
 
 Aim is to create a user interface for a Web client (browser) to interact with the application via API. To start out with the frontend of the To-do app, I used the create-react-app command to scaffold the app.
 
@@ -463,7 +461,7 @@ npm install nodemon --save-dev
 
 ```
 
-### STEP 2.2: Configure Proxy in package.json
+# STEP 2.2: Configure Proxy in package.json
 
 - Change directory to ‘client’
 
@@ -494,7 +492,8 @@ Move into the  Todo Directory and run the below command
 
 ![Pic23a](./images/Pic23a.png)
 
-### STEP 2.3: Creating React Components
+
+## STEP 2.3: Creating React Components
 
  One of the advantages of react is that it makes use of components, which are reusable and also makes code modular. For our Todo app, there will be two stateful components and one stateless component.
 
