@@ -6,7 +6,8 @@ Two Linux-based virtual servers(EC2 instances in AWS) were created and configure
 
 *screenshot below*
 
-![Pic8](./images/Pic8.png)
+![Pic8](https://user-images.githubusercontent.com/93116204/156807418-a70feb62-6873-417c-abf0-b08d3d68f30e.png)
+
 
 ### Database Server
 
@@ -23,19 +24,23 @@ I then enabled the service and then ran the security with the following command:
 sudo systemctl enable mysql
 ```
  *screenshot below*
-![Pic10](./images/Pic10.png)
+ 
+![pic10](https://user-images.githubusercontent.com/93116204/156807588-b83fa9b6-a9c5-4be6-b16d-1b67b8db15aa.png)
+
 
 MySQL server uses TCP port 3306 by default, so this was opened by creating a new entry in ‘Inbound rules’ in ‘mysql server’ Security Groups.
 
 *screenshot below*
 
-![Pic9](./images/Pic9.png)
+![Pic9](https://user-images.githubusercontent.com/93116204/156807654-ba1831c4-35e2-450c-9fc0-9d8898e9f288.png)
+
 
 In the database server I created the user, database, granted and flushed privileges.
 
 *screenshot below*
 
-![Pic11](./images/Pic11.png)
+![pic11](https://user-images.githubusercontent.com/93116204/156807698-a1a5af29-79eb-411f-86c1-3eb1c8bc51e0.png)
+
 
 
 To allow connections from remote hosts I  configured MySQL server  using the command below, I then Replaced ‘127.0.0.1’ to ‘0.0.0.0’ 
@@ -67,4 +72,6 @@ Show databases;
 ```
 
 *sreenshot below*
-![Pic12a](./images/Pic12a.png)
+
+ ![Pic12](https://user-images.githubusercontent.com/93116204/156807747-0d2a0b78-fa42-42fc-a1e5-87551ec6fb6e.png)
+
