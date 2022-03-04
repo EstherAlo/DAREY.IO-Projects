@@ -25,7 +25,7 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
 *Screenshot below*
  
-![Pic5a](./images/Pic5a.png)
+![pic5a](./images/pic5a.png)
 
 - Install Node.js
 
@@ -47,7 +47,7 @@ npm -v
 
 *Screenshot below*
 
-   ![Pic6a](./images/Pic6a.png)          
+   ![pic6a](./images/pic6a.png)          
 
 
 - Create a new directory for your To-Do project
@@ -58,7 +58,7 @@ mkdir Todo
 
 *Screenshot below*
 
-   ![Pic6b](./images/Pic6b.png)   
+   ![pic6b](./images/pic6b.png)   
 
 
 - Run the command below to verify that the Todo directory is created with ls command
@@ -81,7 +81,7 @@ npm init
 
 *Screenshot below*  
 
-![Pic7a](./images/Pic7a.png)
+![pic7a](./images/pic7a.png)
 
 
 - Run the command ls to confirm that you have package.json file created
@@ -119,7 +119,7 @@ vim index.js
 
 *Screenshot below*
 
-![Pic8a](./images/Pic8a.png)
+![pic8a](./images/pic8a.png)
 
 - Enter code below into index.js file:
 
@@ -157,17 +157,17 @@ node index.js
 
 - You should see Server running on port 5000 in your terminal
 
-![Pic8b](./images/Pic8b.png)
+![pic8b](./images/pic8b.png)
                                                        
 - Create an inbound rule to open TCP port 5000.
 
 *Screenshot below*
 
-![Pic1a](./images/Pic1a.png)
+![pic1a](./images/pic1a.png)
 
 - Open up your browser and try to access your server’s Public IP or Public DNS name followed by port 5000:
 
-![Pic2a](./images/Pic2a.png)
+![pic2a](./images/pic2a.png)
 
 
 # STEP 1.2: ROUTES
@@ -231,7 +231,7 @@ npm install mongoose
 ```
 *Screenshot below*
 
-![Pic13a](./images/Pic13a.png)
+![pic13a](./images/pic13a.png)
 
 - Create a new modes folder and then change directory into the newly created ‘models’ folder
 
@@ -391,7 +391,7 @@ Start your server
 
 *Screenshot below*
 
-![Pic14a](./images/Pic14a.png)
+![pic14a](./images/pic14a.png)
 
 In this project, we will use Postman to test our API.
 
@@ -401,18 +401,18 @@ In this project, we will use Postman to test our API.
 - Open Postman and create a POST request to the API http://<PublicIP-or-PublicDNS>:5000/api/todos. This request sends a new task to your To-Do list so the application can store it in the database.
 
 Note: make sure your set header key Content-Type as application/json
-![Pic22](./images/Pic22.png)
+![pic22](./images/pic22.png)
 
 *screenshot below*
 
-![Pic15a](./images/Pic15a.png)
+![pic15a](./images/pic15a.png)
 
 - Create a GET request to the API on http://<PublicIP-or-PublicDNS>:5000/api/todos. This request retrieves all existing records from out To-do application
 
 
 *screenshot below*
 
-![Pic16a](./images/Pic16a.png)
+![pic16a](./images/pic16a.png)
 
 # STEP 2: FRONTEND CREATION
 
@@ -426,10 +426,10 @@ npx create-react-app client
 
 *Screenshot below*
 
-![Pic20a](./images/Pic20a.png)
+![pic20a](./images/pic20a.png)
 
 
-### STEP 2.1 Running a React App
+## STEP 2.1 Running a React App
 
 Before testing the react app, there are some dependencies that need to be installed.
 
@@ -447,7 +447,7 @@ npm install nodemon --save-dev
 
 *Screenshot below*
 
-![Pic21a](./images/Pic21a.png)
+![pic21a](./images/pic21a.png)
 
  In Todo folder open the package.json file. Change the highlighted part of the below screenshot and replace with the code below
 
@@ -490,7 +490,7 @@ Move into the  Todo Directory and run the below command
 
 - Your app should open and start running on localhost:3000
 
-![Pic23a](./images/Pic23a.png)
+![pic23a](./images/pic23a.png)
 
 
 ## STEP 2.3: Creating React Components
@@ -605,7 +605,7 @@ npm install axios
 
 *Screenshot below*
 
-![Pic23b](./images/Pic23b.png)
+![pic23b](./images/pic23b.png)
 
 
 Go to ‘components’ directory
@@ -928,4 +928,4 @@ Assuming no errors when saving all these files, our To-Do app should be ready an
 
 *Screenshot below*
 
-![Pic25a](./images/Pic25a.png)
+![pic25a](./images/pic25a.png)
