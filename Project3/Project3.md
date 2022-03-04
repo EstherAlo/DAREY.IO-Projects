@@ -391,56 +391,69 @@ Start your server
  node index.js
 ```
 
-ENDED HERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
 *Screenshot below*
 
 ![Pic14a](./images/Pic14a.png)
 
 In this project, we will use Postman to test our API.
-Click Install Postman to download and install postman on your machine.
 
-Opened Postman, created a POST request to the API http://<PublicIP-or-PublicDNS>:5000/api/todos. This request sends a new task to my To-Do list so the application could store it in the database.
+- Install Postman to download and install postman on your machine.
+- You will test all the API endpoints and make sure they are working.
+
+- Open Postman and create a POST request to the API http://<PublicIP-or-PublicDNS>:5000/api/todos. This request sends a new task to your To-Do list so the application can store it in the database.
+
+Note: make sure your set header key Content-Type as application/json
+![Pic22](./images/Pic22.png)
 
 *screenshot below*
 
 ![Pic15a](./images/Pic15a.png)
 
-Created a GET request to the API on http://<PublicIP-or-PublicDNS>:5000/api/todos. This request retrieves all existing records from out To-do application
+- Create a GET request to the API on http://<PublicIP-or-PublicDNS>:5000/api/todos. This request retrieves all existing records from out To-do application
+
 
 *screenshot below*
 
 ![Pic16a](./images/Pic16a.png)
 
-## FRONTEND CREATION
+## sTEP 2: FRONTEND CREATION
 
 Aim is to create a user interface for a Web client (browser) to interact with the application via API. To start out with the frontend of the To-do app, I used the create-react-app command to scaffold the app.
 
-The command below was run In the same root directory as the backend code, which is the Todo directory. This will create a new folder in the Todo directory called client, where all the react code will be placed.
+- In the same root directory as your backend code, which is the Todo directory run the below code. This will create a new folder in your Todo directory called client, where you will add all the react code.
 
 ```
 npx create-react-app client
 ```
+
 *Screenshot below*
 
 ![Pic20a](./images/Pic20a.png)
 
 
-### Running a React App
+### STEP 2.1 Running a React App
 
-Before testing the react app, there are some dependencies that need to be installed. concurrently is used to run more than one command simultaneously from the same terminal window. nodemon is used to run and monitor the server
+Before testing the react app, there are some dependencies that need to be installed.
 
-Install concurrently: npm install concurrently --save-dev
+concurrently is used to run more than one command simultaneously from the same terminal window. 
 
-Install nodemon: npm install nodemon --save-dev
+```
+npm install concurrently --save-dev
+```
+
+- Intall nodemon, this is used to run and monitor the server. If there is any change in the server code, nodemon will restart it automatically and load the new changes.
+
+```
+npm install nodemon --save-dev
+```
 
 *Screenshot below*
 
 ![Pic21a](./images/Pic21a.png)
 
- 
-code below was used to partly replace code in the package.json file 
+ In Todo folder open the package.json file. Change the highlighted part of the below screenshot and replace with the code below
 
- 
+
 ```
 "scripts": {
 "start": "node index.js",
@@ -450,38 +463,80 @@ code below was used to partly replace code in the package.json file
 
 ```
 
-### Configure Proxy in package.json
+### STEP 2.2: Configure Proxy in package.json
+
+- Change directory to ‘client’
+
+```
+cd
+```
+
+- Open the package.json file 
+
+```
+vi package.json
+```
+
+- Add the key value pair in the package.json file
+
+ "proxy": "http://localhost:5000"
 
 
-Opened the package.json file in client directory and added the key value pair in the package.json file: "proxy": "http://localhost:5000"
+ The whole purpose of adding the proxy configuration above is to make it possible to access the application directly from the browser by simply calling the server url like http://localhost:5000 rather than always including the entire path like http://localhost:5000/api/todos
 
-Entered following command in Todo Directory: npm run dev
+Move into the  Todo Directory and run the below command
 
-*Screenshot below*
+```
+ npm run dev
+```
 
-
-### Creating React Components
-
- For the Todo app, there will be two stateful components and one stateless component
+- Your app should open and start running on localhost:3000
 
 ![Pic23a](./images/Pic23a.png)
 
- Created components folder insde the src folder and made three files:
+### STEP 2.3: Creating React Components
+
+ One of the advantages of react is that it makes use of components, which are reusable and also makes code modular. For our Todo app, there will be two stateful components and one stateless component.
+
+- From your Todo directory run
+
+```
+cd client
+```
+
+- move to the src directory
+
+```
+cd src
+```
+
+- Inside your src folder create another folder called components
+
+```
+mkdir components
+```
+
+- Move into the components directory with
+
+```
+cd components
+```
+
+- Inside ‘components’ directory create three files Input.js, ListTodo.js and Todo.js.
 
   ```                                                   
   touch Input.js ListTodo.js Todo.js                                          
   ```                                                 
-                                                            
-                                                            
- Inside the ‘components’ directory three files were created:
- 
+
+Open Input.js file
+
 ```
-touch Input.js ListTodo.js Todo.js                                   
- ```
+vi Input.js                                                           
+```
 
- Added code below into Input.js:
+Copy and paste the following
 
- ```
+```
  import React, { Component } from 'react';
 import axios from 'axios';
 
@@ -529,19 +584,47 @@ return (
 export default Input
 ```
 
-To make use of Axios, which is a Promise based HTTP client for the browser and node.js, I npm install axios:
+To make use of Axios, which is a Promise based HTTP client for the browser and node.js, you need to cd into your client from your terminal and run yarn add axios or npm install axios.
+
+- Move to the src folder
+
+```
+cd ..
+```
+
+Move to clients folder
+
+```
+cd ..
+```
+
+Install Axios
+
+```
+npm install axios
+```
 
 *Screenshot below*
 
 ![Pic23b](./images/Pic23b.png)
 
-## FRONTEND CREATION
 
-Entered code below into ListTodo.js which is in the src folder:
-
-import React from 'react';
+Go to ‘components’ directory
 
 ```
+cd src/components
+```
+- After that open your ListTodo.js
+
+```
+vi ListTodo.js
+```
+
+- Entered code below into ListTodo.js which is in the src folder:
+
+```
+import React from 'react';
+
 const ListTodo = ({ todos, deleteTodo }) => {
 
 return (
@@ -626,14 +709,83 @@ let { todos } = this.state;
 }
 
 export default Todo;
+```
 
-In the src directory I opened added the code below into Apps.js:
+Then in your Todo.js file you write the following code:
+
+```
+import React, {Component} from 'react';
+import axios from 'axios';
+
+import Input from './Input';
+import ListTodo from './ListTodo';
+
+class Todo extends Component {
+
+state = {
+todos: []
+}
+
+componentDidMount(){
+this.getTodos();
+}
+
+getTodos = () => {
+axios.get('/api/todos')
+.then(res => {
+if(res.data){
+this.setState({
+todos: res.data
+})
+}
+})
+.catch(err => console.log(err))
+}
+
+deleteTodo = (id) => {
+
+    axios.delete(`/api/todos/${id}`)
+      .then(res => {
+        if(res.data){
+          this.getTodos()
+        }
+      })
+      .catch(err => console.log(err))
+
+}
+
+render() {
+let { todos } = this.state;
+
+    return(
+      <div>
+        <h1>My Todo(s)</h1>
+        <Input getTodos={this.getTodos}/>
+        <ListTodo todos={todos} deleteTodo={this.deleteTodo}/>
+      </div>
+    )
+
+}
+}
+
+export default Todo;
+```
+
+- In the src directory I opened added the code below into Apps.js:
+
+```
+cd ..
+
+vi App.js
+```
+
+- We need to make little adjustment to our react code. Delete the logo and adjust our App.js to look like this.
 
 ```
  
 imported React from 'react';
 
- ```
+ 
 import Todo from './components/Todo';
 import './App.css';
 
@@ -648,7 +800,7 @@ return (
 export default App;
 ```
 
-Added code below into App.css:
+AIn the src directory open the App.css Then paste the following code into App.css:
 
 ```
 .App {
@@ -741,7 +893,7 @@ margin-top: 0;
 
 ```
 
-In the src directory I opened and added the code below into index.css:
+- In the src directory open the index.css and Copy and paste the code below:
 
 ```
 body {
@@ -765,11 +917,15 @@ monospace;
 ```
                                                 
                                                 
-I went into the Todo directory and run command: npm run dev
-                                                
+- Go into  the Todo directory and run command npm run dev
+ ```                                               
+cd ../..
 
-                                                 
-The To-Do app is ready and fully functional. Functionality: creating a task, deleting a task and viewing all your tasks.
+npm run dev
+```                                               
+- The To-Do app is ready and fully functional. Functionality: creating a task, deleting a task and viewing all your tasks.
+
+Assuming no errors when saving all these files, our To-Do app should be ready and fully functional with the functionality discussed earlier: creating a task, deleting a task and viewing all your tasks.
 
 *Screenshot below*
 
