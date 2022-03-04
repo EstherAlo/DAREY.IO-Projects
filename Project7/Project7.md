@@ -442,4 +442,6 @@ mysql -h <databse-private-ip> -u <db-username> -p tooling < tooling-db.sql
 
 *screenshot below*
 
-![pic16a](./images/pic16a.png)
+![pic16](https://user-images.githubusercontent.com/93116204/156808248-77d0aec0-c290-4426-a2f2-e19523750ea7.png)
+
+
