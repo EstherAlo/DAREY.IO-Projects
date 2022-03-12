@@ -175,6 +175,16 @@ resource "aws_subnet" "public" {
 }
 ```
 
+
+![pic11](./images/pic11.png)
+
+- the first section of the count value points to the tfvars, to see how many subnets are needed and check if its null. 
+
+- If it is null use the number of availability zones in that region.
+
+- If its is not null use the preferred amount stated in  .tfvar
+
+
 The essesnce of creating all this files is to ensure that we do not hard code values which give room for re-usability.
 
 - The variables.tf consist of all variable declarations in the main.tf file.
