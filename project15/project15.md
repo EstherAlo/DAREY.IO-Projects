@@ -29,7 +29,7 @@ Click Save
 * Create an Elastic IP address that will be used by the NAT-Gateway
 * Create a NAT Gateway for your private subnets (create one in each public subnet)and attach the Elastic IP created 
 
-![pic5](./images/pic5.png)
+
 
 * Add a new route to your private route table with destination as 0.0.0.0/0 and target as the NAT Gateway you created
 ![pic6](./images/pic6.png)
