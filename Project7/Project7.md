@@ -112,6 +112,7 @@ sudo vgdisplay -v #view complete setup - VG, PV, and LV
 
 sudo lsblk 
 ```
+
 *Screenshot below*
 
 ![pic6d](./images/pic6d.png)
@@ -142,7 +143,7 @@ sudo mount /dev/webdata-vg/apps-lv /mnt/apps
 sudo mount /dev/webdata-vg/logs-lv /mnt/logs
 
 sudo mount /dev/webdata-vg/opt-lv /mnt/opt
-
+```
 
 - Confirm mount 
 
@@ -240,6 +241,7 @@ rpcinfo -p | grep nfs
 ![pic10a](./images/pic10a.png)
 
 - In order for NFS server to be accessible from the client, open the following ports and allow access from the web subcidrs: TCP 111, UDP 111, UDP 2049
+- 
 
  ## CONFIGURE THE DATABASE SERVER
 
@@ -291,6 +293,7 @@ sudo systemctl restart mysql
 
 
 - Open mysql/aurora in the security group 
+- 
 
 ## PREPARE THE WEBSERVER 
 
@@ -303,12 +306,12 @@ During this process you will do the following:
 - Launch 3 new EC2 instance with RHEL 8 Operating System, update the respositries and install NFS. 
 
 
-```
+ ```
  sudo yum install nfs-utils nfs4-acl-tools -y
  sudo systemctl start nfs-server
  sudo systemctl enable nfs-server
  sudo systemctl status nfs-server 
-```
+ ```
 
 
 - Create www directory  
@@ -412,9 +415,9 @@ sudo mkdir /var/log/httpd
 
 
 ```
- sudo mount -t nfs -o rw,nosuid <NFS Private IP address>:/mnt/logs /var/log/httpd
-
+sudo mount -t nfs -o rw,nosuid <NFS Private IP address>:/mnt/logs /var/log/httpd
 ```
+
 
 
 - To make sure changes persist after reboot run I update the fstab 
@@ -424,14 +427,14 @@ sudo vi /etc/fstab
 
 #Update with the below
 
- 172.31.30.141:/mnt/logs /var/log/httpd nfs defaults 0 0
+72.31.30.141:/mnt/logs /var/log/httpd nfs defaults 0 0
 ```
 
 - Reload the system
 
 
 ```
- sudo systemctl daemon-reload 
+sudo systemctl daemon-reload 
 ```
 
 
@@ -446,9 +449,9 @@ sudo cp -R /var/log/httpd.bak/. /var/log/httpd
 - Install git and clone tooling source code:
 
 ```
- sudo yum install git
+sudo yum install git
 
- git clone https://github.com/EstherAlo/tooling.git
+git clone https://github.com/EstherAlo/tooling.git
 ```
 
 - Deploy The tooling website’s code was on to the Webserver and the html folder from the repository unto /var/www/html
