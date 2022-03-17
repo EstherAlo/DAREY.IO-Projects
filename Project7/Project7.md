@@ -1,6 +1,7 @@
-# __DEVOPS TOOLING WEBSITE SOLUTION__
+## __DEVOPS TOOLING WEBSITE SOLUTION__
+The task of the project is to implement a tooling website solution which makes access to Devops tools within the corporate infrastructure easily accessible. 
 
-In this project I will implement a solution that consists of following components:
+The solution consists of the following components:
 
 1. Infrastructure: AWS
 1. Webserver Linux: Red Hat Enterprise Linux 8
@@ -11,47 +12,54 @@ In this project I will implement a solution that consists of following component
 
 - The diagram below shows 3 stateless Web Servers sharing a common database and also accessing the same files using Network File System as a shared filed storage, which can also be used for back up in case a server crashes. As a result the content of the server is secured and safe.
 
-![pic17](./images/pic17.png)
-# PREPARE NFS SERVER
+#insert image here
 
-- Launched an EC2 instance with RHEL that will serve as "NFS Server" and attached three volumes with the availability zone same as the instance type. To inspect what block devices are attached to the server I ran this command: lsblk 
+## PREPARE THE NFS SERVER
 
+- Launch an EC2 instance with RHEL that will serve as "NFS Server" 
+- Attach three volumes with the the same availability 
+- Inspect what block devices are attached to the server 
+
+```
+lsblk 
+```
 
 *screenshot below*
 
 ![pic1a](./images/pic1a.png)
 
 
-
-
-- I used gdisk utility to create a single partition on each of the 3 disks  
+- Use gdisk utility to create a single partition on each of the 3 disks  
 
 *Screenshot below*
 
+```
  sudo gdisk /dev/xvdf
 
  sudo gdisk /dev/xvdg
 
  sudo gdisk /dev/xvdh
-
+```
  
-
-
 ![pic3a](./images/pic3a.png)
 
-- To view the newly configured partition on each of the 3 disks the lsblk command:
+- View the newly configured partition on each of the 3 disks:
+
+```
+lsblk command:
+```
 
 *Screenshot below*
 
 ![pic4a](./images/pic4a.png)
 
-- I ran the following command to install lvm2
+- Install lvm2
 
 ```
 sudo yum install lvm2
 ```
 
-- Used pvcreate utility to mark each of 3 disks as physical volumes (PVs) to be used by LVM and verified that the physical volumes had been created successfully
+- Use the pvcreate utility to mark each of 3 disks as physical volumes (PVs) to be used by LVM:
 
 ```
 sudo pvcreate /dev/xvdf1
@@ -63,13 +71,13 @@ sudo pvcreate /dev/xvdh1
 
 ![pic6a](./images/pic6a.png)
 
-- To add all 3 PVs to a volume group (VG) I run the following command:
+- Add all 3 PVs to a volume group:
 
 ```
 sudo vgcreate webdata-vg /dev/xvdh1 /dev/xvdg1 /dev/xvdf1
 ```
                                                                 
-- Verification that the VG has been created successfully by running:
+- Verify that the VG has been created successfully:
 
 ```
 sudo vgs
@@ -79,7 +87,7 @@ sudo vgs
 
 ![pic6b](./images/pic6b.png)
 
-- I created 3 logical volumes. apps-lv, and logs-lv. apps-lv will be used to store data for the Website while, logs-lv will be used to store data for logs
+- Create 3 logical volumes. apps-lv, and logs-lv. apps-lv will be used to store data for the Website while, logs-lv will be used to store data for logs
 
 ```
 sudo lvcreate -n apps-lv -L 9G webdata-vg
@@ -87,7 +95,7 @@ sudo lvcreate -n logs-lv -L 9G webdata-vg
 sudo lvcreate -n opt-lv -L 9G webdata-vg
 ```
 
-- I verfied that the Logical Volume had been created successfully by running: 
+- Verify that the Logical Volume had been created successfully:
 
 ```
 sudo lvs
@@ -97,7 +105,7 @@ sudo lvs
 
 ![pic6c](./images/pic6c.png)
 
-- To confirm the whole set up I ran the following commands:
+- Confirm the whole set:
 
 ```
 sudo vgdisplay -v #view complete setup - VG, PV, and LV
@@ -108,7 +116,7 @@ sudo lsblk
 
 ![pic6d](./images/pic6d.png)
 
-- I used mkfs.xfs to format the logical volumes with xfs filesystem with the commands below: 
+- Use mkfs.xfs to format the logical volumes with xfs filesystem with the commands below: 
 
 ```
 sudo mkfs -t xfs /dev/webdata-vg/apps-lv
@@ -126,8 +134,7 @@ sudo mkdir /mnt/apps
 sudo mkdir /mnt/opt 
 ```
 
-
-- mounted logical volumes:
+- mount logical volumes:
 
 ```
 sudo mount /dev/webdata-vg/apps-lv /mnt/apps
@@ -136,8 +143,10 @@ sudo mount /dev/webdata-vg/logs-lv /mnt/logs
 
 sudo mount /dev/webdata-vg/opt-lv /mnt/opt
 
-#for confirmation
 
+- Confirm mount 
+
+```
 df -h
 ```
 
@@ -147,14 +156,15 @@ df -h
 
 ![pic9b](./images/pic9b.png)
 
-- Retrieved UUID of the devices and updated the ftsab file:
+- Retrieve the UUID of the devices and updated the ftsab file:
 
 ```
 sudo blkid
 
 sudo vi /etc/fstab
 ```
-- To confirm the mount was okay and reload:
+
+- Confirm if the mount is okay and then reload:
 
 ```
 sudo mount -a
@@ -162,7 +172,7 @@ sudo mount -a
 sudo systemctl daemon-reload
 ```
 
-- To install, configure the NFS to start on reboot and confirm that it is running I ran the commands below:
+- To install, configure the NFS to start on reboot and confirm that it is running:
 
 ```
 sudo yum -y update
@@ -172,7 +182,7 @@ sudo systemctl enable nfs-server.service
 sudo systemctl status nfs-server.service
 ```
 
-- Permission was updated to allow our Web servers to read, write and execute files on NFS by running the following commands:
+- Set up permission that will allow the Web servers to read, write and execute file on the NFS:
 
 ```
 sudo chown -R nobody: /mnt/apps
@@ -186,22 +196,30 @@ sudo chmod -R 777 /mnt/opt
 sudo systemctl restart nfs-server.service
 ```
 
-- To Configure access to NFS for clients within the same subnet I opened the exports file located in the etc directory and the following commands were entered:
+- To Configure access to NFS for clients within the same subnet get the subnet cidr for NFS on the EC2.
 
+
+Open the exports file located in the etc directory 
 
 ```
-#open exports file
 sudo vi /etc/exports
+```
 
+- enter the below 
 
+```
 /mnt/apps <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash)
 /mnt/logs <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash)
 /mnt/opt <Subnet-CIDR>(rw,sync,no_all_squash,no_root_squash)
+```
 
-#export
+- Run the below command 
+
+```
 sudo exportfs -arv
 ```
-- I ran the command below to check  which port is used by NFS and open it within the Security Groups:
+
+- Check which port is used by NFS and open it within the Security Groups:
 
 ```
 rpcinfo -p | grep nfs
@@ -211,11 +229,11 @@ rpcinfo -p | grep nfs
 
 ![pic10a](./images/pic10a.png)
 
-- In order for NFS server to be accessible from the client, I open the following ports and allowed access from the web subcidrs: TCP 111, UDP 111, UDP 2049
+- In order for NFS server to be accessible from the client, open the following ports and allow access from the web subcidrs: TCP 111, UDP 111, UDP 2049
 
- # CONFIGURE THE DATABASE SERVER
+ ## CONFIGURE THE DATABASE SERVER
 
- - The RHEL repositries were updated and Mysql was installed.
+ - Install mysql-server
 
 ```
 sudo apt install mysql-server
@@ -229,9 +247,7 @@ sudo systemctl status mysql
 sudo mysql_secure_installation
 ```
 
-
-  I then created a database called tooling, a database user (webaccess) and granted permission to webaccess user on tooling database to do anything only from the webservers subnet cidr. 
-
+- I then created a database called tooling, a database user (webaccess) and grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr. 
 
 ```
  CREATE USER 'webaccess'@'172.31.16.0/20' IDENTIFIED BY 'password';
@@ -246,9 +262,11 @@ sudo mysql_secure_installation
  ![pic12a](./images/pic12a.png)
 
 
-- Set the bind address 0000 in mysql.cnf
+- Set the bind address to 0000 in mysql.cnf
 
+```
 sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf 
+```
 
 - restart mysql 
 
@@ -258,15 +276,15 @@ sudo systemctl restart mysql
 
 - Open mysql/aurora in the security group 
 
-## Prepare the Web Servers
+## PREPARE THE WEBSERVER 
 
-During this process I did the following:
+During this process you will do the following: 
 
-1. Configured NFS client on 3 web servers
-1. Deployed a Tooling application to my Web Servers into a shared NFS folder
-1. Configured the Web Servers to work with a single MySQL database
+1. Configure NFS client on 3 web servers
+1. Deploy a Tooling application to your Web Servers into a shared NFS folder
+1. Configur the Web Servers to work with a single MySQL database
 
-- I launched 3 new EC2 instance with RHEL 8 Operating System, updated the respositries and installed NFS. 
+- Launch 3 new EC2 instance with RHEL 8 Operating System, update the respositries and install NFS. 
 
 ```
  sudo yum install nfs-utils nfs4-acl-tools -y
@@ -275,36 +293,50 @@ During this process I did the following:
  sudo systemctl status nfs-server 
 ```
 
-- A www directory was created and the NFS server export for apps was mounted on /var/www using the below commands:
+- Create www directory  
 
 ```
-#create www directory
 sudo mkdir /var/www
+```
 
-#mount nfs server export
+- Mount /var/www: 
+
+```
 sudo mount -t nfs -o rw,nosuid <NFS-Server-Private-IP-Address>:/mnt/apps /var/www
 ```
 
-I verified NFS was mounted succesfully:
+Verify that NFS was mounted succesfully:
+
+```
+df -h 
+```
 
 *screenshot below*
 
 ![pic13a](./images/pic13a.png)
 
-- To ensure that the changes will will persist on Web Server after reboot I entered the below command into the ftsab file which is located in the ect directory and restarted the server:
+- To ensure that the changes will persist on Web Server after reboot open the fstab file:
 
 ```
 sudo vi /etc/fstab
+```
 
+- Enter in the below and save:
+
+```
 <NFS-Server-Private-IP-Address>:/mnt/apps /var/www nfs defaults 0 0
 ```
+
 - Reloaded server with below command:
 
 ```
 sudo systemctl daemon-reload
 ```
 
-- The following commands were entered to install Remi’s repository, Apache and PHP:
+- Repeat the steps above on the 2 Web Servers
+
+
+- Install Remi’s repository, Apache and PHP:
 
 ```
 sudo yum install httpd -y
@@ -326,7 +358,7 @@ sudo systemctl enable php-fpm
 sudo setsebool -P httpd_execmem 1
 ```
 
-- To verify whether NFS was mounted correctly I created a new file called test.md from my web server and checked whether it was visible within my NFS server:
+- To verify whether NFS was mounted correctly I creat a new file called test.md from your web server and check whether it is visible within your NFS server:
 
 ```
 sudo touch /var/www/test.md
@@ -337,7 +369,7 @@ sudo touch /var/www/test.md
 ![pic10b](./images/pic10b.png)
 
 
-- The log file for Apache was located on the Web Server. The folder contained content and once mounted this will be deleted. In order to avoid this I moved the content  and created a new httpd with the below command:
+- The log file for Apache is located on the Web Server. The folder contains content and once mounted this will be deleted. In order to avoid this move the content  and create a new httpd with the below command:
 
 ```
 sudo mv /var/log/httpd /var/log/httpd.bak
@@ -345,14 +377,14 @@ sudo mv /var/log/httpd /var/log/httpd.bak
 sudo mkdir /var/log/httpd
 ```
 
- - mounted to the NFS server’s export for logs to var/log/httpd, updated the fstab to ensure changes will persist on web server after reboot and reloaded.
+ - mount to the NFS server’s export for logs to var/log/httpd, updated the fstab to ensure changes will persist on web server after reboot and reloaded.
 
 ```
  sudo mount -t nfs -o rw,nosuid <NFS Private IP address>:/mnt/logs /var/log/httpd
 
 ```
 
-To make sure changes persist after reboot run I updated the fstab 
+- To make sure changes persist after reboot run I update the fstab 
 
 ```
 sudo vi /etc/fstab
@@ -362,19 +394,19 @@ sudo vi /etc/fstab
  172.31.30.141:/mnt/logs /var/log/httpd nfs defaults 0 0
 ```
 
-- reloaded the system
+- Reload the system
 
 ```
  sudo systemctl daemon-reload 
 ```
 
-- Copied the content of httpd.bak into httpd folder since mount has already taken place 
+- Copy the content of httpd.bak into httpd folder since mount has already taken place 
 
 ```
 sudo cp -R /var/log/httpd.bak/. /var/log/httpd
 ```
 
-- Git was installed and tooling source code from Darey.io was forked into my github account. 
+- Install git and clone tooling source code:
 
 ```
  sudo yum install git
@@ -382,13 +414,13 @@ sudo cp -R /var/log/httpd.bak/. /var/log/httpd
  git clone https://github.com/EstherAlo/tooling.git
 ```
 
-- The tooling website’s code was deployed to the Webserver and the html folder from the repository was also deployed to /var/www/html
+- Deploy The tooling website’s code was on to the Webserver and the html folder from the repository unto /var/www/html
 
 ```
 sudo cp -R ~/tooling/html/. /var/www/html
 ```
 
-Disabled Apache default page and restarted httpd
+Disable Apache default page and restarte httpd
 
 ```
 sudo mv /etc/httpd/conf.d/welcome.conf /etc/httpd/conf.d/welcome.conf_backup
@@ -414,13 +446,13 @@ sudo vi /etc/sysconfig/selinux
 
 ![pic14a](./images/pic14a.png)
 
-Installed mysql client
+Installe mysql client
 
 ```
 sudo yum install mysql -y
 ```
 
-- Updated the website’s configuration with tooling script to connect to the database /var/www/html/functions.php file
+- Update the website’s configuration with tooling script to connect to the database /var/www/html/functions.php file
 
 ```
 sudo vi /var/www/html/functions.php file
@@ -438,7 +470,7 @@ sudo vi /var/www/html/functions.php file
 mysql -h <databse-private-ip> -u <db-username> -p tooling < tooling-db.sql
 ```
 
-- The website below was generated using the public ip address of all webservers created and I was able to login!
+- access website with the the  public ip address of all webservers and login
 
 *screenshot below*
 
