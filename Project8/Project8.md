@@ -1,23 +1,32 @@
-# __CONFIGURING APACHE AS A LOAD BALANCER__
+##__Load balancer solution with Apache__
 
+
+- In project 7, we had 3 Web Servers with each having its own public ip address.
+- A client will have to access the site using different URLs , which is not a nice user experience. In order have a single point of access with a single public IP address/name, a Load Balancer can be used.
 - A Load Balancer (LB) distributes clients’ requests among underlying Web Servers and makes sure that the load is distributed in an optimal way. 
-- In this project I will enhance my Tooling Website solution by adding a Load Balancer to distribute traffic between Web Servers and allow users to access my website using a single URL.
+
+
 
 ![pic1](./images/pic1.png)
 
-Prior to this project I had the following servers installed and configured within:
+- The task of this project is to enhance out Tooling website solution by adding a Load Balancer to distribute traffic between Web Servers and allow users to access the website using a single URL.
+
+The following resources were created in project 7:
 
 1. Two RHEL8 Web Servers
 1. One MySQL DB Server (based on Ubuntu 20.04)
 1. One RHEL8 NFS server
 
+*insert image*
+
 
 ## Configure Apache As A Load Balancer
 
-- I created an ubuntu server and opened port 80 by creating an Inbound Rule in Security Group
+- Spin up an ubuntu server 
+- Open port 80 by creating an Inbound Rule in Security Group
 
 
-- The Apache Load Balancer was installed and configured to point traffic coming to LB to both Web Servers with the below commands:
+- Install Apache Load Balancer and configure it to point traffic coming to LB to both Web Servers:
 
 ```
 #Install apache2
@@ -37,7 +46,17 @@ sudo a2enmod lbmethod_bytraffic
 sudo systemctl restart apache2
 ```
 
-- The Below configuraton was entered into/etc/apache2/sites-available/000-default.conf. The command below allows the apache server to map the ip addresses of the web server to this load balancer.
+- Ensure Apache2 is up and running 
+
+```
+sudo systemctl status apache2
+```
+
+
+- The Below configuraton was entered into/etc/apache2/sites-available/000-default.conf.
+
+- The command below allows the apache server to map the ip addresses of the web server to this load balancer.
+
 
 ```
 sudo vi /etc/apache2/sites-available/000-default.conf
@@ -54,12 +73,20 @@ sudo vi /etc/apache2/sites-available/000-default.conf
         ProxyPassReverse / balancer://mycluster/
 
 ```
-*screemshot below*
+
+*screenshot below*
 ![pic1](./images/pic2.png)
 
-- The bytraffic balancing method will distribute incoming load between the Web Servers according to current traffic load and the I can control in which proportion the traffic must be distributed by loadfactor parameter.
 
-- Verified that my configuration works by entering the LB public ip address into browser 
+- Restart apache2 and confirm status 
+
+```
+sudo systemctl restart apache2, sudo systemctl status apache2.
+```
+
+- Verify that the configuration works by entering the LB public ip address into browser
+
+- Unmount /var/log/httpd/ from the Web Servers to the NFS Server sudo umount -f /var/log/httpd and make sure the Web Server has its own log directory
 
 - Opened two terminals for both Web Servers and run following command: 
 
@@ -67,8 +94,7 @@ sudo vi /etc/apache2/sites-available/000-default.conf
 sudo tail -f /var/log/httpd/access_log
 ```
 
-
-- Refreshed my LB browser several times to make sure that both servers receive HTTP GET requests from the LB – new records appeared in each server’s log file. 
+- Refresh youe LB browser several times to make sure that both servers receive HTTP GET requests from the LB 
 
 The number of requests to each server were approximately the same since I set loadfactor to the same value for both servers – this means that traffic will be disctributed evenly between them.
 
