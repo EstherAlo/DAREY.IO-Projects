@@ -1189,3 +1189,4 @@ master-password = "password"
 
 Run terraform plan to check error and run terraform apply -auto-approve to install all necessary rsources.
 
+![pic1](./images/pic1.png)
