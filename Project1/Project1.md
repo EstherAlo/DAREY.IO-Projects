@@ -50,7 +50,7 @@ sudo apt install mysql-server
 - Run a security script that comes pre-installed with MySQL: 
 
 ```
-sudo mysql secure installation 
+sudo mysql_secure_installation 
 ```                                                           
                                                                      
 - Log into MySQL to test connection: 
