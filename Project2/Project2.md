@@ -52,7 +52,7 @@ M stands for MySQL: MySQL is a popular relational database management system use
 - Install  MySql: 
 
 ```                                
-sudo apt mysql-server                                   
+sudo apt install mysql-server                                   
 ```     
 
  ![P2A (5)](https://user-images.githubusercontent.com/93116204/139405644-5b17265f-078c-40e0-956a-80f0b917936d.png)
@@ -175,7 +175,7 @@ sudo unlink /etc/nginx/sites-enabled/default
 - In order to apply the changes I reloaded Nginx using command:
 
 ```
-sudo systemctl reload nginx]
+sudo systemctl reload nginx
 ```
                                                 
                                                 
@@ -212,7 +212,7 @@ phpinfo();
 
 
                                                                                                                
-- Remov the file created as it contains sensitive information about the PHP environment and the Ubuntu server with command below: 
+- Remove the file created as it contains sensitive information about the PHP environment and the Ubuntu server with command below: 
 
 ```
 sudo rm /var/www/your_domain/info.php
@@ -230,7 +230,9 @@ sudo mysql
 
 ```
 CREATE DATABASE `example_database`;
-```                                                                                                                                                                                                        
+```                                                                                                                                                                      
+CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+
 - Give user permission over the example_database database:
 
 ```
@@ -240,7 +242,7 @@ GRANT ALL ON example_database.* TO 'example_user'@'%';
 - To to test if the new user has the proper permissions to log into the MySQL console again, this time use the custom user credentials:
 
 ```
--u example_user -p
+mysql -u example_user -p
 ```                                                                                                                                           
 
 *Screenshot below*
@@ -262,8 +264,7 @@ SHOW DATABASES;
 - Create a test table named todo_list From the MySQL console with statement:
 
 ```
-CREATE TABLE example_database.todo_list (item_id INT AUTO_INCREMENT,
-content VARCHAR(255),PRIMARY KEY(item_id));
+CREATE TABLE example_database.todo_list (item_id INT AUTO_INCREMENT, content VARCHAR(255),PRIMARY KEY(item_id));
 ```
 
 - Insert a few rows of content in the test table. You might want to repeat the next command a few times, using different VALUES:
