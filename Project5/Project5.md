@@ -79,7 +79,7 @@ sudo systemctl restart mysql
 
 ## Client server
 
-- On mysql server Linux Client I update the server and install MySQL Client with command: 
+- On mysql server Linux Client update the server and install MySQL Client with command: 
 
 ```
 sudo apt update -y

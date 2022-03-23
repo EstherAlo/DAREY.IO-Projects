@@ -63,12 +63,10 @@ lsblk
 - Install lvm2 package
 
 ```
- sudo yum install lvm2
+ sudo apt install lvm2
 ```
 
 - Use the pvcreate utility to mark each of 3 disks as physical volumes 
-
-- Verify physical volume has been created successfully running 
 
 ```
 sudo pvcreate /dev/xvdf1
@@ -80,7 +78,9 @@ sudo pvcreate /dev/xvdh1
 
 ![pic5a](./images/pic5a.png)
 
-- Add all 3 PVs to a volume group (VG) I run the following command:
+- sudo pvs to confirm 
+
+- Add all 3 PVs to a volume group:
 
 ```
 sudo vgcreate webdata-vg /dev/xvdh1 /dev/xvdg1 /dev/xvdf1
@@ -96,14 +96,14 @@ sudo vgs
 
 ![pic5b](./images/pic5b.png)
 
-Create  2 logical volumes. apps-lv, and logs-lv. apps-lv will be used to store data for the Website while, logs-lv will be used to store data for logs
+Create  2 logical volumes. apps-lv, and logs-lv. apps-lv. This will be used to store data for the Website while, logs-lv will be used to store data for logs
 
 ```
 sudo lvcreate -n apps-lv -L 14G webdata-vg
 sudo lvcreate -n logs-lv -L 14G webdata-vg
 ```
 
-Verify that the Logical Volume had been created successfully by running: 
+Verify that the Logical Volume has been created successfully: 
 
 ```
 sudo lvs
@@ -146,7 +146,7 @@ sudo mount /dev/webdata-vg/apps-lv /var/www/html/
 sudo mkdir -p /home/recovery/logs
 ```
 
-- Before mounting the fie system back up all the files in the log directory /var/log into /home/recovery/logs by running this command:
+- Before mounting the file system back up all the files in the log directory /var/log into /home/recovery/logs by running this command:
 
 ```
 sudo rsync -av /var/log/. /home/recovery/logs/
@@ -171,7 +171,7 @@ Update the /etc/fstab file with the UUID, this ensures the mount configuration w
 - Use the below command to retrieve this and then update the fstab file rememebering to remove the leading and ending quotes.
 
 ```
-sudo blk id
+sudo blkid
 ```
 
 *screenshot below*
@@ -204,7 +204,7 @@ df -h
 ### Preparing the Database Server
 
 - Launch a second RedHat EC2 instance that will be the ‘DB Server’
-- Repeat the same steps as the Web Server, but instead of apps-lv  create db-lv and mounte it to /db directory instead of /var/www/html/
+- Repeat the same steps as the Web Server, but instead of apps-lv, create db-lv and mount it to /db directory instead of /var/www/html/
 
 
 *Screenshot below*
@@ -257,14 +257,27 @@ sudo systemctl restart httpd
 - Download wordpress and copy wordpress to var/www/html:
 
 ```
-  mkdir wordpress
-  cd   wordpress
+  sudo mkdir wordpress
+  cd wordpress
   sudo wget http://wordpress.org/latest.tar.gz
   sudo tar xzvf latest.tar.gz
   sudo rm -rf latest.tar.gz
-  cp wordpress/wp-config-sample.php wordpress/wp-config.php
-  cp -R wordpress /var/www/html/
-  ```
+  sudo cp wordpress/wp-config-sample.php wordpress/wp-config.php
+```
+
+
+cd into wordpress folders 
+
+```
+cd wordpress/
+```
+
+- Copy the content inside wordpress into /var/www/html/
+
+```
+sudo cp -R wordpress/. /var/www/html/
+```
+
 
 Configure SELinux Policies by running the following commands:
 
