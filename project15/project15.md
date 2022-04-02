@@ -39,6 +39,7 @@ Click Save
   * Application Load Balancer: ALB should be open to the internet
   * Bastion servers: Access to bastion servers should only be from the IPs of your workstation
   * Nginx servers: Access to nginx servers should only be from the Application Load Balancer and bastion
+  * Internal lb: Allow access to nginx servers 
   * Webservers: Webservers should only be accessible from the Nginx servers and bastion
   * Data Layer: This comprises the RDS and EFS servers. Traffic from Bastion (Mysql), Webserver (NFS and Mysql).
 
