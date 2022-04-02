@@ -103,7 +103,10 @@ openssl req -newkey rsa:2048 -nodes -keyout /etc/pki/tls/private/ACS.key -x509 -
 vi /etc/httpd/conf.d/ssl.conf
 ```
 * Edit the ssl.conf to conform with the key and crt file we created
-![pic9](./images/pic9.png)
+
+```
+vi /etc/httpd/conf.d/ssl.conf
+```
 
 * Create an AMI from all instances
 * Right click on the instance
