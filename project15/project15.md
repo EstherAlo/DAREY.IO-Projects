@@ -83,7 +83,7 @@ yum install -y  ./build/amazon-efs-utils*rpm
 ```
 
 - Install self signed certificate on nginx
-* _The reason we are installing this because the load balancer will be sending traffic to the webserver via port 443 and also listen in port 443 thus for the connection to be secured we a self signed certificate on the instance_
+* _The reason we are installing this is because the load balancer will be sending traffic to the webserver via port 443 and also listen on port 443 thus for the connection to be secured we need a self signed certificate on the nginx instance
 - _Make sure you enter the private IPv4 dns of the instance_
 
 ```
