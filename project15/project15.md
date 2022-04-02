@@ -32,6 +32,7 @@ Click Save
 
 
 * Add a new route to your private route table with destination as 0.0.0.0/0 and target as the NAT Gateway you created
+* Associcate route table with subnets
 ![pic6](./images/pic6.png)
 
 * Create a security group for:
