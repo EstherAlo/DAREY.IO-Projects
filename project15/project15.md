@@ -47,6 +47,8 @@ Click Save
 
 Create Autoscaling group : The two requirements are Launch Templates and Load Balancers. The Launch Templates requires AMI and Userdata while the Load balancer requires target goup
 
+The following steps below must take place before creating the Autoscaling group
+
 # Step 2.1: Setup Compute Resources for Nginx
 
 * Provision an EC2 Instances for Nginx, bastion and webserver 
