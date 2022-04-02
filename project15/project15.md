@@ -51,7 +51,7 @@ The following steps below must take place before creating the Autoscaling group
 
 # Step 2.1: Setup Compute Resources for Nginx
 
-* Provision an EC2 Instances for Nginx, bastion and webserver and attach security groups 
+* Provision an EC2 Instances for Nginx, bastion and webserver 
   * Create a t2.micro RHEL 8 instance in any of your two public AZs
   * Install the following packages 
 
