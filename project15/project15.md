@@ -36,9 +36,9 @@ Click Save
 ![pic6](./images/pic6.png)
 
 * Create a security group for:
-  * Nginx servers: Access to nginx servers should only be from the Application Load Balancer
-  * Bastion servers: Access to bastion servers should only be from the IPs of your workstation
   * Application Load Balancer: ALB should be open to the internet
+  * Bastion servers: Access to bastion servers should only be from the IPs of your workstation
+  * Nginx servers: Access to nginx servers should only be from the Application Load Balancer
   * Webservers: Webservers should only be accessible from the Nginx servers
   * Data Layer: This comprises the RDS and EFS servers. Traffic from Bastion (Mysql), Webserver (NFS and Mysql).
 
