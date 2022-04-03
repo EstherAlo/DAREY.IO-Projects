@@ -7,7 +7,7 @@
 
 - Here is how your updated architecture will look like upon competion of this project:
 
-![Pic8](./images/Pic8.png)
+![pic8](./images/pic8.png)
 
 ## Install Jenkins server
 
