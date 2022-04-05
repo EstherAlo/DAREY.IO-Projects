@@ -92,7 +92,7 @@ sudo systemctl restart nginx
 
   ## configure secured connection using SSL/certificates                                                      
 
-- I install certbot and dependencies by executing the following command: 
+- Install certbot and dependencies by executing the following command: 
 
 ```
 sudo apt install certbot -y
@@ -101,7 +101,7 @@ sudo apt install python3-certbot-nginx -y
 
 ```
 
-- execut the below commands to checked syntax and reload nginx:
+- Execute the below commands to checked syntax and reload nginx:
 
 ```
 sudo nginx -t && sudo nginx -s reload
