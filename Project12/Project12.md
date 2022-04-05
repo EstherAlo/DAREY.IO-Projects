@@ -153,9 +153,8 @@ ansible-playbook -i /home/ubuntu/ansible-config-mgt/inventory/uat.yml /home/ubun
 I WAS able to see both of the UAT Web servers configured and able reach them from the browser: 
 
 *screenshot below*
+
 ![pic16](./images/pic16.png)
-
-
 
 *screenshot of Ansible architecture*
 

@@ -1,6 +1,6 @@
 # __LOAD BALANCER SOLUTION WITH NGINX AND SSL/TLS__
 
-During this project I will do the following:
+During this project we will do the following:
 
 1. Register a new domain name and connect to route 53
 1. Configure Nginx as a Load Balancer
@@ -11,21 +11,19 @@ During this project I will do the following:
 
 ## Configure Nginx As A Load Balancer
 
-In order to do this I completed the following:
+In order to do this complete the following:
 
-1. Created an EC2 VM based on Ubuntu Server 20.04 LTS and opened TCP port 80 for HTTP connections and TCP port 443
+1. Create an EC2 VM based on Ubuntu Server 20.04 LTS and open TCP port 80 for HTTP connections and TCP port 443
 
-1. Updated /etc/hosts file for local DNS with Web Servers’ names (e.g. Web1 and Web2) and their local IP addresses
-
-1. Installed and configured Nginx as a load balancer to point traffic to the resolvable DNS names of the webservers
-
-- Updated /etc/hosts file for local DNS with Web Servers' name and their local IP addressess.
+1. Update /etc/hosts file for local DNS with Web Servers’ names (e.g. Web1 and Web2) and their local IP addresses
 
 ```
-sudo vi /etc/hosts
+<IP web 1>
+
+<IP web 2>
 ```
 
-To update the server depositry and install nginx I executed this command:
+Update the server repositry and install nginx:
 
 ```
 sudo apt update && sudo apt install nginx
@@ -36,13 +34,13 @@ sudo apt update && sudo apt install nginx
 ![pic2](./images/pic2.png)
 
 
-- In order to Configure Nginx LB using Web Servers’ names defined in  /etc/hosts I created a config file by executing the below command:
+- In order to Configure Nginx LB using Web Servers’ names defined in  /etc/hosts  created a config file by executing the below command:
 
 ```
 sudo vi /etc/nginx/nginx.conf 
 ```
 
-- The confiuration below was inserted and saved 
+- Inserted and save the configuration below 
 
 ```
 upstream web {
@@ -61,8 +59,7 @@ server {
   ```
 
 
-
-- checked that nginx was successfully configured with this command: 
+- Check that nginx was successfully configured:
 
 ```
 sudo nginx -t
@@ -72,7 +69,7 @@ sudo nginx -t
 
 ![pic3](./images/pic3.png)
 
-- Restart Nginx and made sure the service is up 
+- Restart Nginx and make sure the service is up 
 
 ```
 sudo systemctl restart nginx
@@ -84,9 +81,9 @@ sudo systemctl restart nginx
                                                         
 ## Register a new domain name and connect to route 53
 
-- I registered a www.esthertooling.co.uk on go daddy. 
-- I then went unto the route 53 dashboard on AWS and created a hosted zone, connected this to my domain. This will tell route 53 to respond to DNS queries for my domain.  
-- I Assigned an Elastic IP to your Nginx LB server and associated the domain name with this Elastic IP, the purpose of this is to ensure that the public IP address is static because everytime you restart, stop or start your EC2 instance, you get a new public IP address. When you want to associate your domain name, it is better to have a static IP address that does not change after reboot, thus Elastic IP is the solution for this problem.
+- Register a doman with any registrar of your choice
+- Go unto the route 53 dashboard on AWS and create a hosted zone, connect this to your domain. This will tell route 53 to respond to DNS queries from your domain.  
+- Assign an Elastic IP to your Nginx LB server and associate the domain name with this Elastic IP, the purpose of this is to ensure that the public IP address is static because everytime you restart, stop or start your EC2 instance, you get a new public IP address. When you want to associate your domain name, it is better to have a static IP address that does not change after reboot, thus Elastic IP is the solution for this problem.
 
 *screenshot below*
 
@@ -118,26 +115,26 @@ sudo systemctl status snapd
 ![pic5](./images/pic5.png)
 
 
-- In order to create a certificate for my domain to make it secure I executed this command 
+- Create a certificate for your domain to make it is secure:
 
 ```
 sudo certbot --nginx -d esthertooling.co.uk -d www.esthertooling.co.uk
 ```
 
-- A valid email address was entered and service agreement accepted. To increase security I selected for incoming request from port 80 to be redirected to port 443.
+- Enter a valid agreement and accept service agreement. To increase security select for incoming request from port 80 to be redirected to port 443.
 
 *screenshot below showing site is secure*
 
 ![pic6](./images/pic6.png)
 
-- Created a cron assignment so that the certificate will automatically renew each time it expires by executing this command:
 
+- Create a cron assignment so that the certificate will automatically renew each time it expires by executing this command:
 
 ```
 crontab -e
 ```
 
-Inserted the below command which will be executed every 12 minutes of every hour:
+Insert the below command which will be executed every 12 minutes of every hour:
 
 
 ```
@@ -147,6 +144,16 @@ Inserted the below command which will be executed every 12 minutes of every hour
 - Set up periodical renewal of your SSL/TLS certificate. By default, LetsEncrypt certificate is valid for 90 days, so it is recommended to renew it at least every 60 days or more frequently.
 
 
+You can test renewal command in dry-run mode
 
+```
+sudo certbot renew --dry-run
+```
+
+The best practice is to have a scheduled job to run renew command periodically. Add the following command
+
+```
+* */12 * * * root /usr/bin/certbot renew > /dev/null 2>&1.
+```
 
 
