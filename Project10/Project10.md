@@ -40,7 +40,7 @@ sudo apt update && sudo apt install nginx
 sudo vi /etc/nginx/nginx.conf 
 ```
 
-- Inserted and save the configuration below 
+- Insert and save the configuration below 
 
 ```
 upstream web {
@@ -92,7 +92,7 @@ sudo systemctl restart nginx
 
   ## configure secured connection using SSL/certificates                                                      
 
-- I installed certbot and dependencies by executing the following command: 
+- I install certbot and dependencies by executing the following command: 
 
 ```
 sudo apt install certbot -y
@@ -101,7 +101,7 @@ sudo apt install python3-certbot-nginx -y
 
 ```
 
-- executed the below commands to checked syntax and reload nginx:
+- execut the below commands to checked syntax and reload nginx:
 
 ```
 sudo nginx -t && sudo nginx -s reload
