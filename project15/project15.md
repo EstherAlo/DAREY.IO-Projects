@@ -366,12 +366,12 @@ ssh -A ec2-user@<privateip>
 ```
 mysql -h <RDS endoint -u <RDSusername> -p 
 create database wordpressdb;
-create wordpressdp;
+create wordpressdb;
 show databases;
 ```
 ## Step 6 : Create Autoscaling Group  
 
-*  Create Autoscaling Group for Bastion, Nginx, WordPress and Tooling. The same setting used for the Bastion server will be used for Nginx, the only difference is the Load Balancer is added to Nginx, Wordpress and Tooling as the Bastion does not make use of load balancer.
+*  Create Autoscaling Group for Nginx, WordPress and Tooling. The same setting used for the Bastion server will be used for Nginx, the only difference is the Load Balancer is added to Nginx, Wordpress and Tooling as the Bastion does not make use of load balancer.
    * Create autoscaling group
    * Name the autoGroup 
    * Select bastion template and click next
