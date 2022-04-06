@@ -299,7 +299,7 @@ yum install -y ansible
 * Select Subnet groups
 * Click Create DB subnet group
 * Enter the name, description and select your VPC
-* Under Add subnets, select the two AZs your data layer subnets are in and select the two private data layer subnets.
+* Under Add subnets, select the two AZs your VPC is in and select the two private data layer subnets.
 * Click Create
 
 ![pic16](./images/pic16.png)
