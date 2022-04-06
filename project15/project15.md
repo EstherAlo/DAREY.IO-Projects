@@ -193,6 +193,24 @@ systemctl restart httpd
 * Create Target groups for Nginx, Worpress and Tooling 
 * _This is because they are all behind a load balancer. The Auto-Scaling will launch instance in this target group_
 ```
+User data for Nginx
+
+```
+#!/bin/bash
+yum install -y nginx
+systemctl start nginx
+systemctl enable nginx
+git clone https://github.com/Livingstone95/ACS-project-config.git
+mv /ACS-project-config/reverse.conf /etc/nginx/
+mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf-distro
+cd /etc/nginx/
+touch nginx.conf
+sed -n 'w nginx.conf' reverse.conf
+systemctl restart nginx
+rm -rf reverse.conf
+rm -rf /ACS-project-config
+```
+
 _We have to update the reverse.conf file by updating the end point of the internal load balancer (DNS name) in the proxy_pass section of the file, so that when the userdata is cloning the repository, it will have the updated version of the conf file_
 
 ![pic36](./images/pic36.png)
