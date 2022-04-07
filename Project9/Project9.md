@@ -1,4 +1,4 @@
-## __CONTINOUS INTERGRATION PIPELINE FOR TOOLING WEBSITE__
+## __CONTINUOUS INTERGRATION PIPELINE FOR TOOLING WEBSITE__
 
 - The task of this project is to enhance the architecture prepared in Project 8 by automating part of our routine tasks with a free and open source automation server (Jenkins)
 - Acording to Circle CI, Continuous integration (CI) is a software development strategy that increases the speed of development while ensuring the quality of the code that teams deploy. Developers continually commit code in small increments (at least daily, or even several times a day), which is then automatically built and tested before it is merged with the shared repository.
