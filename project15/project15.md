@@ -179,7 +179,7 @@ yum module enable php:remi-7.4 -y
 yum install -y php php-common php-mbstring php-opcache php-intl php-xml php-gd php-curl php-mysqlnd php-fpm php-json
 systemctl start php-fpm
 systemctl enable php-fpm
-git clone https://github.com/Estheralo/AS-project-config.git
+git clone https://github.com/Livingstone95/tooling-1.git
 mkdir /var/www/html
 cp -R /tooling-1/html/*  /var/www/html/
 cd /tooling-1
@@ -193,6 +193,24 @@ systemctl restart httpd
 * Create Target groups for Nginx, Worpress and Tooling 
 * _This is because they are all behind a load balancer. The Auto-Scaling will launch instance in this target group_
 ```
+User data for Nginx
+
+```
+#!/bin/bash
+yum install -y nginx
+systemctl start nginx
+systemctl enable nginx
+git clone https://github.com/EstherAlo/ACS-project-config.git
+mv /ACS-project-config/reverse.conf /etc/nginx/
+mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf-distro
+cd /etc/nginx/
+touch nginx.conf
+sed -n 'w nginx.conf' reverse.conf
+systemctl restart nginx
+rm -rf reverse.conf
+rm -rf /ACS-project-config
+```
+
 _We have to update the reverse.conf file by updating the end point of the internal load balancer (DNS name) in the proxy_pass section of the file, so that when the userdata is cloning the repository, it will have the updated version of the conf file_
 
 ![pic36](./images/pic36.png)
@@ -281,7 +299,7 @@ yum install -y ansible
 * Select Subnet groups
 * Click Create DB subnet group
 * Enter the name, description and select your VPC
-* Under Add subnets, select the two AZs your data layer subnets are in and select the two private data layer subnets.
+* Under Add subnets, select the two AZs your VPC is in and select the two private data layer subnets.
 * Click Create
 
 ![pic16](./images/pic16.png)
@@ -348,12 +366,12 @@ ssh -A ec2-user@<privateip>
 ```
 mysql -h <RDS endoint -u <RDSusername> -p 
 create database wordpressdb;
-create wordpressdp;
+create wordpressdb;
 show databases;
 ```
 ## Step 6 : Create Autoscaling Group  
 
-*  Create Autoscaling Group for Bastion, Nginx, WordPress and Tooling. The same setting used for the Bastion server will be used for Nginx, the only difference is the Load Balancer is added to Nginx, Wordpress and Tooling as the Bastion does not make use of load balancer.
+*  Create Autoscaling Group for Nginx, WordPress and Tooling. The same setting used for the Bastion server will be used for Nginx, the only difference is the Load Balancer is added to Nginx, Wordpress and Tooling as the Bastion does not make use of load balancer.
    * Create autoscaling group
    * Name the autoGroup 
    * Select bastion template and click next
