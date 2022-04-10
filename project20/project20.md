@@ -47,12 +47,14 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
 apt-cache madison docker-ce
 ```
+![pic1](./images/pic1.png)
 
 Verify that Docker Engine is installed
 
 ```
 sudo docker run hello-world
 ```
+![pic2](./images/pic2.png)
 
 We will be using the Tooling web application we used in our previous projects, which is a PHP-based web solution backed by a MySQL database. let us migrate the Tooling Web Application from a VM-based solution into a containerized one
 
@@ -80,9 +82,15 @@ docker run --name <container_name> -e MYSQL_ROOT_PASSWORD=<my-secret-pw> -d mysq
 
 - In the command above, we used the latest version tag. This tag may differ according to the image you downloaded
 
-```
+
 check to see if the MySQL container is running
+
 ```
+sudo docker ps -a 
+```
+
+
+![pic3](./images/pic3.png)
 
 ## Step 3: Connecting to the MySQL Docker Container
 
@@ -93,6 +101,8 @@ We will connect to the mysql container we have created with a second container a
 ```
 sudo docker network create --subnet=172.18.0.0/24 tooling_app_network
 ```
+
+![pic4](./images/pic4.png)
 
 - Verify that this has been created:
 
@@ -194,6 +204,8 @@ docker exec -i mysql-server mysql -uroot -p$MYSQL_PW < $tooling_db_schema
 
 4. Edit the .env file in the tooling/html folder with your db credentials used in your create_user.sql.
 
+![pic5](./images/pic5.png)
+
 5. Run the tooling Application 
 - Containerization of an application starts with creation of a file with a special name - 'Dockerfile'
 - This tells Docker how to pack your application into a container. 
@@ -201,7 +213,7 @@ docker exec -i mysql-server mysql -uroot -p$MYSQL_PW < $tooling_db_schema
 - Ensure you are inside the folder that has the Dockerfile and build your container
 
 ```
-docker build -t tooling:0.0.1
+docker build -t tooling:0.0.1 .
 ```
 
 We specify a parameter -t, so that the image can be tagged tooling:0.0.1 . Also, you have to notice the . at the end. This is important as that tells Docker to locate the Dockerfile in the current directory you are running the command. Otherwise, you would need to specify the absolute path to the Dockerfile.
