@@ -16,6 +16,13 @@ To make use of the content within modules, you need to use the keyword module an
 
 Once done, execute terraform apply
 
+![pic8](./images/pic8.png)
+
+![pic9](./images/pic9.png)
+
+
+
+
 ![pic2](./images/pic2.png)
 
 ![pic3](./images/pic3.png)
@@ -94,4 +101,19 @@ terraform {
   }
 }
 ```
+![pic10](./images/pic10.png)
 
+![pic11](./images/pic11png)
+
+![pic12](./images/pic12.png)
+
+When we run terraform plan or apply, a new lock ID would be generated while running the plan. The DynamoDB is handling the lockID, it will be present until the plan or apply finishes.
+
+![pic13](./images/pic13.png)
+
+We have successfully refactored our project to use modules, introduced backend as S3 and also used DynamoDB to store our state lockfiles.
+
+
+run terraform destroy, but before we run it, we should take note that terraform will destroy the S3 bucket and if it destroys it, terraform will go into a undefined state and delete the files you have there so avoid this by commenting out your S3 backend terraform init -migrate-state at that point it will copy your statefile back from S3 to your local storage. Note that to use S3 as a backend, you need to enable versioning on the bucket.
+
+![pic14](./images/pic14.png)
