@@ -103,7 +103,7 @@ terraform {
 ```
 ![pic10](./images/pic10.png)
 
-![pic11](./images/pic11png)
+![pic11](./images/pic11.png)
 
 ![pic12](./images/pic12.png)
 
