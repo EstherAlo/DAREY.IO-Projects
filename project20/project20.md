@@ -223,3 +223,5 @@ We specify a parameter -t, so that the image can be tagged tooling:0.0.1 . Also,
 ```
 docker run --network tooling_app_network -p 8085:80 -it tooling:0.0.1
 ```
+
+![pic6](./images/pic6.png)
