@@ -229,20 +229,23 @@ sudo mysql
 - Create a new database called example_database
 
 ```
-CREATE DATABASE `example_database`;
-```                                                                                                                                                                      
-CREATE USER 'example_user'@'%' IDENTIFIED WITH mysql_native_password BY 'password';
+CREATE DATABASE <example_database>;
+``` 
+
+```
+CREATE USER <example_user> @'%' IDENTIFIED WITH mysql_native_password BY 'password';
+```
 
 - Give user permission over the example_database database:
 
 ```
-GRANT ALL ON example_database.* TO 'example_user'@'%';
+GRANT ALL ON example_database.* TO <'example_user'>@'%';
 ```                                                                                                   
                                                                                                                                            
 - To to test if the new user has the proper permissions to log into the MySQL console again, this time use the custom user credentials:
 
 ```
-mysql -u example_user -p
+mysql -u <example_user> -p
 ```                                                                                                                                           
 
 *Screenshot below*
@@ -284,7 +287,7 @@ SELECT * FROM example_database.todo_list;
 - exit mysql 
 
 ```
-mysql> exit
+mysql exit
 ```
 - Now you can create a PHP script that will connect to MySQL and query for your content. Create a new PHP file in your custom web root directory using your preferred editor                                                                                                                                                                      
 
