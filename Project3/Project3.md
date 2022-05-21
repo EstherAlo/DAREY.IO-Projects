@@ -25,7 +25,7 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
 *Screenshot below*
  
-![pic5a](./images/pic5a.png)
+![pic51](./images/pic51.png)
 
 - Install Node.js
 
