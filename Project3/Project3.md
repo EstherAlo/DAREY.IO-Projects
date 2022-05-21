@@ -24,8 +24,9 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 ```
 
 *Screenshot below*
- 
-![pic51](./images/pic51.png)
+
+![Pic51](https://user-images.githubusercontent.com/93116204/169639557-5f6df0ef-42a0-4ba0-b543-47d357790988.png)
+
 
 - Install Node.js
 
@@ -47,7 +48,9 @@ npm -v
 
 *Screenshot below*
 
-   ![pic6a](./images/pic6a.png)          
+  
+   ![Pic6a](https://user-images.githubusercontent.com/93116204/169639596-aa68fbbf-ce4a-4a05-888f-282625f2d6b9.png)
+
 
 
 - Create a new directory for your To-Do project
@@ -58,8 +61,7 @@ mkdir Todo
 
 *Screenshot below*
 
-   ![pic6b](./images/pic6b.png)   
-
+![Pic6b](https://user-images.githubusercontent.com/93116204/169639613-190348db-7aa9-494e-9f27-2ecc050a018d.png)
 
 - Run the command below to verify that the Todo directory is created with ls command
 
@@ -81,10 +83,10 @@ npm init -y
 
 *Screenshot below*  
 
-![pic7a](./images/pic7a.png)
+![Pic7a](https://user-images.githubusercontent.com/93116204/169639635-30c79054-1143-46ff-b83e-0bac4898652a.png)
 
 
-- Run the command ls to confirm that you have package.json file created
+- Run the ls command to confirm that you have package.json file created
 
 
 # STEP 1.1: INSTALL EXPRESSJS
@@ -119,7 +121,8 @@ vim index.js
 
 *Screenshot below*
 
-![pic8a](./images/pic8a.png)
+![Pic8a](https://user-images.githubusercontent.com/93116204/169639690-40e26f47-56bb-44d9-8bd2-66945a65d4e1.png)
+
 
 - Enter code below into index.js file:
 
@@ -157,17 +160,19 @@ node index.js
 
 - You should see Server running on port 5000 in your terminal
 
-![pic8b](./images/pic8b.png)
+![Pic8b](https://user-images.githubusercontent.com/93116204/169639713-7c197de1-ceb9-492a-ab9c-189309b417e6.png)
+
                                                        
 - Create an inbound rule to open TCP port 5000.
 
 *Screenshot below*
 
-![pic1a](./images/pic1a.png)
+![pic1a](https://user-images.githubusercontent.com/93116204/169639729-9173d33a-c9c3-4062-9b79-cd0432b7b96e.png)
+
 
 - Open up your browser and try to access your server’s Public IP or Public DNS name followed by port 5000:
 
-![pic2a](./images/pic2a.png)
+![Pic2a](https://user-images.githubusercontent.com/93116204/169639737-527e6ad8-a7ce-4b41-81e5-1c5c6f27fa22.png)
 
 
 # STEP 1.2: ROUTES
@@ -221,10 +226,10 @@ module.exports = router;
 
 # STEP 1.3 MODELS
 
- install mongoose which is a Node.js package that allow us to communicate with our database in a very manner.
+ Install mongoose which is a Node.js package that allow us to communicate with our database.
 
 
-- Change directory back Todo folder with cd and install Mongoose
+- Change directory back to the Todo folder with cd and install Mongoose
 
 ```
 npm install mongoose
@@ -232,7 +237,8 @@ npm install mongoose
 
 *Screenshot below*
 
-![pic13a](./images/pic13a.png)
+![pic13a](https://user-images.githubusercontent.com/93116204/169639793-dd389b96-f575-46eb-8997-2cc1c80e064c.png)
+
 
 - Create a new models folder and then change directory into the newly created ‘models’ folder
 
@@ -242,7 +248,7 @@ mkdir models
 cd models
 ```
 
-Inside the models folder, create a file and nam it todo.js
+Inside the models folder, create a file and name it todo.js
 
 ```
 touch todo.js
@@ -267,6 +273,7 @@ const Todo = mongoose.model('todo', TodoSchema);
 
 module.exports = Todo;
 ```
+
 - Update our routes from the file api.js in ‘routes’ directory to make use of the new model
 
 - In Routes directory, open api.js with vim api.js, delete the code inside with :%d command and paste there code below into it then save and exit
@@ -309,15 +316,18 @@ module.exports = router;
 
 We need a database where we will store our data. For this we will make use of mLab. mLab provides MongoDB database as a service solution (DBaaS), so to make life easy, you will need to sign up for a shared clusters free account, which is ideal for our use case
 
-![pic44](./images/pic44.png)
+![pic70](https://user-images.githubusercontent.com/93116204/169639941-05724599-d151-4c89-910a-47967caab4ee.png)
+
 
 - Allow access to the MongoDB database from anywhere (Not secure, but it is ideal for testing)
 
-![pic26](./images/pic26.png)
+<img width="1537" alt="pic26" src="https://user-images.githubusercontent.com/93116204/169639952-79ba39a4-b5fc-471c-871a-ff5512f5e51d.png">
 
-![pic27](./images/pic27.png)
+<img width="1235" alt="pic27" src="https://user-images.githubusercontent.com/93116204/169639983-e4359a8b-2edf-4d10-b6a7-55e72c12e622.png">
 
-![pic29](./images/pic29.png)
+
+<img width="1585" alt="pic29" src="https://user-images.githubusercontent.com/93116204/169639988-f6054761-93c9-4941-a018-7d9f213706c9.png">
+
 
 In the index.js file, we specified process.env to access environment variables, but we have not yet created this file. So we need to do that now.
 
@@ -337,12 +347,10 @@ DB = 'mongodb+srv://<username>:<password>@<network-address>/<dbname>?retryWrites
 
 - Here is how to get your connection string
 
-![pic30](./images/pic30.png)
+<img width="1276" alt="pic30" src="https://user-images.githubusercontent.com/93116204/169640033-2ce5e496-921f-4603-9ecc-b3b1871f7245.png">
 
-![pic30](./images/pic30.png)
 
 Now we need to update the index.js to reflect the use of .env so that Node.js can connect to the database.  delete existing content in the file, and update it with the entire code below.
-
 
 ```
  const express = require('express');
@@ -392,7 +400,8 @@ Start your server
 
 *Screenshot below*
 
-![pic14a](./images/pic14a.png)
+![pic14a](https://user-images.githubusercontent.com/93116204/169640041-59e149cb-bdc4-4cee-a293-71e8157e8bb7.png)
+
 
 In this project, we will use Postman to test our API.
 
@@ -402,22 +411,26 @@ In this project, we will use Postman to test our API.
 - Open Postman and create a POST request to the API http://<PublicIP-or-PublicDNS>:5000/api/todos. This request sends a new task to your To-Do list so the application can store it in the database.
 
 Note: make sure your set header key Content-Type as application/json
-![pic22](./images/pic22.png)
+
+![pic22](https://user-images.githubusercontent.com/93116204/169640063-f186d687-5b08-4ead-ac8f-2e4f5d3478ce.png)
+
 
 *screenshot below*
 
-![pic15a](./images/pic15a.png)
+![pic15a](https://user-images.githubusercontent.com/93116204/169640070-db4a2fe6-4bbb-4d38-abc1-5df641bd3b91.png)
+
 
 - Create a GET request to the API on http://<PublicIP-or-PublicDNS>:5000/api/todos. This request retrieves all existing records from out To-do application
 
 
 *screenshot below*
 
-![pic16a](./images/pic16a.png)
+![pic16a](https://user-images.githubusercontent.com/93116204/169640084-6f95135a-b3c5-4a64-be13-2e474991f9dd.png)
+
 
 # STEP 2: FRONTEND CREATION
 
-Aim is to create a user interface for a Web client (browser) to interact with the application via API. To start out with the frontend of the To-do app, I used the create-react-app command to scaffold the app.
+The aim is to create a user interface for a Web client (browser) to interact with the application via API. To start out with the frontend of the To-do app, User the create-react-app command to scaffold the app.
 
 - In the same root directory as your backend code, which is the Todo directory run the below code. This will create a new folder in your Todo directory called client, where you will add all the react code.
 
@@ -427,7 +440,8 @@ npx create-react-app client
 
 *Screenshot below*
 
-![pic20a](./images/pic20a.png)
+![pic20a](https://user-images.githubusercontent.com/93116204/169640116-88a47630-766f-4374-8918-e1a689e0fe0f.png)
+
 
 
 ## STEP 2.1 Running a React App
@@ -448,7 +462,8 @@ npm install nodemon --save-dev
 
 *Screenshot below*
 
-![pic21a](./images/pic21a.png)
+![Pic21a](https://user-images.githubusercontent.com/93116204/169640135-91db9cdf-98ae-469a-a6e6-8734f45d8e48.png)
+
 
  In Todo folder open the package.json file. Change the highlighted part of the below screenshot and replace with the code below
 
@@ -491,7 +506,8 @@ Move into the  Todo Directory and run the below command
 
 - Your app should open and start running on localhost:3000
 
-![pic23a](./images/pic23a.png)
+![pic23a](https://user-images.githubusercontent.com/93116204/169640165-fb676e8e-d46d-4d1a-8ec0-917317058c46.png)
+
 
 
 ## STEP 2.3: Creating React Components
@@ -606,7 +622,7 @@ npm install axios
 
 *Screenshot below*
 
-![pic23b](./images/pic23b.png)
+![Pic23b](https://user-images.githubusercontent.com/93116204/169640203-ccfb8e1d-6445-4e36-a75c-77f2051612ac.png)
 
 
 Go to ‘components’ directory
@@ -651,7 +667,7 @@ return (
 export default ListTodo
 ```
 
-In the Todo.js file i wrote the following code: 
+In the Todo.js file add the following code: 
 
  ```
 import React, {Component} from 'react';
@@ -711,7 +727,7 @@ let { todos } = this.state;
 export default Todo;
 ```
 
-Then in your Todo.js file you write the following code:
+Then in your Todo.js file you add the following code:
 
 ```
 import React, {Component} from 'react';
@@ -779,7 +795,7 @@ cd ..
 vi App.js
 ```
 
-- We need to make little adjustment to our react code. Delete the logo and adjust our App.js to look like this.
+- We need to makea  little adjustment to our react code. Delete the logo and adjust our App.js to look like this.
 
 ```
  
@@ -800,7 +816,7 @@ return (
 export default App;
 ```
 
-In the src directory open the App.css Then paste the following code into App.css:
+In the src directory open the App.css then paste the following code into App.css:
 
 ```
 .App {
@@ -893,7 +909,7 @@ margin-top: 0;
 
 ```
 
-- In the src directory open the index.css and Copy and paste the code below:
+- In the src directory open the index.css and add code below:
 
 ```
 body {
@@ -932,4 +948,5 @@ Assuming no errors when saving all these files, our To-Do app should be ready an
 
 *Screenshot below*
 
-![pic25a](./images/pic25a.png)
+![pic25a](https://user-images.githubusercontent.com/93116204/169640257-cb7ae9c0-1631-4f5a-9e89-c32e7c05155b.png)
+
