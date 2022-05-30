@@ -10,7 +10,8 @@ A machine that is trying to access a Web site using Web browser or simply ‘cur
 
 If we extend this concept further and add a Database Server to our architecture, we can get this picture
 
-![pic14](./images/pic14.png)
+![pic14](https://user-images.githubusercontent.com/93116204/171048280-c9fcd55d-ce64-4e6d-bc3f-965bcd37e993.png)
+
 
 
 - Create and configure two linux-based virtual servers (EC2 instances in AWS) and connect. 
