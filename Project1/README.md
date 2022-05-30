@@ -1,12 +1,12 @@
 PROJECT 1: LAMP STACK IMPLEMENTATION
-web stack implementation (lamp stack) in AWS
+Web stack implementation (lamp stack) in AWS
 
-step 1 — installing apache and updating the firewall
+Step 1 — Installing apache and updating the firewall
 
-step 2 — installing mysql
+Step 2 — Installing mysql
 
-step 3 — installing php
+Step 3 — Installing php
 
-step 4 — creating a virtual host for your website using apache
+Step 4 — Creating a virtual host for your website using apache
 
-step 5 — enable php on the website
+Step 5 — Enable php on the website
