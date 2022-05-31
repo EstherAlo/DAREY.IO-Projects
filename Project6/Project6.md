@@ -25,16 +25,14 @@ Project 6 consists of two parts:
 
 - Launch an EC2 instance that will serve as "Web Server" and attach three volumes. 
 
+![image1](https://user-images.githubusercontent.com/93116204/171265444-18eb7753-9b6e-4d3c-a90c-226d2b1ff3e8.png)
+
+
 Inspect what block devices are attached to the server
 
 ```
 lsblk 
 ```
-
-*screenshot below*
-
-![Pic1a](https://user-images.githubusercontent.com/93116204/171228641-0f162966-9011-47f8-9afa-3e4bcbb9932a.png)
-
 
 To see all mounts and free space on the server 
 
