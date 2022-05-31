@@ -164,7 +164,7 @@ sudo rsync -av /var/log/. /home/recovery/logs/
 sudo mount /dev/webdata-vg/logs-lv /var/log
 ```
 
-- Restor log files back into /var/log directory
+- Restore log files back into /var/log directory
 
 ```
 sudo rsync -av /home/recovery/logs/. /var/log
@@ -185,8 +185,8 @@ sudo blkid
 ![pic10a](https://user-images.githubusercontent.com/93116204/171229601-deac0ee3-dd21-47b9-9e8b-039c776c7d8d.png)
 
 
+![fstaba](https://user-images.githubusercontent.com/93116204/171230520-ab63008f-13dd-447b-a549-e452ffb9ddc1.png)
 
-![fstaba](./images/fstaba.png)
 
 - Test the configuration, if no error message displays then it implies it installations went smoothly.
 
