@@ -1,4 +1,4 @@
-PROJECT 1:Web stack implementation (lamp stack) in AWS
+Web stack implementation (lamp stack) in AWS
 
 Step 1 — Installing apache and updating the firewall
 
