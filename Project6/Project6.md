@@ -216,12 +216,10 @@ df -h
 
 *Screenshot below*
 
-
-![db-lvs](./images/db-lvs.png)
-
+![db-lvs](https://user-images.githubusercontent.com/93116204/171229919-b5116840-06b7-4e0c-87dc-d29a9c52795b.png)
 
 
-![mount](./images/mount.png)
+![mount](https://user-images.githubusercontent.com/93116204/171229968-679ac7e4-df54-4834-a38e-9099e65dfef9.png)
 
 
 ## Install WordPress on your Web Server EC2
@@ -333,7 +331,8 @@ I did the following:
 
 *Screenshot below*
 
-![createdatabase](./images/createdatabase.png)
+![createdatabase](https://user-images.githubusercontent.com/93116204/171230044-7581bbe8-6cb1-4917-9e9f-8a4268d91426.png)
+
 
 ## Configure WordPress to connect to remote database
 
@@ -357,7 +356,8 @@ sudo mysql -u admin -p -h <DB-Server-Private-IP-address>
 
 *screenshot below*
 
-![show](./images/show.png)
+![show](https://user-images.githubusercontent.com/93116204/171230089-41875cf9-03c9-4028-92ac-09a68567e0e5.png)
+
 
 - Change permissions and configuration so Apache uses WordPress 
 
@@ -367,15 +367,18 @@ sudo mysql -u admin -p -h <DB-Server-Private-IP-address>
 
 *Screenshot below*
 
-![word1a](./images/word1a.png)
+![Word1a](https://user-images.githubusercontent.com/93116204/171230167-f01eab79-c532-4462-a9d6-62f4b66c6cdf.png)
+
 
 *Filled in my credentials*
 
-![word2a](./images/word2a.png)
+![word2a](https://user-images.githubusercontent.com/93116204/171230195-453c02bb-7eeb-427d-b498-72fbf00b7619.png)
+
 
 WordPress has successfully connected to youe remote MySQL database!
 
 *Screenshot below*
 
-![word3a](./images/word3a.png)
+![word3a](https://user-images.githubusercontent.com/93116204/171230226-077c7d10-9645-441d-8a50-80c4dbbdd6fa.png)
+
 
