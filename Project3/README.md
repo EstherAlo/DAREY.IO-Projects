@@ -1,6 +1,6 @@
 
 
-PROJECT 3:Simple to-do application on mern web stack
+PROJECT 3: Simple to-do application on mern web stack
 
 step 1 – backend configuration
 
