@@ -33,7 +33,7 @@ lsblk
 
 *screenshot below*
 
-![pic1a](./images/pic1a.png) 
+![Pic1a](https://user-images.githubusercontent.com/93116204/171228641-0f162966-9011-47f8-9afa-3e4bcbb9932a.png)
 
 
 To see all mounts and free space on the server 
@@ -42,7 +42,8 @@ To see all mounts and free space on the server
 
 *Screenshot below*
 
-![pic1b](./images/pic1b.png)
+![Pic1b](https://user-images.githubusercontent.com/93116204/171228707-47643dda-b9e6-4582-a0eb-bbb12230ae0f.png)
+
 
 - Use gdisk utility to create a single partition on each of the 3 disks 
 
@@ -58,7 +59,8 @@ lsblk
 
 *Screenshot below*
 
-![pic4a](./images/pic4a.png)
+![pic4a](https://user-images.githubusercontent.com/93116204/171228900-d8556951-f417-42a7-b579-8dabaaba12af.png)
+
 
 - Install lvm2 package
 
@@ -76,7 +78,8 @@ sudo pvcreate /dev/xvdh1
 
 *screenshot below*
 
-![pic5a](./images/pic5a.png)
+![pic5a](https://user-images.githubusercontent.com/93116204/171229091-9dc45444-fe15-4cad-add9-89fcbc7bab0c.png)
+
 
 - sudo pvs to confirm 
 
@@ -94,7 +97,8 @@ sudo vgs
 
 *screenshot below*
 
-![pic5b](./images/pic5b.png)
+![pic5b](https://user-images.githubusercontent.com/93116204/171229226-c61972ad-8046-4e8d-b6ea-f164bbfcf226.png)
+
 
 Create  2 logical volumes. apps-lv, and logs-lv. apps-lv. This will be used to store data for the Website while, logs-lv will be used to store data for logs
 
@@ -111,7 +115,8 @@ sudo lvs
 
 *screenshot below*
 
-![pic5c](./images/pic5c.png)
+![pic5c](https://user-images.githubusercontent.com/93116204/171229466-5e3f1a42-f33d-4051-8a13-e7cc4124aa4d.png)
+
 
 To confirm the whole set up I executed the following commands:
 
@@ -122,7 +127,8 @@ sudo lsblk
 ```
 *Screenshot below*
 
-![pic6a](./images/pic6a.png)
+![pic6a](https://user-images.githubusercontent.com/93116204/171229509-53631ced-327f-46af-a640-bd1a66a6a495.png)
+
 
 
 - Use mkfs.ext4 to format the logical volumes by executing the commands below: 
@@ -176,7 +182,8 @@ sudo blkid
 
 *screenshot below*
 
-![pic10a](./images/pic10a.png)
+![pic10a](https://user-images.githubusercontent.com/93116204/171229601-deac0ee3-dd21-47b9-9e8b-039c776c7d8d.png)
+
 
 
 ![fstaba](./images/fstaba.png)
