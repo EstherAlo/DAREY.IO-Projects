@@ -1,4 +1,4 @@
-PROJECT 2:Web stack implementation (lemp stack)
+Web stack implementation (lemp stack)
 
 step 1 - Installing the nginx web server
 
