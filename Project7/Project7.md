@@ -261,7 +261,7 @@ sudo mysql_secure_installation
 ```
 
 
-- I then created a database called tooling, a database user (webaccess) and grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr. 
+- Create a database called tooling, a database user (webaccess) and grant permission to webaccess user on tooling database to do anything only from the webservers subnet cidr. 
 
 
 ```
@@ -355,7 +355,7 @@ sudo vi /etc/fstab
 ```
 
 
-- Reloaded server with below command:
+- Reload server with below command:
 
 
 ```
@@ -388,7 +388,7 @@ sudo systemctl enable php-fpm
 sudo setsebool -P httpd_execmem 1
 ```
 
-- To verify whether NFS was mounted correctly I creat a new file called test.md from your web server and check whether it is visible within your NFS server:
+- To verify whether NFS was mounted correctly create a new file called test.md from your web server and check whether it is visible within your NFS server:
 
 
 ```
@@ -420,7 +420,7 @@ sudo mount -t nfs -o rw,nosuid <NFS Private IP address>:/mnt/logs /var/log/httpd
 
 
 
-- To make sure changes persist after reboot run I update the fstab 
+- To make sure changes persist after reboot update the fstab 
 
 ```
 sudo vi /etc/fstab
@@ -454,7 +454,7 @@ sudo yum install git
 git clone https://github.com/EstherAlo/tooling.git
 ```
 
-- Deploy The tooling website’s code was on to the Webserver and the html folder from the repository unto /var/www/html
+- Deploy The tooling website’s code was on the Webserver and the html folder from the repository unto /var/www/html
 
 
 ```
@@ -476,9 +476,9 @@ sudo systemctl restart httpd.
 
 ![pic14b](./images/pic14b.png)
 
-- If unbale to restart httpd do the below:
+- If unable to restart httpd do the below:
 
-- I disabled SELinux sudo setenforce 0 and to make this change permanent – opened  config file /etc/sysconfig/selinux and set SELINUX=disabled. Apache was restarted and status checked.
+- Disable SELinux sudo setenforce 0 and to make this change permanent – open  config file /etc/sysconfig/selinux and set SELINUX=disabled. Restart and check apache status
 
 
 ```
