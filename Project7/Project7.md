@@ -454,7 +454,7 @@ sudo yum install git
 git clone https://github.com/EstherAlo/tooling.git
 ```
 
-- Deploy The tooling website’s code was on the Webserver and the html folder from the repository unto /var/www/html
+- Deploy The tooling website’s code on the Webserver and the html folder from the repository unto /var/www/html
 
 
 ```
